@@ -10,8 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-    #testBar { inset: auto; margin: 0; border: 0; padding: 0; overflow: visible; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; height: 3px; background: #C96F52; pointer-events: none; }
-    #testBadge { inset: auto; margin: 0; border: 0; overflow: visible; position: fixed; left: 8px; bottom: 8px; z-index: 9999; background: rgba(201,111,82,.85); color: #fff; font: 700 11px/1 Arial, sans-serif; padding: 5px 9px; border-radius: 999px; pointer-events: none; }
+    #testBadge { inset: auto; margin: 0; border: 0; overflow: visible; position: fixed; top: 3px; right: 6px; background: rgba(201,111,82,.85); color: #fff; font: 700 11px/1 Arial, sans-serif; padding: 5px 9px; border-radius: 999px; pointer-events: none; }
     body { padding-top: 0; }
     :root {
       --sky-bg: #E3EEF3; --sky: #1F5C6B;   /* פלטה אחידה: ממומן (פייסבוק), חינם וספונטני */
@@ -34,7 +33,7 @@
 
     .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px calc(20px + env(safe-area-inset-bottom)); }
     /* הגלילה רק ברשימה: העמוד בגובה המסך, הכותרת והחיפוש קבועים */
-    .wrap { height: calc(100vh - 3px); height: calc(100dvh - 3px); margin-top: 3px; display: flex; flex-direction: column; box-sizing: border-box; }
+    .wrap { height: 100vh; height: 100dvh; margin-top: 0; display: flex; flex-direction: column; box-sizing: border-box; }
     .wrap > header.top { flex: 0 0 auto; position: relative; }
     .list::-webkit-scrollbar { display: none; }
     html { scrollbar-width: none; }
@@ -1205,7 +1204,7 @@
 </style>
 </head>
 <body class="locked">
-  <div id="testBar" popover="manual" role="note" aria-label="סביבת בדיקות"></div><div id="testBadge" popover="manual">בדיקות</div>
+  <div id="testBadge" popover="manual">בדיקות</div>
   <div class="gate" id="gate" hidden>
     <h1>משתתפים</h1>
     <p>יוצאים להרפתקה</p>
@@ -4649,5 +4648,5 @@
 
   startAuth();
   </script>
-<script>(function(){var els=[document.getElementById("testBar"),document.getElementById("testBadge")];function up(){els.forEach(function(e){try{e.hidePopover();e.showPopover();}catch(x){}});}up();new MutationObserver(function(m){if(m.some(function(r){return r.target.nodeName==="DIALOG";}))up();}).observe(document.documentElement,{subtree:true,attributes:true,attributeFilter:["open"]});})();</script></body>
+<script>(function(){var els=[document.getElementById("testBadge")];function up(){els.forEach(function(e){try{e.hidePopover();e.showPopover();}catch(x){}});}up();new MutationObserver(function(m){if(m.some(function(r){return r.target.nodeName==="DIALOG";}))up();}).observe(document.documentElement,{subtree:true,attributes:true,attributeFilter:["open"]});})();</script></body>
 </html>
