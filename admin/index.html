@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-    #testBar { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; height: 3px; background: #C96F52; pointer-events: none; }
-    #testBadge { position: fixed; left: 8px; bottom: 8px; z-index: 9999; background: rgba(201,111,82,.85); color: #fff; font: 700 11px/1 Arial, sans-serif; padding: 5px 9px; border-radius: 999px; pointer-events: none; }
+    #testBar { inset: auto; margin: 0; border: 0; padding: 0; overflow: visible; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; height: 3px; background: #C96F52; pointer-events: none; }
+    #testBadge { inset: auto; margin: 0; border: 0; overflow: visible; position: fixed; left: 8px; bottom: 8px; z-index: 9999; background: rgba(201,111,82,.85); color: #fff; font: 700 11px/1 Arial, sans-serif; padding: 5px 9px; border-radius: 999px; pointer-events: none; }
     body { padding-top: 0; }
     :root {
       --sky-bg: #E3EEF3; --sky: #1F5C6B;   /* פלטה אחידה: ממומן (פייסבוק), חינם וספונטני */
@@ -1205,7 +1205,7 @@
 </style>
 </head>
 <body class="locked">
-  <div id="testBar" role="note" aria-label="סביבת בדיקות"></div><div id="testBadge">בדיקות</div>
+  <div id="testBar" popover="manual" role="note" aria-label="סביבת בדיקות"></div><div id="testBadge" popover="manual">בדיקות</div>
   <div class="gate" id="gate" hidden>
     <h1>משתתפים</h1>
     <p>יוצאים להרפתקה</p>
@@ -4649,5 +4649,5 @@
 
   startAuth();
   </script>
-</body>
+<script>(function(){var els=[document.getElementById("testBar"),document.getElementById("testBadge")];function up(){els.forEach(function(e){try{e.hidePopover();e.showPopover();}catch(x){}});}up();new MutationObserver(function(m){if(m.some(function(r){return r.target.nodeName==="DIALOG";}))up();}).observe(document.documentElement,{subtree:true,attributes:true,attributeFilter:["open"]});})();</script></body>
 </html>
