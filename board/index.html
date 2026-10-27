@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head><script src="/shared/env.js"></script><meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google tag (gtag.js) -->
+  
+  
+  <title>לוח השיתופים | יוצאים להרפתקה</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#F6EFE4" />
+  <meta name="description" content="לוח השיתופים של יוצאים להרפתקה: מקום לשתף, לעזור ולהמליץ, באופן אנונימי" />
+  <meta property="og:title" content="לוח השיתופים" />
+  <meta property="og:description" content="יוצאים להרפתקה: מקום לשתף, לעזור ולהמליץ, באופן אנונימי" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://harpatka.co.il/board/" />
+  <meta property="og:image" content="https://harpatka.co.il/images/og-board.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1200" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="לוח השיתופים" />
+  <meta name="twitter:image" content="https://harpatka.co.il/images/og-board.jpg" />
+  <link rel="icon" href="../images/favicon-v4.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --cream: #F6EFE4; --sand: #E8D5BE; --terra: #C96F52; --olive: #686A48; --ink: #3F382F; --paper: #FFFDF9; --line: #E8D5BE; --muted: #7A6F60; --heart: #D2504B; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body { background: var(--cream); color: var(--ink); font-family: "Assistant", system-ui, sans-serif; font-size: 17px; line-height: 1.45; -webkit-tap-highlight-color: transparent; }
+    button, input, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; border: 0; background: none; padding: 0; }
+    :focus-visible { outline: 3px solid #663F4C; outline-offset: 2px; }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 10px 16px 60px; }
+    .home { display: inline-flex; align-items: center; gap: 4px; flex-direction: row-reverse; color: var(--terra); font-weight: 700; font-size: 15px; text-decoration: none; margin-bottom: 8px; }
+    .home svg { width: 16px; height: 16px; }
+    .bar { display: flex; align-items: center; gap: 8px; min-height: 40px; }
+    .bar h1 { flex: 0 0 auto; font-size: 20px; white-space: nowrap; }
+    .back { flex: 0 0 auto; width: 30px; height: 40px; display: grid; place-items: center; color: var(--terra); margin-right: -8px; }
+    .back svg { width: 24px; height: 24px; }
+    .crow[hidden] { display: none; }
+    .cmp { margin-top: 12px; padding: 12px 16px; }
+    .cmp textarea { min-height: 26px; height: 26px; }
+    .cmp textarea::placeholder { font-size: 15px; }
+    .cmp .crow { margin-top: 8px; }
+    .who { margin: 0; margin-inline-start: auto; min-width: 0; display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--muted); white-space: nowrap; }
+    .who .wn { min-width: 0; max-width: 9.5rem; overflow: hidden; text-overflow: ellipsis; color: var(--ink); font-weight: 600; }
+    .who b { color: var(--ink); font-weight: 600; }
+    .who a, .who button { color: var(--terra); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; padding: 0; font-size: inherit; }
+    .btns { display: flex; gap: 8px; flex: 0 0 auto; }
+    .toprow .home { margin-bottom: 0; }
+    .titlerow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 6px 0 8px; }
+    .titlerow h1 { font-size: 24px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    h1 { font-family: "Rubik", sans-serif; font-size: 26px; margin: 0; }
+    .banner { margin-top: 14px; padding: 11px 14px; border-radius: 14px; background: #FBE9C7; color: #7A5410; font-size: 15px; font-weight: 600; }
+    .banner[hidden] { display: none; }
+    .card { background: var(--paper); border-radius: 20px; box-shadow: 0 0 0 1px rgba(232,213,190,.7); padding: 14px; }
+    .composer { margin-top: 16px; }
+    textarea { width: 100%; min-height: 28px; height: 28px; resize: none; overflow: hidden; display: block; border: 0; background: transparent; font-size: 17px; line-height: 1.45; padding: 2px; }
+    textarea:focus-visible { outline: none; }
+    .crow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 6px; }
+    .cnt { font-size: 13px; color: var(--muted); }
+    .btn { background: var(--terra); color: #fff; font-weight: 700; padding: 10px 22px; border-radius: 999px; font-size: 16px; }
+    .btn:disabled { opacity: .5; }
+    .btn.ghost { background: var(--sand); color: var(--ink); }
+    .post { margin-top: 12px; }
+    .body { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: anywhere; }
+    .meta { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 14px; margin-top: 8px; font-size: 14px; color: var(--muted); }
+    .act { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-weight: 600; font-size: 14px; padding: 4px 2px; }
+    .act svg { width: 19px; height: 19px; }
+    .act.liked { color: var(--heart); }
+    .act.liked svg { fill: var(--heart); stroke: var(--heart); }
+    .act.del { color: #A3453A; }
+    .act.ok { color: #2F7D4F; }
+    .share { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 14px; color: var(--muted); }
+    .share input { width: 18px; height: 18px; accent-color: var(--terra); }
+    .phone { margin-top: 8px; padding: 8px 12px; border-radius: 12px; background: #E3F1E8; color: #1F5C3A; font-size: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+    .phone a { color: #1F5C3A; font-weight: 700; text-decoration: underline; }
+    .nchip { flex: 0 0 auto; margin-inline-start: auto; margin-inline-end: 10px; height: 34px; padding: 0 12px; border-radius: 999px; background: #F3E3D1; color: #A9533A; font-weight: 700; font-size: 14px; }
+    .nchip.off { background: transparent; color: var(--muted); border: 1.5px dashed var(--line); font-weight: 600; }
+    .pname.adm { background: var(--terra); color: #fff; padding: 3px 12px; letter-spacing: .2px; box-shadow: 0 2px 6px rgba(201,111,82,.35); }
+    .pname { display: inline-block; font-weight: 700; font-size: 13.5px; color: #A9533A; background: #F3E3D1; padding: 2px 10px; border-radius: 999px; margin-bottom: 6px; }
+    .auth { margin-top: 6px; font-size: 13px; color: var(--muted); }
+    .pend { display: inline-block; font-size: 12.5px; font-weight: 700; background: #FBE9C7; color: #7A5410; padding: 2px 9px; border-radius: 999px; }
+    .kids { margin-top: 10px; padding-right: 14px; border-right: 2px solid var(--sand); }
+    .kids .kids { margin-top: 8px; }
+    .flat .kids { padding-right: 0; border-right: 0; }
+    .cm { margin-top: 10px; }
+    .cm .body { font-size: 16px; }
+    .reply { margin-top: 10px; background: var(--cream); border-radius: 14px; padding: 8px 10px; }
+    .empty { text-align: center; color: var(--muted); padding: 30px 10px; }
+    dialog { border: 0; border-radius: 24px; padding: 20px; width: min(420px, calc(100vw - 32px)); background: var(--paper); color: var(--ink); box-shadow: 0 20px 60px rgba(63,56,47,.3); }
+    dialog::backdrop { background: rgba(63,56,47,.5); }
+    dialog h2 { font-family: "Rubik", sans-serif; font-size: 20px; margin: 0 0 6px; }
+    dialog p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
+    dialog input { width: 100%; border: 1.5px solid var(--line); border-radius: 14px; padding: 11px 14px; font-size: 17px; background: #fff; direction: ltr; text-align: right; }
+    .regl { display: block; margin-top: 6px; color: var(--terra); font-weight: 700; text-decoration: underline; }
+    .regl[hidden] { display: none; }
+    .err { color: #A3453A; font-size: 14px; min-height: 20px; margin-top: 6px; }
+    .drow { display: flex; gap: 8px; margin-top: 10px; }
+    .drow .btn { flex: 1; }
+    .gbtn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: #fff; border-radius: 999px; padding: 12px; font-weight: 700; box-shadow: 0 0 0 1.5px var(--line); }
+    .gbtn svg { width: 20px; height: 20px; }
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 14px; font-weight: 600; opacity: 0; pointer-events: none; transition: .2s; z-index: 50; max-width: calc(100% - 32px); }
+    .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar">
+      <a class="back" href="../" aria-label="חזרה לעמוד הבית" title="חזרה לעמוד הבית"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+      <h1>לוח שיתופים</h1>
+      <div class="who" id="who"></div>
+    </div>
+
+    <div class="card cmp" id="cmp">
+      <textarea id="newText" rows="1" maxlength="2000" placeholder="שתפו משהו, בקשות, טרמפים או דברים שבאים מהלב" aria-label="פוסט חדש"></textarea>
+      <div class="crow" id="cmpAct" hidden><span class="cnt" id="newCnt"></span><button type="button" class="nchip" id="nameChip" hidden></button><button type="button" class="btn" id="newBtn">פרסום</button></div>
+    </div>
+
+    <div class="banner" id="banner" hidden></div>
+
+    <div id="feed"></div>
+  </div>
+
+  <dialog id="noMeetDlg" aria-labelledby="noMeetTitle">
+    <h2 id="noMeetTitle">צריך להירשם למפגש</h2>
+    <p>אפשר לכתוב ולהגיב בלוח רק אחרי שנרשמים לפחות למפגש אחד. אחרי ההרשמה זה יעבוד</p>
+    <a class="regl" href="../?register=1">להרשמה למפגש</a>
+    <div class="drow"><button type="button" class="btn ghost" id="noMeetOk">סגירה</button></div>
+  </dialog>
+
+  <dialog id="phoneDlg" aria-labelledby="phoneTitle">
+    <h2 id="phoneTitle">עוד רגע ומפרסמים</h2>
+    <p>כדי לפרסם צריך לאמת שאתם משתתפים. הזינו את הטלפון שנרשמתם איתו. החיבור ייבדק ויאושר על ידינו, ובינתיים מה שתכתבו יהיה גלוי רק לכם</p>
+    <input id="phoneIn" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-0000000" aria-label="טלפון" />
+    <div class="err" id="phoneErr" role="alert"></div>
+    <a class="regl" id="phoneReg" href="../?register=1" hidden>להרשמה למפגש</a>
+    <div class="drow"><button type="button" class="btn" id="phoneOk">המשך</button><button type="button" class="btn ghost" id="phoneCancel">ביטול</button></div>
+  </dialog>
+
+  <dialog id="loginDlg" aria-labelledby="loginTitle">
+    <h2 id="loginTitle">כניסה</h2>
+    <p>כדי לפרסם, להגיב או לסמן לב צריך להתחבר. מה שתכתבו יוצג באופן אנונימי</p>
+    <button type="button" class="gbtn" id="gBtn">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.3 0-9.7-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+      כניסה עם גוגל
+    </button>
+    <div class="drow"><button type="button" class="btn ghost" id="loginCancel">ביטול</button></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+  const DB = {
+    url: 'https://ezakarwqstnldqixgreb.supabase.co',
+    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6YWthcndxc3RubGRxaXhncmViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyMTA3MzIsImV4cCI6MjEwNjc4NjczMn0.Bg0eFBC4zKjyJc5kBw3wLgSP-PkxLFVv3o7-4YUdq4c',
+  };
+  const $ = (s) => document.querySelector(s);
+  const SKEY = 'harpatka_board_session', PKEY = 'harpatka_board_pending';
+  const LIKE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.2-9.4C1.7 7.700 3.900 4.500 7.200 4.500c2 0 3.700 1.100 4.800 2.800 1.100-1.700 2.800-2.800 4.800-2.800 3.300 0 5.500 3.200 4.400 6.600-1.700 4.800-9.200 9.400-9.200 9.400z"/></svg>';
+  let meAdmin = false, meFirst = '', showName = true, meName = '', editId = null, editText = '', shareOn = false, session = null, me = null, canShare = false, canPost = true, posts = [], pendingAct = null, openReply = null, delAsk = null;
+
+  /* ---------- כניסה עם גוגל (הזדהות של Supabase, בלי SDK) ---------- */
+  const jwtData = (tok) => { try { return JSON.parse(decodeURIComponent(escape(atob(tok.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))))); } catch (e) { return {}; } };
+  const saveSession = (s) => { session = s; try { localStorage.setItem(SKEY, JSON.stringify(s)); } catch (e) {} };
+  const clearSession = () => { session = null; me = null; try { localStorage.removeItem(SKEY); } catch (e) {} };
+  const sessionOk = (s) => s && s.access_token && (jwtData(s.access_token).exp || 0) * 1000 > Date.now() + 30000;
+  async function refreshSession() {
+    if (!session || !session.refresh_token) return false;
+    try {
+      const r = await fetch(DB.url + '/auth/v1/token?grant_type=refresh_token', { method: 'POST', headers: { apikey: DB.key, 'Content-Type': 'application/json' }, body: JSON.stringify({ refresh_token: session.refresh_token }) });
+      if (!r.ok) return false;
+      const d = await r.json(); saveSession({ access_token: d.access_token, refresh_token: d.refresh_token }); return true;
+    } catch (e) { return false; }
+  }
+  const goGoogle = () => { location.href = DB.url + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(location.origin + location.pathname); };
+  async function startAuth() {
+    const h = new URLSearchParams(location.hash.replace(/^#/, ''));
+    if (h.get('access_token')) { saveSession({ access_token: h.get('access_token'), refresh_token: h.get('refresh_token') }); history.replaceState(null, '', location.pathname + location.search); }
+    else if (h.get('error_description')) { history.replaceState(null, '', location.pathname + location.search); toast('הכניסה נכשלה'); }
+    else { try { session = JSON.parse(localStorage.getItem(SKEY) || 'null'); } catch (e) { session = null; } }
+    if (session && !sessionOk(session) && !(await refreshSession())) clearSession();
+  }
+
+  async function rpc(name, body) {
+    const call = () => fetch(DB.url + '/rest/v1/rpc/' + name, { method: 'POST', headers: { apikey: DB.key, Authorization: 'Bearer ' + ((session && session.access_token) || DB.key), 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) });
+    let res = await call();
+    if (res.status === 401 && session && await refreshSession()) res = await call();
+    if (res.status === 401 || res.status === 403) { clearSession(); throw new Error('auth'); }
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const t = await res.text(); return t ? JSON.parse(t) : null;
+  }
+
+  try { showName = localStorage.getItem('hb_showname') !== '0'; } catch (e) {}
+  /* מזהה מכשיר ללבבות בלי התחברות */
+  function deviceId() {
+    try { let d = localStorage.getItem('hb_device'); if (!d) { d = (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); })); localStorage.setItem('hb_device', d); } return d; }
+    catch (e) { return null; }
+  }
+  let toastT = 0;
+  function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2600); }
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  function ago(iso) {
+    const s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+    if (s < 60) return 'עכשיו';
+    if (s < 3600) return 'לפני ' + Math.floor(s / 60) + ' דקות';
+    if (s < 86400) return 'לפני ' + Math.floor(s / 3600) + ' שעות';
+    return new Date(iso).toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric', timeZone: 'Asia/Jerusalem' });
+  }
+
+  /* ---------- רינדור: עץ של פוסטים ותגובות (טקסט בלבד, textContent דרך esc) ---------- */
+  /* בפוסט שאני כתבתי אין טעם לשתף לעצמי את הטלפון */
+  const ownThread = (p) => { const root = posts.find((x) => x.id === (p.root_id || p.id)); return !!(root && root.mine); };
+  function render() {
+    const kids = {}; posts.forEach((p) => { (kids[p.parent_id || 'root'] = kids[p.parent_id || 'root'] || []).push(p); });
+    const roots = (kids.root || []).slice().sort((a, b) => b.created_at.localeCompare(a.created_at));
+    const node = (p, depth) => {
+      const ch = (kids[p.id] || []).slice().sort((a, b) => a.created_at.localeCompare(b.created_at));
+      const asking = delAsk === p.id;
+      const act = '<span class="meta">'
+        + '<span>' + ago(p.created_at) + (p.edited ? ' · נערך' : '') + '</span>'
+        + '<button type="button" class="act' + (p.liked ? ' liked' : '') + '" data-like="' + p.id + '" aria-pressed="' + p.liked + '" aria-label="לב">' + LIKE + '<span>' + (p.likes || '') + '</span></button>'
+        + '<button type="button" class="act" data-reply="' + p.id + '">תגובה</button>'
+        + (p.mine && meFirst && !meAdmin ? '<button type="button" class="act" data-setname="' + p.id + '" data-show="' + (p.first_name ? '0' : '1') + '">' + (p.first_name ? 'הסרת השם' : 'הצגת השם') + '</button>' : '')
+        + (p.mine && editId !== p.id ? '<button type="button" class="act" data-edit="' + p.id + '">עריכה</button>' : '')
+        + (p.author != null ? (p.hidden ? '<button type="button" class="act" data-unhide="' + p.id + '">ביטול הסתרה</button>' : '<button type="button" class="act" data-hide="' + p.id + '">הסתרה</button>') : '')
+        + (p.hidden ? '<span class="pend" style="background:#E9DCE3;color:#663F4C">מוסתר, רק מנהלים רואים</span>' : '')
+        + (p.can_approve ? '<button type="button" class="act ok" data-approve="' + p.id + '">אישור ופרסום</button>' : '')
+        + (p.can_delete ? (asking ? '<span>למחוק? <button type="button" class="act del" data-delyes="' + p.id + '">כן</button> <button type="button" class="act" data-delno="1">לא</button></span>' : '<button type="button" class="act del" data-del="' + p.id + '">מחיקה</button>') : '')
+        + (p.pending ? '<span class="pend">' + (p.pending_edit ? 'העריכה ממתינה לאישור, עד אז מוצג הנוסח הקודם' : 'ממתין לאישור, רק אתם רואים אותו') + '</span>' : '') + '</span>';
+      const reply = openReply === p.id ? '<div class="reply"><textarea rows="1" maxlength="2000" data-rtext="' + p.id + '" placeholder="תגובה" aria-label="תגובה"></textarea>' + (canShare && !ownThread(p) ? '<label class="share"><input type="checkbox" data-rshare="' + p.id + '"' + (shareOn ? ' checked' : '') + ' /> לשתף את הטלפון שלי רק עם בעל הפוסט</label>' : '') + '<div class="crow"><span></span><button type="button" class="nchip" ' + (meFirst && !meAdmin ? '' : 'hidden') + '>' + chipHTML() + '</button><button type="button" class="btn" data-rsend="' + p.id + '">שליחה</button></div></div>' : '';
+      return '<div class="' + (depth ? 'cm' : 'card post') + '">' + (p.admin_post ? '<div class="pname adm">★ מנהל</div>' : p.first_name ? '<div class="pname">' + esc(p.first_name) + '</div>' : '') + (editId === p.id ? '<div class="reply"><textarea rows="1" maxlength="2000" data-etext="' + p.id + '" aria-label="עריכה">' + esc(editText) + '</textarea><div class="crow"><button type="button" class="btn ghost" data-ecancel="1">ביטול</button><button type="button" class="btn" data-esave="' + p.id + '">שמירה</button></div></div>' : '<div class="body">' + esc(p.body) + '</div>') + (p.author ? '<div class="auth">' + (p.mine ? 'את/ה' : esc(p.author)) + '</div>' : '')
+        + (p.phone ? '<div class="phone"><span>הטלפון של המגיב/ה:</span> <b dir="ltr">' + esc(p.phone) + '</b> <a href="https://wa.me/972' + esc(String(p.phone).replace(/^0/, '').replace(/\D/g, '')) + '" target="_blank" rel="noopener">וואטסאפ</a> <a href="tel:' + esc(p.phone) + '">חיוג</a></div>' : '')
+        + (p.shared ? '<div class="auth">הטלפון שלך משותף עם בעל הפוסט</div>' : '') + act + reply
+        + (ch.length ? '<div class="kids' + (depth >= 3 ? ' flat' : '') + '">' + ch.map((c) => node(c, depth + 1)).join('') + '</div>' : '') + '</div>';
+    };
+    $('#feed').innerHTML = roots.length ? roots.map((p) => node(p, 0)).join('') : '<div class="empty">עוד אין פוסטים. אפשר להיות הראשונים</div>';
+    if (editId) { const e = $('[data-etext="' + editId + '"]'); if (e && !e.dataset.f) { e.dataset.f = 1; grow(e); e.focus(); e.setSelectionRange(e.value.length, e.value.length); } }
+    if (openReply) { const t = $('[data-rtext="' + openReply + '"]'); if (t && !t.dataset.f) { t.dataset.f = 1; t.focus(); } }
+    const b = $('#banner');
+    if (me === 'blocked' || me === 'removed') { b.textContent = 'אין אפשרות לפרסם בחשבון הזה'; b.hidden = false; }
+    else b.hidden = true;
+    paintChips();
+    const w = $('#who');
+    if (session) {
+      let nm = meName; if (!nm) { const u = jwtData(session.access_token); nm = (u.user_metadata && (u.user_metadata.full_name || u.user_metadata.name)) || u.email || ''; }
+      w.innerHTML = (nm ? '<span class="wn">' + esc(nm) + '</span><span>·</span>' : '') + '<button type="button" id="out">יציאה</button>';
+    } else w.innerHTML = 'לא מחובר · <button type="button" id="inBtn">התחברות</button>';
+  }
+
+  async function load() {
+    try {
+      const [feed, st] = await Promise.all([rpc('harpatka_board_feed', { p_device: deviceId() }), session ? rpc('harpatka_board_profile') : Promise.resolve(null)]);
+      posts = feed || []; me = st ? st.status : null; canShare = !!(st && st.can_share); canPost = !st || st.can_post !== false; meName = (st && st.name) || ''; meFirst = (st && st.first_name) || ''; meAdmin = !!(st && st.is_admin);
+    } catch (e) { if (e.message === 'auth') { /* נכנס מחדש כמבקר */ } }
+    render();
+  }
+  const keepTyping = () => { const a = document.activeElement; return a && a.tagName === 'TEXTAREA' && a.value; };
+
+  /* ---------- פעולות ---------- */
+  async function submit(body, parent, share) {
+    body = (body || '').trim(); if (!body) return false;
+    if (!session) { try { sessionStorage.setItem(PKEY, JSON.stringify({ body, parent, share })); } catch (e) {} $('#loginDlg').showModal(); return false; }
+    if (!me || (me === 'pending' && !canShare)) { pendingAct = { body, parent, share }; $('#phoneErr').textContent = ''; $('#phoneReg').hidden = true; $('#phoneDlg').showModal(); $('#phoneIn').focus(); return false; }
+    if (me && !canPost) { $('#noMeetDlg').showModal(); return false; }
+    try {
+      const r = await rpc('harpatka_board_post', { p_body: body, p_parent: parent || null, p_share: !!share, p_show_name: !!(showName && meFirst) });
+      if (r === 'ok' || r === 'pending') { toast(r === 'ok' ? 'פורסם' : 'נשלח לאישור, יופיע לכולם אחרי שנאשר'); await load(); return true; }
+      if (r === 'no_meeting') { canPost = false; $('#noMeetDlg').showModal(); return false; }
+      toast({ blocked: 'אין אפשרות לפרסם', no_meeting: 'צריך להיות רשום למפגש', limit: 'אפשר לפרסם עוד אחרי האישור', long: 'הטקסט ארוך מדי', no_parent: 'הפוסט כבר לא קיים' }[r] || 'משהו השתבש');
+    } catch (e) { toast('משהו השתבש, אפשר לנסות שוב'); }
+    return false;
+  }
+  /* שורת כתיבה: מתחילה בשורה אחת ומתרחבת, וכפתור הפרסום מופיע ברגע שמתחילים להקליד */
+  const chipHTML = () => showName ? esc(meFirst) + ' ×' : 'הוספת שם';
+  function paintChips() { document.querySelectorAll('.nchip').forEach((c) => { c.hidden = !meFirst || meAdmin; c.classList.toggle('off', !showName); c.innerHTML = chipHTML(); c.title = showName ? 'הסרת השם מהפרסום' : 'הצגת השם הפרטי בפרסום'; }); }
+  document.addEventListener('click', (e) => { const c = e.target.closest('.nchip'); if (!c) return; showName = !showName; try { localStorage.setItem('hb_showname', showName ? '1' : '0'); } catch (x) {} paintChips(); });
+  const syncComposer = () => { $('#cmpAct').hidden = !$('#newText').value.trim(); paintChips(); };
+  function closeCompose() { const ta = $('#newText'); ta.value = ''; grow(ta); syncComposer(); }
+  $('#newBtn').addEventListener('click', async () => { if (await submit($('#newText').value, null)) closeCompose(); });
+  /* התיבה מתחילה בשורה אחת ומתארכת לפי הטקסט */
+  const grow = (ta) => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; };
+  /* לחיצה מחוץ לתיבת התגובה סוגרת אותה */
+  document.addEventListener('click', (e) => {
+    if (!openReply || e.target.closest('.reply') || e.target.closest('[data-reply]') || e.target.closest('dialog')) return;
+    openReply = null; render();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && (openReply || editId) && !document.querySelector('dialog[open]')) { openReply = null; editId = null; render(); } });
+  document.addEventListener('input', (e) => { if (e.target.tagName === 'TEXTAREA') { grow(e.target); if (e.target.dataset.etext) editText = e.target.value; } });
+  $('#newText').addEventListener('input', (e) => { const n = e.target.value.length; $('#newCnt').textContent = n > 1700 ? n + ' / 2000' : ''; syncComposer(); });
+
+  $('#feed').addEventListener('click', async (e) => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.reply) { openReply = openReply === t.dataset.reply ? null : t.dataset.reply; render(); return; }
+    if (t.dataset.rsend) {
+      const ta = $('[data-rtext="' + t.dataset.rsend + '"]');
+      const sh = $('[data-rshare="' + t.dataset.rsend + '"]');
+      if (await submit(ta.value, t.dataset.rsend, !!(sh && sh.checked))) openReply = null; render(); return;
+    }
+    if (t.dataset.like) {
+      const p = posts.find((x) => x.id === t.dataset.like); if (!p) return;
+      const member = !!(session && me && me !== 'blocked' && me !== 'removed');   // מחובר ומאושר: לב רגיל; אחרת לב אנונימי לפי מכשיר (בלי התחברות)
+      p.liked = !p.liked; p.likes = Math.max(0, (p.likes || 0) + (p.liked ? 1 : -1)); render();
+      try { if (member) await rpc('harpatka_board_like', { p_id: p.id }); else await rpc('harpatka_board_like_anon', { p_id: p.id, p_device: deviceId() }); } catch (err) { p.liked = !p.liked; p.likes += p.liked ? 1 : -1; render(); }
+      return;
+    }
+    if (t.dataset.edit) { const p = posts.find((x) => x.id === t.dataset.edit); if (!p) return; editId = p.id; editText = p.body; openReply = null; render(); return; }
+    if (t.dataset.ecancel) { editId = null; render(); return; }
+    if (t.dataset.esave) {
+      const ta = $('[data-etext="' + t.dataset.esave + '"]'), txt = (ta && ta.value || '').trim(); if (!txt) return;
+      try {
+        const r = await rpc('harpatka_board_edit', { p_id: t.dataset.esave, p_body: txt });
+        if (r === 'ok') toast('נשמר'); else if (r === 'pending') toast('העריכה נשלחה לאישור, עד אז מוצג הנוסח הקודם');
+        else { toast({ empty: 'אי אפשר לשמור ריק', long: 'הטקסט ארוך מדי', blocked: 'אין אפשרות לערוך' }[r] || 'משהו השתבש'); return; }
+        editId = null; await load();
+      } catch (err) { toast('משהו השתבש, אפשר לנסות שוב'); }
+      return;
+    }
+    if (t.dataset.setname) {
+      try { await rpc('harpatka_board_set_name', { p_id: t.dataset.setname, p_show: t.dataset.show === '1' }); toast(t.dataset.show === '1' ? 'השם מוצג' : 'השם הוסר'); } catch (err) { toast('משהו השתבש'); }
+      load(); return;
+    }
+    if (t.dataset.hide || t.dataset.unhide) {
+      const id = t.dataset.hide || t.dataset.unhide;
+      try { await rpc('harpatka_board_hide', { p_id: id, p_hide: !!t.dataset.hide }); toast(t.dataset.hide ? 'הוסתר, רק מנהלים רואים' : 'ההסתרה בוטלה'); } catch (err) { toast('משהו השתבש'); }
+      load(); return;
+    }
+    if (t.dataset.approve) {
+      try { await rpc('harpatka_board_approve', { p_id: t.dataset.approve }); toast('פורסם'); } catch (err) { toast('משהו השתבש'); }
+      load(); return;
+    }
+    if (t.dataset.del) { delAsk = t.dataset.del; render(); return; }
+    if (t.dataset.delno) { delAsk = null; render(); return; }
+    if (t.dataset.delyes) {
+      delAsk = null;
+      try { await rpc('harpatka_board_delete', { p_id: t.dataset.delyes }); toast('נמחק'); } catch (err) { toast('משהו השתבש'); }
+      load();
+    }
+  });
+
+  document.addEventListener('change', (e) => { if (e.target.dataset && e.target.dataset.rshare !== undefined) shareOn = e.target.checked; });
+  $('#noMeetOk').addEventListener('click', () => $('#noMeetDlg').close());
+  $('#gBtn').addEventListener('click', goGoogle);
+  $('#loginCancel').addEventListener('click', () => $('#loginDlg').close());
+  $('#phoneCancel').addEventListener('click', () => { pendingAct = null; $('#phoneDlg').close(); });
+  async function claim() {
+    const v = $('#phoneIn').value.trim(); if (v.replace(/\D/g, '').length < 8) { $('#phoneErr').textContent = 'מספר לא תקין'; return; }
+    $('#phoneOk').disabled = true;
+    try {
+      const r = await rpc('harpatka_board_claim', { p_phone: v });
+      if (r === 'invalid_phone') { $('#phoneErr').textContent = 'מספר לא תקין'; return; }
+      if (r === 'not_registered') { $('#phoneErr').textContent = 'המספר הזה עוד לא רשום למפגש. כדי להשתמש בלוח צריך להירשם תחילה למפגש, ורק אחר כך זה יעבוד'; $('#phoneReg').hidden = false; return; }
+      me = r; canShare = true; $('#phoneDlg').close();
+      const a = pendingAct; pendingAct = null; if (a) { if (await submit(a.body, a.parent, a.share)) { openReply = null; if (!a.parent) closeCompose(); } }
+      load();
+    } catch (e) { $('#phoneErr').textContent = 'משהו השתבש, אפשר לנסות שוב'; }
+    finally { $('#phoneOk').disabled = false; }
+  }
+  $('#phoneOk').addEventListener('click', claim);
+  $('#phoneIn').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); claim(); } });
+  $('#who').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; if (b.id === 'out') { clearSession(); location.reload(); } else if (b.id === 'inBtn') goGoogle(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && !keepTyping()) load(); });
+  /* זמן אמת: אות ריק בערוץ ציבורי "board" (admin/board-realtime.sql) מרענן את הלוח; בזמן הקלדה מחכים לסיום כדי לא לאבד טקסט */
+  let rtWs = null, rtHb = 0, rtRetry = 1000, rtDirty = false, rtTimer = 0;
+  const RT_TOPIC = 'realtime:board';
+  const refreshNow = () => { if (keepTyping() || document.querySelector('dialog[open]')) { rtDirty = true; return; } rtDirty = false; load(); };
+  document.addEventListener('focusout', () => { if (rtDirty) setTimeout(refreshNow, 300); });
+  function startRealtime() {
+    if (rtWs) return;
+    let ws; try { ws = new WebSocket(DB.url.replace(/^http/, 'ws') + '/realtime/v1/websocket?apikey=' + encodeURIComponent(DB.key) + '&vsn=1.0.0'); } catch (e) { return; }
+    rtWs = ws;
+    const send = (o) => { if (ws.readyState === 1) ws.send(JSON.stringify(o)); };
+    ws.onopen = () => {
+      rtRetry = 1000;
+      send({ topic: RT_TOPIC, event: 'phx_join', ref: '1', payload: { config: { broadcast: { ack: false, self: false }, presence: { key: '' }, private: false }, access_token: DB.key } });
+      rtHb = setInterval(() => send({ topic: 'phoenix', event: 'heartbeat', payload: {}, ref: String(Date.now()) }), 25000);
+    };
+    ws.onmessage = (e) => {
+      let m; try { m = JSON.parse(e.data); } catch (x) { return; }
+      if (m.topic === RT_TOPIC && m.event === 'broadcast') { clearTimeout(rtTimer); rtTimer = setTimeout(refreshNow, 250); }
+    };
+    ws.onclose = () => { clearInterval(rtHb); rtWs = null; setTimeout(startRealtime, rtRetry); rtRetry = Math.min(rtRetry * 2, 30000); };
+    ws.onerror = () => { try { ws.close(); } catch (x) {} };
+  }
+  startRealtime();
+  setInterval(() => { if (!document.hidden && !keepTyping() && !document.querySelector('dialog[open]')) load(); }, 60000);
+
+  (async () => {
+    await startAuth();
+    /* קישור "הסתרת הפוסט" מהמייל (?hide=<מזהה>): מנהל מחובר מסתיר מיד; אחרת עוברים קודם התחברות עם גוגל */
+    try { const hp = new URLSearchParams(location.search).get('hide'); if (hp) { sessionStorage.setItem('hb_hide', hp); history.replaceState(null, '', location.pathname); } } catch (e) {}
+    let hid = null; try { hid = sessionStorage.getItem('hb_hide'); } catch (e) {}
+    if (hid) {
+      if (!session) { goGoogle(); return; }
+      try { sessionStorage.removeItem('hb_hide'); } catch (e) {}
+      try { const r = await rpc('harpatka_board_hide', { p_id: hid, p_hide: true }); toast(r === 'ok' ? 'הפוסט הוסתר, רק מנהלים רואים אותו' : r === 'denied' ? 'אין הרשאה להסתיר (נדרשת כניסה של מנהל)' : 'הפוסט לא נמצא'); } catch (e) { toast('משהו השתבש'); }
+    }
+    /* קישור "אישור חיבור ופרסום" מהמייל (?approve=<מזהה פוסט/תגובה>): מנהל מחובר מאשר את החיבור ואת התוכן הראשון יחד; אחרת עוברים קודם התחברות עם גוגל */
+    try { const ap = new URLSearchParams(location.search).get('approve'); if (ap) { sessionStorage.setItem('hb_approve', ap); history.replaceState(null, '', location.pathname); } } catch (e) {}
+    let apid = null; try { apid = sessionStorage.getItem('hb_approve'); } catch (e) {}
+    if (apid) {
+      if (!session) { goGoogle(); return; }
+      try { sessionStorage.removeItem('hb_approve'); } catch (e) {}
+      try { const r = await rpc('harpatka_board_approve', { p_id: apid }); toast(r === 'ok' ? 'החיבור אושר והתוכן פורסם' : r === 'denied' ? 'אין הרשאה לאשר (נדרשת כניסה של מנהל)' : 'הפריט לא נמצא'); } catch (e) { toast('משהו השתבש'); }
+    }
+    await load();
+    /* חזרה מהכניסה: ממשיכים מה שהתחילו לכתוב */
+    let p = null; try { p = JSON.parse(sessionStorage.getItem(PKEY) || 'null'); sessionStorage.removeItem(PKEY); } catch (e) {}
+    if (p && session) { if (!p.parent) { $('#newText').value = p.body; grow($('#newText')); syncComposer(); } if (await submit(p.body, p.parent, p.share) && !p.parent) { $('#newText').value = ''; grow($('#newText')); } }
+  })();
+  </script>
+</body>
+</html>

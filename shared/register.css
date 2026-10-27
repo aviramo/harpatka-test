@@ -1,0 +1,83 @@
+/* פופאפ הרשמה משותף (עמוד הבית, v6, ביודנסה): עיצוב הפופאפ והטופס. נטען מ-shared/register.css */
+.modal{ position:fixed; inset:0; z-index:60; display:flex; align-items:flex-start; justify-content:center; padding:0; background:rgba(30,25,20,.78); opacity:0; transition:opacity .3s ease; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; }
+.modal[hidden]{ display:none; }
+.modal.open{ opacity:1; }
+#contactModal [data-su="done"] h2{ padding-inline:2rem; font-size:1.5rem; }
+.modal-box{ position:relative; width:100%; max-width:30rem; margin:0 auto auto; background:var(--paper); border-radius:0; padding:calc(1.6rem + env(safe-area-inset-top)) 1.25rem 2.6rem; text-align:center; transform:translateY(-110%); transition:transform .34s cubic-bezier(.22,.8,.2,1); will-change:transform; }
+.modal.open .modal-box{ transform:none; }
+/* מגירה מלמעלה: נפתחת מלמעלה, נסגרת למעלה (החלקה למעלה, לחיצה בחוץ או Esc); הפס בתחתית במקום כפתור סגירה */
+.modal-close{ display:none !important; }
+.modal-grab{ position:absolute; left:0; right:0; bottom:0; height:2.2rem; display:grid; place-items:center; cursor:grab; touch-action:none; }
+.modal-grab i{ width:2.7rem; height:.3rem; border-radius:.2rem; background:rgba(63,56,47,.28); }
+.modal-close{ position:absolute; top:-3.6rem; left:50%; margin-left:-1.3rem; width:2.6rem; height:2.6rem; border-radius:50%; background:var(--paper); color:var(--ink); font-size:1.6rem; line-height:1; box-shadow:0 4px 14px rgba(0,0,0,.25); }   /* מעל הפופאפ, במרכז, עם רווח ממנו */
+.contact-opt{ display:flex; flex-direction:column; align-items:center; gap:.45rem; padding:1.1rem .5rem 1rem; border-radius:24px; background:rgba(232,213,190,.42); color:var(--ink); }
+.contact-opt img{ width:6rem; height:6rem; border-radius:50%; object-fit:cover; box-shadow:0 0 0 5px var(--cream); }
+.contact-opt b{ font-family:Rubik,sans-serif; font-weight:600; font-size:1.2rem; }
+.contact-opt span{ display:inline-flex; align-items:center; gap:.35rem; background:var(--terra); color:var(--paper); font-weight:700; font-size:.98rem; border-radius:999px; padding:.4rem .95rem; }
+.su-input{ width:100%; background:var(--paper); border:2px solid var(--sand); border-radius:16px; padding:.7rem 1rem; font-size:1.05rem; color:var(--ink); font-family:inherit; }
+.su-input::placeholder{ color:#a39a8b; }
+.su-input:focus{ outline:none; border-color:var(--terra); }
+.su-input.bad{ border-color:#B85C40; }
+.su-seg{ display:flex; gap:.4rem; flex-shrink:0; }
+.su-seg label{ position:relative; display:block; }
+.su-seg input{ position:absolute; inset:0; opacity:0; margin:0; cursor:pointer; }
+.su-seg span{ display:block; text-align:center; padding:.7rem .8rem; border:2px solid var(--sand); border-radius:16px; background:var(--paper); font-size:1.05rem; font-weight:600; color:var(--ink); white-space:nowrap; }
+.su-seg input:checked + span{ border-color:var(--terra); background:var(--terra); color:#fff; }
+.su-seg input:focus-visible + span{ outline:3px solid var(--plum); outline-offset:2px; }
+.su-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:.6rem .5rem; align-items:start; }
+.su-cell{ min-width:0; }
+.su-wide{ grid-column:1 / -1; }
+.su-names{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:.5rem; }
+.su-cell .su-err{ text-align:center; }   /* הודעת השגיאה ממורכזת אופקית מתחת לשדה */
+.su-grid > *{ min-width:0; }
+.su-seg.eq{ flex:1 1 0; min-width:0; flex-shrink:1; }
+.su-seg.eq label{ flex:1 1 0; min-width:0; }
+.su-seg.eq span{ padding-inline:.3rem; }
+.su-seg.bad span{ border-color:#B85C40; }
+.su-err{ color:#A9533A; font-size:.82rem; font-weight:600; margin-top:.25rem; line-height:1.25; }
+.su-err:empty{ display:none; }
+.su-hp{ position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
+.btn-green{ display:inline-block; background:#686A48; color:#FFFDF9; font-weight:700; font-size:1.05rem; padding:.8rem 1.6rem; border-radius:999px; }
+.su-input:-webkit-autofill, .su-input:-webkit-autofill:hover, .su-input:-webkit-autofill:focus, .su-input:-webkit-autofill:active{ -webkit-box-shadow:0 0 0 1000px var(--paper) inset !important; box-shadow:0 0 0 1000px var(--paper) inset !important; -webkit-text-fill-color:var(--ink) !important; caret-color:var(--ink); transition:background-color 99999s ease-in-out 0s; }   /* מילוי אוטומטי של הדפדפן: בלי רקע כחול */
+.mt-badge{ display:flex; flex-direction:column; align-items:center; gap:.15rem; margin:0 auto 1rem; padding:.75rem 1rem; max-width:20rem; border-radius:20px; background:rgba(201,111,82,.13); border:2px solid #C96F52; color:var(--ink); }
+.mt-badge svg{ width:1.6rem; height:1.6rem; color:#C96F52; }
+.mt-badge b{ font-family:Rubik,sans-serif; font-weight:700; font-size:1.35rem; line-height:1.2; }
+.mt-badge span{ font-size:1rem; font-weight:600; color:var(--muted); }
+.mt-badge span:empty{ display:none; }
+.modal-box:focus{ outline:none; }
+.modal-close{ border-radius:9999px; padding:0; border:0; cursor:pointer; display:grid; place-items:center; }
+.modal-close:focus:not(:focus-visible){ outline:none; }
+.modal-close:focus-visible{ outline:2px solid #C96F52; outline-offset:2px; }
+
+/* כשפופאפ פתוח: דף הבית מאחור לא נגלל (רק הפופאפ עצמו, למשל כשהמקלדת פתוחה) */
+html.modal-lock{ overflow:hidden; overscroll-behavior:none; }
+html.modal-lock body{ overflow:hidden; overscroll-behavior:none; touch-action:none; }
+html.modal-lock .modal{ touch-action:pan-y; }
+
+/* מגדר כרשימה נפתחת (v7) */
+.su-select{ appearance:none; -webkit-appearance:none; padding-inline-end:2.2rem; cursor:pointer; text-align:start; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23686A48' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:left .75rem center; background-size:1.15rem; }
+.su-select:invalid{ color:#a39a8b; }
+.su-select option{ color:var(--ink); }
+
+/* טופס מינימליסטי (v7: window.REGISTER_MIN, מוגדר לפני הסקריפט): בלי משפט ההסבר, פרטי המפגש בשורה קטנה אחת */
+html.reg-min [data-su="formWrap"] > p.muted{ display:none; }
+html.reg-min .modal-box{ padding:calc(1.4rem + env(safe-area-inset-top)) 1.1rem 2.4rem; }
+html.reg-min .mt-badge{ flex-direction:row; flex-wrap:wrap; justify-content:center; align-items:center; gap:.35rem; margin:0 auto 1rem; padding:0; max-width:none; background:none; border:0; border-radius:0; }
+html.reg-min .mt-badge svg{ width:1.05rem; height:1.05rem; }
+html.reg-min .mt-badge b{ font-size:1rem; font-weight:600; }
+html.reg-min .mt-badge span{ font-size:1rem; font-weight:500; }
+html.reg-min .mt-badge span:not(:empty)::before{ content:'· '; }
+
+.su-title{ font-family:Rubik,sans-serif; font-weight:700; font-size:1.45rem; line-height:1.2; color:var(--ink); margin:0 0 .7rem; }
+
+/* אחרי ההרשמה: התוכן נסגר מלמעלה (קיפול), הכפתור הופך ל"נשמר זמנית", ואז נחשפים טקסט וכפתור תשלום */
+.su-fold{ display:grid; grid-template-rows:1fr; opacity:1; transition:grid-template-rows .55s cubic-bezier(.22,.8,.2,1), opacity .4s ease; }
+.su-fold > div{ min-height:0; overflow:hidden; }
+.su-fold.shut{ grid-template-rows:0fr; opacity:0; }
+.su-after.shut{ pointer-events:none; }
+.su-after > div{ padding-top:1rem; }
+.su-paynote{ font-size:1.1rem; font-weight:700; line-height:1.45; color:var(--ink); margin:0 0 1rem; text-align:center; }
+[data-su="btn"]{ transition:opacity .25s ease, background-color .4s ease; }
+[data-su="btn"].swap{ opacity:0; }
+[data-su="btn"].saved, [data-su="btn"]:disabled.saved{ opacity:1 !important; background:#E4DBCC; color:#8C8374; box-shadow:none; cursor:not-allowed; pointer-events:none; }
+@media (prefers-reduced-motion:reduce){ .su-fold, [data-su="btn"]{ transition:none; } }
