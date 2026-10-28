@@ -1777,7 +1777,7 @@
     }
     if (session && !sessionOk(session) && !(await refreshSession())) clearSession();
     if (!session) { showGate(''); return; }
-    if (!ADMINS.includes(emailOf()) || emailOf() === 'ofir.aviram@gmail.com') { showGate('אין הרשאה לחשבון ' + emailOf(), true); return; }
+    if (!ADMINS.includes(emailOf())) { showGate('אין הרשאה לחשבון ' + emailOf(), true); return; }
     document.body.classList.remove('locked'); $('#gate').hidden = true;
     load();
     startRealtime();
