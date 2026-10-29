@@ -1117,7 +1117,7 @@
         const inn = mk('div', 'mt-in');
         if (m.name) inn.append(mk('div', 'mt-name font-display', m.name));
         inn.append(mk('div', 'mt-when font-display', label(m) + ' · ' + m.time));
-        { const cl = [m.city, !past && m.max ? m.max + ' משתתפים' : ''].filter(Boolean).join(' · '); if (cl) inn.append(mk('div', 'mt-city', cl)); }
+        { const cl = [m.city, !past && m.max ? m.max + ' משתתפים' : '', past ? 'הסתיים' : ''].filter(Boolean).join(' · ');   // מפגש שעבר: "הרצליה · הסתיים" if (cl) inn.append(mk('div', 'mt-city', cl)); }
         const st = !past && window.HarpatkaMe ? HarpatkaMe.get(m.id) : null;   // משתתף מחובר שכבר רשום למפגש הזה: מצב ההרשמה והתשלום במקום מדרגות המחיר
         if (st && st.registered) {
           /* משתתף מחובר שכבר רשום למפגש: הכפתור מציג את המצב (נרשמתם, שולם, דווח...) ולחיצה מובילה לאזור האישי על אותו מפגש */
