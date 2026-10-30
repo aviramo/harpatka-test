@@ -1410,8 +1410,8 @@
       let side = '';
       if (state.filter) {
         const l = linkOf(p.id, state.filter);
-        if (!l) side = '<span class="ptag unpaid" data-qs="' + p.id + '" role="button" tabindex="0" title="לא משויך למפגש (לחיצה לבחירת סטטוס ושיוך)">לא משויך</span>';
-        else { const st = dispStatus(l); side = '<span class="ptag ' + st + '" data-qs="' + p.id + '" role="button" tabindex="0" title="סטטוס במפגש (לחיצה לשינוי)">' + STATUS_LABEL[st] + '</span>'; }   // תצוגה בלבד: לחיצה על הכרטיס פותחת את פרטי המשתתף, ושם משנים סטטוס
+        if (!l) side = UI.tag('לא משויך', 'ptag unpaid', { 'data-qs': p.id, role: 'button', tabindex: 0, title: 'לא משויך למפגש (לחיצה לבחירת סטטוס ושיוך)' });
+        else { const st = dispStatus(l); side = UI.tag(STATUS_LABEL[st], 'ptag ' + st, { 'data-qs': p.id, role: 'button', tabindex: 0, title: 'סטטוס במפגש (לחיצה לשינוי)' }); }   // תצוגה בלבד: לחיצה על הכרטיס פותחת את פרטי המשתתף, ושם משנים סטטוס
       }
       let tags = '', payIc = '';
       if (state.showPay && state.filter && linkOf(p.id, state.filter)) { const al = allocatedOf(p.id, state.filter), mt = state.meetings.find((x) => x.id === state.filter), lk = linkOf(p.id, state.filter), need = mt ? (pkgNetFor(p.id, state.filter) > 0 ? al : expectedPrice(p.id, mt, ilDay(lk.created_at || new Date().toISOString()))) : 0;
@@ -1420,7 +1420,7 @@
       if (!state.filter) {
         const pr = persist(p), rate = pr.total ? pr.came / pr.total : 0, st = attCtx().by[p.id] || { cls: 'n', rank: 0, n: 0 }, cls = st.cls;
         const fut = linksOf(p.id).filter((l) => { const m = state.meetings.find((x) => x.id === l.meeting_id); return m && !started(m); }).length;   // מפגשים עתידיים שהמשתתף רשום אליהם נספרים במכנה; הצבע נקבע רק לפי מפגשים שהתחילו
-        if (state.showAtt !== false) tags = '<span class="ptag cnt ' + cls + '" title="הגיע ל-' + pr.came + ' מתוך ' + (pr.total + fut) + ' מפגשים' + (fut ? ' (' + fut + ' עתידיים)' : '') + (pr.total ? '. התמדה בפועל: ' + Math.round(rate * 100) + '%, דירוג ' + st.rank + ' מתוך ' + st.n : '') + '">הגיע <bdi dir="ltr">' + pr.came + '/' + (pr.total + fut) + '</bdi></span>';
+        if (state.showAtt !== false) tags = UI.tag('הגיע <bdi dir="ltr">' + pr.came + '/' + (pr.total + fut) + '</bdi>', 'ptag cnt ' + cls, { title: 'הגיע ל-' + pr.came + ' מתוך ' + (pr.total + fut) + ' מפגשים' + (fut ? ' (' + fut + ' עתידיים)' : '') + (pr.total ? '. התמדה בפועל: ' + Math.round(rate * 100) + '%, דירוג ' + st.rank + ' מתוך ' + st.n : '') });
       }
       const hl = state.filter ? linkOf(p.id, state.filter) : null;
       const tgm = attTarget(), tgl = tgm ? linkOf(p.id, tgm.id) : null, showHere = !!(tgm && (state.filter ? attVisible(tgm) : attendOpen(tgm))), attOk = !!(tgl && (dispStatus(tgl) !== SYSTEM_STATUS || tgl.attended)), evc = evCircle(p);   // עיגול ההגעה רק למי שלא בסטטוס ברירת המחדל (או שכבר סומנה לו הגעה, כדי שאפשר יהיה לבטל)
@@ -1493,7 +1493,7 @@
     const ilsB = (n) => '<bdi dir="ltr">₪' + nfm(n) + '</bdi>';
     const dlab = (m) => meetingLabel(m).split(' · ')[0];
     const price = (l) => (l.st === 'paid' && l.paid_amount != null) ? Number(l.paid_amount) : priceAtReg(l.m, l.created_at);
-    const trend = (a, b) => { if (!(b > 0)) return ''; const ch = Math.round((a - b) / b * 100), up = ch >= 0; return '<span class="trend ' + (up ? 'up' : 'down') + '"><i>' + (up ? '▲' : '▼') + '</i><b>' + Math.abs(ch) + '%</b></span>'; };
+    const trend = (a, b) => { if (!(b > 0)) return ''; const ch = Math.round((a - b) / b * 100), up = ch >= 0; return UI.tag('<i>' + (up ? '▲' : '▼') + '</i><b>' + Math.abs(ch) + '%</b>', 'trend ' + (up ? 'up' : 'down')); };
     const num = (v, label) => UI.metric(label, v);
     const topic = (key, title, tr, nums, hint) => '<button type="button" class="topic" data-topic="' + key + '"><div class="th"><b>' + title + '</b>' + (tr || '') + '</div><div class="tnums">' + nums + '</div><span class="tmore">' + (hint || 'פרטים') + ' ›</span></button>';
     const tbl = (head, rows) => '<div class="tb' + (head.length === 2 ? ' mv' : '') + '"><div class="tr th2">' + head.map((h) => '<span>' + h + '</span>').join('') + '</div>' + rows.map((r) => '<div class="tr">' + r.map((c) => '<span>' + c + '</span>').join('') + '</div>').join('') + '</div>';
@@ -1614,7 +1614,7 @@
     $('#finRecLbl').hidden = !state.finRec.length;
     $('#finRec').innerHTML = state.finRec.map((r) => '<button type="button" class="finrow' + (r.active ? '' : ' off') + '" data-frec="' + r.id + '"><span class="ft"><b>' + esc(r.title) + '</b><span>' + PERIODS[r.period] + ' · מ-' + finDmy(r.start_date) + (r.end_date ? ' עד ' + finDmy(r.end_date) : '') + (r.active ? '' : ' · מושהה') + '</span></span><span class="fa ' + (r.kind === 'income' ? 'in' : 'out') + '">₪' + nfm(Number(r.amount)) + '</span></button>').join('');
     const shown = state.finFilter ? rows.filter((x) => x.kind === state.finFilter) : rows;
-    $('#finList').innerHTML = shown.length ? shown.map((x) => { const m = x.meeting_id && state.meetings.find((q) => q.id === x.meeting_id); return '<button type="button" class="finrow" ' + (x.channel ? 'data-fch="' + x.channel + '"' : x.rec ? 'data-frec="' + x.id + '"' : 'data-fent="' + x.id + '"') + '><span class="ft"><b>' + esc(x.title) + (x.rec ? '<i class="frec">מחזורי</i>' : '') + (x.channel ? '<i class="frec">דרך הגעה</i>' : '') + '</b><span>' + finDmy(x.date) + ' · ' + (x.channel ? 'לחיצה לפתיחת ההתחשבנות' + (x.by ? ' · דרך ' + esc(finName(x.by)) : '') : (m ? 'מפגש ' + dmShort(m) : 'כללי') + (x.by ? ' · דרך ' + esc(finName(x.by)) : '')) + '</span></span><span class="fa ' + (x.kind === 'income' ? 'in' : 'out') + '">₪' + nfm(x.amount) + '</span></button>'; }).join('') : '<p class="mnone">עוד אין תנועות' + ((state.finPeriod === 'all' ? '' : state.finPeriod === 'month' ? ' החודש' : ' ב' + finPeriodLabel())) + '</p>';
+    $('#finList').innerHTML = shown.length ? shown.map((x) => { const m = x.meeting_id && state.meetings.find((q) => q.id === x.meeting_id); return '<button type="button" class="finrow" ' + (x.channel ? 'data-fch="' + x.channel + '"' : x.rec ? 'data-frec="' + x.id + '"' : 'data-fent="' + x.id + '"') + '><span class="ft"><b>' + esc(x.title) + (x.rec ? UI.tag('מחזורי', 'frec') : '') + (x.channel ? UI.tag('דרך הגעה', 'frec') : '') + '</b><span>' + finDmy(x.date) + ' · ' + (x.channel ? 'לחיצה לפתיחת ההתחשבנות' + (x.by ? ' · דרך ' + esc(finName(x.by)) : '') : (m ? 'מפגש ' + dmShort(m) : 'כללי') + (x.by ? ' · דרך ' + esc(finName(x.by)) : '')) + '</span></span><span class="fa ' + (x.kind === 'income' ? 'in' : 'out') + '">₪' + nfm(x.amount) + '</span></button>'; }).join('') : '<p class="mnone">עוד אין תנועות' + ((state.finPeriod === 'all' ? '' : state.finPeriod === 'month' ? ' החודש' : ' ב' + finPeriodLabel())) + '</p>';
   }
   function finView(v) {
     finV = v; $('#finMain').hidden = v !== 'main'; $('#finForm').hidden = v !== 'form'; $('#finLog').hidden = v !== 'log'; $('#finSettle').hidden = v !== 'settle'; $('#finArrow').hidden = v === 'main'; $('#finLogBtn').hidden = v !== 'main'; $('#finSetBtn').hidden = v !== 'main'; $('#finPerBtn').hidden = v !== 'main'; if (typeof closeFinPer === 'function') closeFinPer();
@@ -1878,7 +1878,7 @@
     const brought = state.participants.filter((q) => q.promoter_id === id).sort((a, b) => a.name.localeCompare(b.name, 'he'));
     const stOf = (q) => { const ls = linksOf(q.id); if (ls.some((l) => l.paid && !l.exempt)) return ['paid', 'שילם']; if (ls.some((l) => linkStatus(l) === 'requested')) return ['requested', 'בטיפול']; if (ls.some((l) => l.exempt)) return ['exempt', 'חינם']; return ls.length ? ['unpaid', 'חדש'] : ['none', 'ללא מפגש']; };
     $('#prBroughtLbl').textContent = 'משתתפים שהגיעו דרך ' + x.name + ' (' + brought.length + ', ' + brought.filter((q) => stOf(q)[0] === 'paid').length + ' שילמו)';
-    $('#prBrought').innerHTML = brought.length ? brought.map((q) => { const s = stOf(q); return '<div class="bq"><span class="n">' + esc(q.name) + '</span><span class="pst ' + s[0] + '">' + s[1] + '</span></div>'; }).join('') : '<p class="mnone">עוד אין משתתפים עם דרך ההגעה הזה. בוחרים דרך הגעה באייקון המגפון בכותרת הפופאפ של המשתתף</p>';
+    $('#prBrought').innerHTML = brought.length ? brought.map((q) => { const s = stOf(q); return '<div class="bq"><span class="n">' + esc(q.name) + '</span>' + UI.tag(s[1], 'pst ' + s[0]) + '</div>'; }).join('') : '<p class="mnone">עוד אין משתתפים עם דרך ההגעה הזה. בוחרים דרך הגעה באייקון המגפון בכותרת הפופאפ של המשתתף</p>';
     $('#ppForm').hidden = true; $('#ppOpen').hidden = false;
     show('#prDetail');
   }
@@ -3133,7 +3133,7 @@
       else { on = sheet.links.has(m.id); st = sheet.links.get(m.id) ? 'paid' : 'unpaid'; }
       const freeL = !!(sheet.id && on && noPayOf(state.participants.find((x) => x.id === sheet.id), linkOf(sheet.id, m.id)));   // לא משלם על המפגש: מוצג "חינם" ולא "תשלום"
       return '<div class="mrow' + (on ? ' on' : '') + (sheet.hl === m.id ? ' hl' : '') + '" data-mrow="' + m.id + '">' +
-        '<span class="mlabel">' + dmShort(m) + '</span>' +
+        UI.tag(dmShort(m), 'mlabel') +
         '<button type="button" class="pay ' + (on ? st : 'none') + '" data-mp="' + m.id + '" title="' + (on ? 'שינוי סטטוס' : 'לא משויך למפגש') + '">' + (on ? esc(STATUS_LABEL[st]) : 'לא משויך') + '</button>' +
         '<div class="mline">' + (sheet.id ? '<button type="button" class="mmoney' + (allocatedOf(sheet.id, m.id) > 0 ? ' has' : freeL ? ' free' : reportedOf(sheet.id, m.id) ? ' wait' : '') + '" data-mm="' + m.id + '"' + (on ? '' : ' hidden') + ' title="תשלום למפגש">' + (allocatedOf(sheet.id, m.id) > 0 ? '₪' + nfm(allocatedOf(sheet.id, m.id)) : freeL ? '<span class="nps">₪</span>חינם' : reportedOf(sheet.id, m.id) ? 'דווח' + reportedAmt(sheet.id, m.id) : 'תשלום') + '</button>' : '') +
         (sheet.id && !on && attendOpen(m) ? '<button type="button" class="here sm" data-hw="' + m.id + '">הגיע בלי הרשמה</button>' : '') +
@@ -3260,7 +3260,7 @@
     if (!sheet || sheet.id !== p.id || !rows.length) return;
     box.innerHTML = '<div class="glab">חשבון גוגל מחובר</div>' + rows.map((m) => {
       const st = m.status === 'approved' ? ['מחובר', ''] : m.status === 'blocked' ? ['חסום', 'blk'] : m.status === 'removed' ? ['מנותק', 'off'] : ['ממתין לאישור', 'off'];
-      return '<div data-uid="' + esc(m.user_id) + '"><div class="grow"><span class="gem">' + esc(m.email || 'ללא מייל') + '</span><span class="gst ' + st[1] + '">' + st[0] + '</span></div><div class="gbtns">'
+      return '<div data-uid="' + esc(m.user_id) + '"><div class="grow"><span class="gem">' + esc(m.email || 'ללא מייל') + '</span>' + UI.tag(st[0], 'gst ' + st[1]) + '</div><div class="gbtns">'
         + (m.status === 'approved' ? '<button type="button" data-ga="removed">ניתוק</button>' : m.status === 'blocked' ? '' : '<button type="button" data-ga="approved">חיבור מחדש</button>')
         + (m.status === 'blocked' ? '<button type="button" data-ga="approved">ביטול חסימה</button>' : '<button type="button" class="gred" data-ga="blocked">חסימה</button>') + '</div></div>';
     }).join('');
@@ -3580,7 +3580,7 @@
       if (st && (!first || key(mt) < first)) return '';
       if (!st && !l) return '';
       const lab = dmShort(mt) + ' <small>' + (l ? 'רשום' : 'לא רשום') + '</small>';
-      const chipH = !st ? '<span class="cst f">עתידי</span>' : (l && l.attended) ? '<span class="cst y">הגיע ✓</span>' : '<span class="cst n">' + (l ? 'לא הגיע ✕' : 'לא הגיע ✕') + '</span>';
+      const chipH = !st ? UI.tag('עתידי', 'cst f') : (l && l.attended) ? UI.tag('הגיע ✓', 'cst y') : UI.tag('לא הגיע ✕', 'cst n');
       return '<div class="cnr"><span>' + lab + '</span>' + chipH + '</div>';
     }).join('');
     m.innerHTML = '<h4>' + esc(p.name) + ': הגיע ' + pr.came + ' מתוך ' + pr.total + (pr.total ? ' (' + pc(rate) + ')' : '') + '</h4>' +
