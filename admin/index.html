@@ -401,6 +401,7 @@
   <div class="qmenu" id="viewMenu" role="menu" hidden></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="../shared/age.js?v=20261031a"></script>
   <script src="../shared/rt.js?v=1"></script>
   <script>
   /* Supabase ייעודי לפרויקט (ezakarwqstnldqixgreb). המפתח ציבורי מעצם הגדרתו;
@@ -1144,7 +1145,7 @@
   /* בזמן חיפוש טקסט, סינוני המגדר והתשלום מושהים (כדי למצוא מישהו בוודאות); הם נשמרים ב-state וחוזרים כשהחיפוש נסגר */
   const effGender = () => state.q.trim() ? null : state.gender;
   /* סינונים נוספים (תפריט ⋯ משמאל לצ'יפי המגדר): דרך הגעה וקבוצת גיל; מושהים בזמן חיפוש כמו שאר הסינונים */
-  const AGE_B = [['u39', 'עד 39', 0, 39], ['40', '40 עד 44', 40, 44], ['45', '45 עד 50', 45, 50], ['51', '51 ומעלה', 51, 200]];
+  const AGE_MID = Math.floor((AGE_MIN + AGE_MAX) / 2), AGE_B = [['u', 'עד ' + (AGE_MIN - 1), 0, AGE_MIN - 1], ['lo', AGE_MIN + ' עד ' + AGE_MID, AGE_MIN, AGE_MID], ['hi', (AGE_MID + 1) + ' עד ' + AGE_MAX, AGE_MID + 1, AGE_MAX], ['o', (AGE_MAX + 1) + ' ומעלה', AGE_MAX + 1, 200]];   // קבוצות הגיל לפי טווח היעד (shared/age.js)
   const moreOk = (p) => { if (state.q.trim()) return true; if (state.loginF && loginOf(p) !== state.loginF) return false; if (state.srcF) { const c = channelOf(p); if (state.srcF === '__none' ? !!c : !(c && c.id === state.srcF)) return false; } if (state.ageF) { const b = AGE_B.find((x) => x[0] === state.ageF), a = shownAge(p); if (b && (a == null || a < b[2] || a > b[3])) return false; } return true; };
   const moreOn = () => !state.q.trim() && !!(state.srcF || state.ageF || state.loginF);
   const payKeys = (s) => s ? String(s).split(',').filter(Boolean) : [];   // סינון סטטוסים מרובה: state.pay הוא מפתחות מופרדים בפסיק
@@ -1542,13 +1543,13 @@
 
     // ----- דמוגרפיה (כל המשתתפים) -----
     const people = allP, male = people.filter((q) => q.gender === 'male'), female = people.filter((q) => q.gender === 'female'), noG = people.length - male.length - female.length;
-    const ages = people.map(shownAge).filter((a) => a != null), avgAge = ages.length ? ages.reduce((a, b) => a + b, 0) / ages.length : 0, target = ages.filter((a) => a >= 40 && a <= 50);
+    const ages = people.map(shownAge).filter((a) => a != null), avgAge = ages.length ? ages.reduce((a, b) => a + b, 0) / ages.length : 0, target = ages.filter((a) => a >= AGE_MIN && a <= AGE_MAX);
     const bucket = (lo, hi) => ages.filter((a) => a >= lo && a <= hi).length;
     const convBy = (pred) => { const ls = people.filter((q) => pred(q) && !isFreeP(q)); return { n: ls.length, paid: ls.filter((q) => paidBy.get(q.id) > 0).length }; };
     const cM = convBy((q) => q.gender === 'male'), cF = convBy((q) => q.gender === 'female');
     const demo = part('מגדר', barRow('נקבה', female.length, people.length, 'var(--red)') + barRow('זכר', male.length, people.length, 'var(--sky)') + (noG ? barRow('לא צוין', noG, people.length, 'var(--text-3)') : '') +
         tbl(['המרה לתשלום', 'ערך'], [['נקבה', Ps(cF.paid, cF.n)], ['זכר', Ps(cM.paid, cM.n)]])) +
-      part('גילאים', barRow('עד 39', bucket(0, 39), ages.length, 'var(--text-3)') + barRow('40 עד 44', bucket(40, 44), ages.length, 'var(--orange)') + barRow('45 עד 50', bucket(45, 50), ages.length, 'var(--orange)') + barRow('51 ומעלה', bucket(51, 120), ages.length, 'var(--yellow)') + '<p class="stline">בטווח היעד 40–50: <b>' + Ps(target.length, ages.length) + '</b> · גיל ממוצע <b>' + avgAge.toFixed(1) + '</b>' + (people.length - ages.length ? ' · ' + (people.length - ages.length) + ' בלי גיל' : '') + '</p>') +
+      part('גילאים', AGE_B.map((g, i) => barRow(g[1], bucket(g[2], Math.min(g[3], 120)), ages.length, i === 0 ? 'var(--text-3)' : i === 3 ? 'var(--yellow)' : 'var(--orange)')).join('') + '<p class="stline">בטווח היעד ' + ageText('range') + ': <b>' + Ps(target.length, ages.length) + '</b> · גיל ממוצע <b>' + avgAge.toFixed(1) + '</b>' + (people.length - ages.length ? ' · ' + (people.length - ages.length) + ' בלי גיל' : '') + '</p>') +
       part('חדשים וחוזרים', tbl(['מפגש', 'חדשים', 'חוזרים', 'מגמה'], pm.map((r, k) => [dlab(r.m), r.news, r.ret, k ? trend(r.news + r.ret, pm[k - 1].news + pm[k - 1].ret) : '—'])));
 
     // ----- מסך ראשי: שורה תחתונה לכל נושא -----
@@ -1556,7 +1557,7 @@
     const main = bottom +
       topic('money', 'כספים', last && prev ? trend(last.rev, prev.rev) : '', num(ilsB(cash), 'הכנסות') + num(ilsB(expAll), 'הוצאות') + num(sgn(profit), 'רווח')) +
       topic('promo', 'דרכי הגעה', '', num(ilsB(proInc), 'הכנסה') + num(adP.length, 'לידים') + num(ilsB(proCost), 'עלות')) +
-      topic('demo', 'דמוגרפיה', last && prev ? trend(last.news, prev.news) : '', num(Ps(female.length, people.length), 'נקבה') + num(avgAge ? avgAge.toFixed(0) : '—', 'גיל ממוצע') + num(Ps(target.length, ages.length), '40 עד 50'));
+      topic('demo', 'דמוגרפיה', last && prev ? trend(last.news, prev.news) : '', num(Ps(female.length, people.length), 'נקבה') + num(avgAge ? avgAge.toFixed(0) : '—', 'גיל ממוצע') + num(Ps(target.length, ages.length), ageText('to')));
 
     $('#stBody').innerHTML = '<div class="ppanel" data-sp="main">' + main + '</div><div class="ppanel" data-sp="money" hidden>' + money + '</div><div class="ppanel" data-sp="promo" hidden>' + promo + '</div><div class="ppanel" data-sp="demo" hidden>' + demo + '</div>';
     stView('main', true);
