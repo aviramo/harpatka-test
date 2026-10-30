@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css?v=20261030a" />
+  <link rel="stylesheet" href="admin.css?v=20261030b" />
   <style>
     #testBadge { inset: auto; margin: 0; border: 0; position: fixed; top: 0; left: 0; right: 0; width: auto; height: 18px; padding: 0; overflow: hidden; background: #3F382F; color: #fff; font: 700 11px/18px Arial, sans-serif; text-align: center; pointer-events: none; }
   </style>
@@ -32,7 +32,7 @@
       <div class="title-row">
         
         <div class="msel">
-          <h1><button type="button" id="mSel" aria-haspopup="menu" aria-expanded="false"><span id="mSelTxt">הכל</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h1>
+          <h1><button type="button" id="mSel" aria-haspopup="menu" aria-expanded="false"><span id="mSelTxt">הכל</span><svg data-i="chev"></svg></button></h1>
           <div class="hcount" id="hereCount" hidden></div>
           <button type="button" class="hcount attforce" id="attForce" hidden title="כיבוי מצב ההגעה הזמני">מצב הגעה זמני ✕</button>
           <div class="sortmenu mmenu" id="mMenu" role="menu" hidden></div>
@@ -40,13 +40,13 @@
         <div class="hgrp"><div id="listTags"></div>
         
         <div class="hicons">
-          <button type="button" class="hicon" id="menuBtn" aria-label="תפריט" title="תפריט" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8"/></svg><span class="bdbadge" id="menuBadge" hidden></span></button>
+          <button type="button" class="hicon" id="menuBtn" aria-label="תפריט" title="תפריט" aria-haspopup="menu" aria-expanded="false"><svg data-i="grid"></svg><span class="bdbadge" id="menuBadge" hidden></span></button>
           <div class="hmenu" id="hMenu" role="menu" hidden>
-            <button type="button" role="menuitem" class="hmi" id="bdBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.4A8 8 0 1 1 21 12z"/></svg><span>התחברויות ללוח</span><span class="bdbadge" id="bdBadge" hidden></span></button>
-            <button type="button" role="menuitem" class="hmi" id="statsBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><span>סטטיסטיקות</span></button>
-            <button type="button" role="menuitem" class="hmi" id="moneyBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.2" fill="currentColor"/></svg><span>כספים</span></button>
-            <button type="button" role="menuitem" class="hmi" id="setBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span>הגדרות</span></button>
-            <button type="button" role="menuitem" class="hmi out" id="signOut"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="M15 8l4 4-4 4M19 12H9"/></svg><span>יציאה</span></button>
+            <button type="button" role="menuitem" class="hmi" id="bdBtn"><svg data-i="chat"></svg><span>התחברויות ללוח</span><span class="bdbadge" id="bdBadge" hidden></span></button>
+            <button type="button" role="menuitem" class="hmi" id="statsBtn"><svg data-i="stats"></svg><span>סטטיסטיקות</span></button>
+            <button type="button" role="menuitem" class="hmi" id="moneyBtn"><svg data-i="money"></svg><span>כספים</span></button>
+            <button type="button" role="menuitem" class="hmi" id="setBtn"><svg data-i="gear"></svg><span>הגדרות</span></button>
+            <button type="button" role="menuitem" class="hmi out" id="signOut"><svg data-i="logout"></svg><span>יציאה</span></button>
           </div>
         </div>
         </div>
@@ -55,7 +55,7 @@
       <div class="tools" hidden>
         <div class="facets" id="facets" role="group" aria-label="סינון לפי מגדר ותשלום"></div>
         <div class="sortwrap">
-          <button type="button" class="sortbtn" id="sortBtn" aria-haspopup="menu" aria-expanded="false" aria-label="מיון" title="מיון"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v15M7 19l-3-3M7 19l3-3M17 20V5M17 5l-3 3M17 5l3 3"/></svg></button>
+          <button type="button" class="sortbtn" id="sortBtn" aria-haspopup="menu" aria-expanded="false" aria-label="מיון" title="מיון"><svg data-i="sort"></svg></button>
           <div class="sortmenu cntmenu" id="cntMenu" role="dialog" aria-label="התמדה בהגעה" hidden></div>
           <div class="sortmenu" id="sortMenu" role="menu" hidden></div>
         </div>
@@ -64,10 +64,10 @@
 
     <div id="status"></div>
     <div class="listbar"><div class="lbstart"><label class="search hsearch">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/><path d="M10.5 8v5M8 10.5h5" stroke-width="1.8"/></svg>
+        <svg data-i="search"></svg>
         <input id="q" type="search" placeholder="חיפוש או הוספת משתתף" autocomplete="off" aria-label="חיפוש" />
         <button type="button" class="sclear" id="qClear" aria-label="ניקוי החיפוש" tabindex="-1">×</button>
-      </label><div class="seggrp"><div class="genderchips" id="genderChips"></div><button type="button" class="stcmore" id="moreBtn" aria-haspopup="menu" aria-expanded="false" aria-label="סינונים נוספים" title="סינונים נוספים"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button></div><div class="listcount" id="listCount" aria-live="polite"></div></div><div class="listpay" id="listPay"></div><div class="lbend" id="listHere"></div><div class="lbend" id="listSent"></div><div class="lbend" id="listBal"></div><div class="lbend" id="listAtt"></div>
+      </label><div class="seggrp"><div class="genderchips" id="genderChips"></div><button type="button" class="stcmore" id="moreBtn" aria-haspopup="menu" aria-expanded="false" aria-label="סינונים נוספים" title="סינונים נוספים"><svg data-i="dots"></svg></button></div><div class="listcount" id="listCount" aria-live="polite"></div></div><div class="listpay" id="listPay"></div><div class="lbend" id="listHere"></div><div class="lbend" id="listSent"></div><div class="lbend" id="listBal"></div><div class="lbend" id="listAtt"></div>
     </div>
     <ul class="list" id="list"></ul>
     <div class="addbox" id="addBox"></div>
@@ -78,14 +78,14 @@
   <dialog id="pDlg" aria-labelledby="pTitle">
     <form class="sheet" id="pForm" method="dialog" novalidate>
       <div class="sheet-head">
-        <button type="button" class="hbtn hback" id="pBack" aria-label="חזרה" title="חזרה" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
+        <button type="button" class="hbtn hback" id="pBack" aria-label="חזרה" title="חזרה" hidden><svg data-i="back"></svg></button>
         <h2 id="pTitle">משתתף חדש</h2>
-        <button type="button" class="hbtn" id="pInfoBtn" aria-label="פרטי המשתתף" title="פרטי המשתתף" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></button>
+        <button type="button" class="hbtn" id="pInfoBtn" aria-label="פרטי המשתתף" title="פרטי המשתתף" hidden><svg data-i="user"></svg></button>
         <div class="paychip" id="pPayChip" hidden></div>
         <button type="button" class="paychip allocchip" id="pAllocChip" hidden></button>
         <div id="pMsgs"></div>
-        <a class="hbtn" id="pViewAs" target="_blank" rel="noopener" aria-label="צפייה באזור האישי כמשתתף" title="צפייה באזור האישי כמשתתף" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></a>
-        <a class="hbtn" id="pCall" aria-label="חיוג למשתתף" title="חיוג למשתתף" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></a>
+        <a class="hbtn" id="pViewAs" target="_blank" rel="noopener" aria-label="צפייה באזור האישי כמשתתף" title="צפייה באזור האישי כמשתתף" hidden><svg data-i="eye"></svg></a>
+        <a class="hbtn" id="pCall" aria-label="חיוג למשתתף" title="חיוג למשתתף" hidden><svg data-i="call"></svg></a>
         <span class="saved" id="savedMark">נשמר ✓</span>
       </div>
       <p id="pViewSub" class="pviewsub" hidden></p>
@@ -97,7 +97,7 @@
         <div class="nform">
           <textarea id="nText" rows="1" maxlength="1000" enterkeyhint="send" aria-label="הערה חדשה" placeholder="הערה חדשה, אנטר לשמירה"></textarea>
           <div class="nprev" id="nPrev" hidden><img id="nPrevImg" alt="תצוגה מקדימה" /><button type="button" id="nPrevX" aria-label="הסרת התמונה">×</button></div>
-          <button type="button" class="nattach" id="nAttach" aria-label="צירוף צילום מסך" title="צירוף צילום מסך"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="1.8"/><path d="M21 16l-5-5-8 8"/></svg></button>
+          <button type="button" class="nattach" id="nAttach" aria-label="צירוף צילום מסך" title="צירוף צילום מסך"><svg data-i="img"></svg></button>
           <input type="file" id="nFile" accept="image/*" hidden />
           <button type="button" id="nAdd" hidden aria-hidden="true" tabindex="-1">הוספה</button>
         </div>
@@ -224,7 +224,7 @@
   <dialog id="stDlg" aria-labelledby="stTitle" style="max-width:760px">
     <div class="sheet stsheet">
       <div class="sheet-head">
-        <button type="button" class="hbtn hback" id="stArrow" aria-label="חזרה" title="חזרה" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
+        <button type="button" class="hbtn hback" id="stArrow" aria-label="חזרה" title="חזרה" hidden><svg data-i="back"></svg></button>
         <h2 id="stTitle">סטטיסטיקות</h2>
       </div>
       <div id="stBody"></div>
@@ -235,9 +235,9 @@
     <div class="sheet" style="padding-bottom:20px">
       <div class="idate" id="iDate"></div>
       <div class="iwrap" id="iWrap">
-        <button type="button" class="inav inext" id="iNext" aria-label="הבאה" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="inav inext" id="iNext" aria-label="הבאה" hidden><svg data-i="prev"></svg></button>
         <img id="iImg" alt="צילום מסך" />
-        <button type="button" class="inav iprev" id="iPrev" aria-label="הקודמת" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <button type="button" class="inav iprev" id="iPrev" aria-label="הקודמת" hidden><svg data-i="next"></svg></button>
       </div>
     </div>
   </dialog>
@@ -252,7 +252,7 @@
   <dialog id="meDlg" aria-label="האזור האישי של המשתתף"><iframe id="meFrame" title="האזור האישי של המשתתף"></iframe></dialog>
   <dialog id="setDlg" aria-labelledby="setTitle" style="max-width:480px">
     <div class="sheet">
-      <div class="sheet-head"><button type="button" class="hbtn hback" id="setBack" aria-label="חזרה" title="חזרה" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button><h2 id="setTitle">הגדרות</h2></div>
+      <div class="sheet-head"><button type="button" class="hbtn hback" id="setBack" aria-label="חזרה" title="חזרה" hidden><svg data-i="back"></svg></button><h2 id="setTitle">הגדרות</h2></div>
       <div id="setMain">
         <div class="setgrp">
           <label class="setfield"><div class="sethead"><span>השם שלי במערכת</span><span id="setMail" dir="ltr"></span></div><input class="setinp" id="setSender" maxlength="20" autocomplete="off" aria-label="שם השולח בהודעות" /></label>
@@ -264,12 +264,12 @@
           </div>
         </div>
         <div class="setgrp">
-          <button type="button" class="setrow setlink" id="setSrcBtn"><svg class="seti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h11M11 7l5 5-5 5M20 5v14"/></svg><div class="setl"><b>דרכי הגעה</b><small id="setSrcHint"></small></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button>
-          <button type="button" class="setrow setlink" id="setPmBtn"><svg class="seti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/></svg><div class="setl"><b>דרכי תשלום</b><small id="setPmHint"></small></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button>
-          <button type="button" class="setrow setlink" id="setStBtn"><svg class="seti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg><div class="setl"><b>סטטוסים על מפגשים</b><small>שם, צבע וסדר לכל סטטוס</small></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button>
-          <button type="button" class="setrow setlink" id="setTagBtn"><svg class="seti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l9 9-8 8z"/><circle cx="8" cy="9" r="1.3"/></svg><div class="setl"><b>תגיות על משתתפים</b><small>שם וסדר לכל תגית</small></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button>
-          <button type="button" class="setrow setlink" id="setEmBtn"><svg class="seti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><div class="setl"><b>הודעה לפני המפגש</b><small>נוסח ושעת פתיחה של הכפתור</small></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button>
-          <button type="button" class="setrow setlink" id="setAttBtn" aria-haspopup="menu"><svg class="seti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg><div class="setl"><b>מתי נפתח סימון ההגעה</b><small id="setAttHint"></small></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="22" height="22"><path d="M6 9l6 6 6-6"/></svg></button>
+          <button type="button" class="setrow setlink" id="setSrcBtn"><svg data-i="enter" class="seti"></svg><div class="setl"><b>דרכי הגעה</b><small id="setSrcHint"></small></div><svg data-i="go" class="i22"></svg></button>
+          <button type="button" class="setrow setlink" id="setPmBtn"><svg data-i="money" class="seti"></svg><div class="setl"><b>דרכי תשלום</b><small id="setPmHint"></small></div><svg data-i="go" class="i22"></svg></button>
+          <button type="button" class="setrow setlink" id="setStBtn"><svg data-i="flag" class="seti"></svg><div class="setl"><b>סטטוסים על מפגשים</b><small>שם, צבע וסדר לכל סטטוס</small></div><svg data-i="go" class="i22"></svg></button>
+          <button type="button" class="setrow setlink" id="setTagBtn"><svg data-i="tag" class="seti"></svg><div class="setl"><b>תגיות על משתתפים</b><small>שם וסדר לכל תגית</small></div><svg data-i="go" class="i22"></svg></button>
+          <button type="button" class="setrow setlink" id="setEmBtn"><svg data-i="chat" class="seti"></svg><div class="setl"><b>הודעה לפני המפגש</b><small>נוסח ושעת פתיחה של הכפתור</small></div><svg data-i="go" class="i22"></svg></button>
+          <button type="button" class="setrow setlink" id="setAttBtn" aria-haspopup="menu"><svg data-i="checkc" class="seti"></svg><div class="setl"><b>מתי נפתח סימון ההגעה</b><small id="setAttHint"></small></div><svg data-i="chev" class="i22"></svg></button>
         </div>
       </div>
       <div id="setEm" hidden>
@@ -311,7 +311,7 @@
 
   <dialog id="prDlg" aria-labelledby="prTitle" style="max-width:480px">
     <div class="sheet">
-      <div class="sheet-head"><button type="button" class="hbtn hback" id="prArrow" aria-label="חזרה" title="חזרה" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button><h2 id="prTitle">דרכי הגעה</h2></div>
+      <div class="sheet-head"><button type="button" class="hbtn hback" id="prArrow" aria-label="חזרה" title="חזרה" hidden><svg data-i="back"></svg></button><h2 id="prTitle">דרכי הגעה</h2></div>
       <div id="prList" class="ppanel"></div>
       <div id="prDetail" class="ppanel" hidden>
         <div class="prsum" id="prSum"></div>
@@ -350,11 +350,11 @@
   <dialog id="finDlg" aria-labelledby="finTitle" style="max-width:520px">
     <div class="sheet">
       <div class="sheet-head">
-        <button type="button" class="hbtn hback" id="finArrow" aria-label="חזרה" title="חזרה" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button type="button" class="hbtn hback" id="finArrow" aria-label="חזרה" title="חזרה" hidden><svg data-i="back"></svg></button>
         <h2 id="finTitle">כספים</h2>
-        <button type="button" class="finperbtn" id="finPerBtn" aria-haspopup="menu" aria-expanded="false" aria-label="תקופה"><span id="finPerTxt">החודש</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <button type="button" class="hbtn finlogbtn" id="finSetBtn" aria-label="התחשבנות בין מנהלים" title="התחשבנות בין מנהלים"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h14M14 4l4 4-4 4M20 16H6M10 12l-4 4 4 4"/></svg></button>
-        <button type="button" class="hbtn finlogbtn2" id="finLogBtn" aria-label="יומן שינויים" title="יומן שינויים"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
+        <button type="button" class="finperbtn" id="finPerBtn" aria-haspopup="menu" aria-expanded="false" aria-label="תקופה"><span id="finPerTxt">החודש</span><svg data-i="chev"></svg></button>
+        <button type="button" class="hbtn finlogbtn" id="finSetBtn" aria-label="התחשבנות בין מנהלים" title="התחשבנות בין מנהלים"><svg data-i="swap"></svg></button>
+        <button type="button" class="hbtn finlogbtn2" id="finLogBtn" aria-label="יומן שינויים" title="יומן שינויים"><svg data-i="clock"></svg></button>
       </div>
       <div id="finLog" hidden></div>
       <div id="finSettle" hidden></div>
@@ -410,6 +410,58 @@
     key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6YWthcndxc3RubGRxaXhncmViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyMTA3MzIsImV4cCI6MjEwNjc4NjczMn0.Bg0eFBC4zKjyJc5kBw3wLgSP-PkxLFVv3o7-4YUdq4c',
   };
   const T = { p: 'harpatka_participants', m: 'harpatka_meetings', a: 'harpatka_attendance', n: 'harpatka_notes', pr: 'harpatka_promoters', pp: 'harpatka_promoter_payments', pay: 'harpatka_payments', st: 'harpatka_statuses', pf: 'harpatka_admin_prefs', sr: 'harpatka_sources', pm: 'harpatka_pay_methods', fin: 'harpatka_finance', finr: 'harpatka_finance_recurring', finlog: 'harpatka_finance_log', fintr: 'harpatka_finance_transfers', ps: 'harpatka_public_settings' };
+
+  /* ===== ערכת רכיבים: כל אובייקט ויזואלי שחוזר בדף נבנה כאן, בקריאה אחת עם פרמטרים (העיצוב של כל אובייקט מוגדר פעם אחת ב-admin.css) =====
+     icon(שם, מחלקה)            סמל מהמאגר (24×24, קו 2.2 או מילוי). בסימון הקבוע בדף: <svg data-i="שם"> ומתמלא בטעינה
+     UI.tag(טקסט, סוג, מאפיינים)   תגית: גובה אחד, טקסט במרכז; הסוג קובע רק צבע
+     UI.metric(תווית, ערך, אפשרויות) כרטיס מספר: תווית למעלה, ערך גדול בצבע המצב, שורת משנה
+     UI.fopt(...)                שורת אפשרות בתפריטי הסינון: מחוון, תווית וספירה */
+  const ICONS = {
+    back: ['s', '<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>'],
+    cal: ['s', '<rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16"/><path d="M9 3v4"/><path d="M15 3v4"/>'],
+    call: ['s', '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>'],
+    chat: ['s', '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.4A8 8 0 1 1 21 12z"/>'],
+    checkc: ['s', '<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>'],
+    chev: ['s', '<path d="M6 9l6 6 6-6"/>'],
+    clock: ['s', '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'],
+    copy: ['s', '<rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'],
+    dots: ['f', '<circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/>'],
+    edit: ['s', '<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14 7l3 3"/>'],
+    enter: ['s', '<path d="M4 12h11M11 7l5 5-5 5M20 5v14"/>'],
+    eye: ['s', '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'],
+    flag: ['s', '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>'],
+    free: ['s', '<circle cx="12" cy="12" r="8.5"/><path d="M6 18L18 6"/>'],
+    gear: ['s', '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'],
+    go: ['s', '<path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>'],
+    grid: ['s', '<rect x="4" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8"/>'],
+    grip: ['f', '<circle cx="9" cy="6" r="1.8"/><circle cx="15" cy="6" r="1.8"/><circle cx="9" cy="12" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="9" cy="18" r="1.8"/><circle cx="15" cy="18" r="1.8"/>'],
+    hourglass: ['s', '<path d="M6 3h12M6 21h12"/><path d="M7 3v3.5c0 1.6 1.1 2.8 2.7 3.6L12 12l2.3-1.9C15.9 9.3 17 8.1 17 6.5V3"/><path d="M7 21v-3.5c0-1.6 1.1-2.8 2.7-3.6L12 12l2.3 1.9c1.6.8 2.7 2 2.7 3.6V21"/>'],
+    img: ['s', '<rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="1.8"/><path d="M21 16l-5-5-8 8"/>'],
+    lock: ['s', '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'],
+    logout: ['s', '<path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="M15 8l4 4-4 4M19 12H9"/>'],
+    money: ['s', '<rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.2" fill="currentColor"/>'],
+    next: ['s', '<path d="M9 5l7 7-7 7"/>'],
+    persist: ['s', '<path d="M5 20v-6"/><path d="M12 20V9"/><path d="M19 20V4"/>'],
+    prev: ['s', '<path d="M15 5l-7 7 7 7"/>'],
+    search: ['s', '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/><path d="M10.5 8v5M8 10.5h5" stroke-width="1.8"/>'],
+    sliders: ['s', '<path d="M4 7h9"/><path d="M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 17h3"/><path d="M11 17h9"/><circle cx="9" cy="17" r="2"/>'],
+    sort: ['s', '<path d="M7 4v15M7 19l-3-3M7 19l3-3M17 20V5M17 5l-3 3M17 5l3 3"/>'],
+    spark: ['f', '<path d="M12 2.5l2.2 6.3 6.3 2.2-6.3 2.2L12 19.5l-2.2-6.3L3.5 11l6.3-2.2z"/>'],
+    stats: ['s', '<path d="M5 20V11M12 20V4M19 20v-6"/>'],
+    swap: ['s', '<path d="M4 8h14M14 4l4 4-4 4M20 16H6M10 12l-4 4 4 4"/>'],
+    tag: ['s', '<path d="M3 12V4h8l9 9-8 8z"/><circle cx="8" cy="9" r="1.3"/>'],
+    user: ['s', '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>'],
+    wa: ['f', '<path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.5c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.6.9 1-3.5-.2-.4C3.2 15.6 2.7 13.8 2.7 12c0-5.1 4.2-9.3 9.3-9.3 2.5 0 4.8 1 6.6 2.7 1.8 1.8 2.7 4.1 2.7 6.6 0 5.2-4.2 9.5-9.3 9.5zM20 4C17.9 1.8 15 .7 12 .7 5.8.7.7 5.8.7 12c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.4 5.4 1.4 6.2 0 11.3-5.1 11.3-11.3 0-3-1.2-5.8-3.3-7.9z"/>'],
+  };
+  const icon = (n, cls) => { const x = ICONS[n] || ICONS.dots; return '<svg class="ic' + (cls ? ' ' + cls : '') + '" viewBox="0 0 24 24" ' + (x[0] === 'f' ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"') + ' aria-hidden="true">' + x[1] + '</svg>'; };
+  document.querySelectorAll('svg[data-i]').forEach((s) => { s.outerHTML = icon(s.dataset.i, s.getAttribute('class')); });
+  const uiAttrs = (a) => a ? Object.keys(a).filter((k) => a[k] != null && a[k] !== false).map((k) => ' ' + k + '="' + a[k] + '"').join('') : '';
+  const UI = {
+    tag: (text, cls, a, el) => { el = el || 'span'; return '<' + el + (el === 'button' ? ' type="button"' : '') + ' class="tg' + (cls ? ' ' + cls : '') + '"' + uiAttrs(a) + '>' + text + '</' + el + '>'; },
+    // tone: pos (ירוק) / neg (אדום) / yel (צהוב, יתרה וקרדיט) / mut (אפור) / '' (טקסט רגיל)
+    metric: (label, value, o) => { o = o || {}; return '<div class="metric' + (o.tone ? ' ' + o.tone : '') + (o.cls ? ' ' + o.cls : '') + '"' + uiAttrs(o.a) + '><small>' + label + '</small><b>' + value + '</b>' + (o.sub ? '<small class="msub">' + o.sub + '</small>' : '') + '</div>'; },
+    fopt: (v, on, indCls, glyph, label, n) => '<button type="button" role="menuitem" class="fopt" data-fv="' + v + '" aria-pressed="' + !!on + '"><span class="hfilt ' + indCls + '">' + glyph + '</span><span>' + label + '</span>' + (n != null ? '<b class="fcnt">' + n + '</b>' : '') + '</button>',
+  };
 
   /* חזרה בדפדפן: כל פתיחת פופאפ וכל כניסה למסך משנה בתוכו מוסיפות רשומת היסטוריה; חזרה בדפדפן חוזרת צעד אחד (מסך משנה ← המסך הראשי ← סגירה), וסגירה או חזרה בכפתורי המסך מנקות את הרשומות */
   const NAV = { stack: [], ignore: 0, fromPop: false };
@@ -667,7 +719,7 @@
     return p.age + Math.max(0, years);
   }
 
-  const CALL_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>';
+  const CALL_ICON = icon('call');
   /* קישור שיחה (tel:) בפורמט בינלאומי; מספר ישראלי מקומי הופך ל-+972 */
   function telLink(phone) {
     const raw = String(phone || '').trim();
@@ -1016,14 +1068,14 @@
     { const hc = $('#hereCount'), tg = attTarget(), ls = tg ? state.att.filter((a) => a.meeting_id === tg.id) : []; hc.hidden = true; if (false) hc.innerHTML = 'הגיעו <bdi dir="ltr">' + ls.filter((a) => a.attended).length + '/' + ls.length + '</bdi>' + (cur ? '' : ' · ' + esc(meetingLabel(tg).split(' · ')[0])); }
     $('#mSelTxt').textContent = cur ? meetingLabel(cur).split(' · ')[0] : 'הכל';
     const dayTime = (m) => esc(meetingLabel(m).split(' · ')[0]) + ' · ' + esc(meetingLabel(m, true).split(' ').slice(0, 2).join(' ')) + ' · ' + esc(String(m.meeting_time).slice(0, 5));
-    const EDIT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14 7l3 3"/></svg>';
+    const EDIT_ICON = icon('edit');
     const nextM = state.meetings.filter((m) => !isPast(m)).sort((a, b) => (a.meeting_date + a.meeting_time).localeCompare(b.meeting_date + b.meeting_time))[0] || null;   // המפגש הקרוב: מודגש בתפריט
     const paidAll = state.participants.filter((x) => x.active !== false).filter((x) => { const ls = linksOf(x.id).filter((l) => !l.exempt); return ls.length && ls.every((l) => l.paid); }).length;
     $('#mMenu').innerHTML = '<div class="mtr mhead" aria-hidden="true"><span>מפגש</span><span>נרשמו</span><span>שילמו</span><span></span></div>' +
       '<div class="mtr mrow2" role="menuitemradio" tabindex="0" data-filter="" aria-checked="' + (state.filter === null) + '"><span>כל המשתתפים</span><span class="mc">' + state.participants.length + '</span><span class="mc dim">' + paidAll + '</span><span></span></div>' +
       state.meetings.map((m) => {
         const ls = state.att.filter((a) => a.meeting_id === m.id), isNext = nextM === m;
-        return '<div class="mtr mrow2' + (isPast(m) ? ' past' : '') + (isNext ? ' next' : '') + '" role="menuitemradio" tabindex="0" data-filter="' + m.id + '" aria-checked="' + (state.filter === m.id) + '"><span>' + dayTime(m) + '' + '</span><span class="mc">' + ls.length + '</span><span class="mc dim">' + ls.filter((a) => a.paid).length + '</span>' +
+        return '<div class="mtr mrow2' + (isPast(m) ? ' past' : '') + (isNext ? ' next' : '') + '" role="menuitemradio" tabindex="0" data-filter="' + m.id + '" aria-checked="' + (state.filter === m.id) + '"><span>' + dayTime(m) + '</span><span class="mc">' + ls.length + '</span><span class="mc dim">' + ls.filter((a) => a.paid).length + '</span>' +
           '<button type="button" class="medit" data-edit-m="' + m.id + '" aria-label="עריכת מפגש" title="עריכת מפגש">' + EDIT_ICON + '</button></div>';
       }).join('') +
       '<button type="button" role="menuitem" class="addm2" id="addMeeting">+ מפגש חדש</button>';
@@ -1032,12 +1084,12 @@
   $('#mSel').addEventListener('click', (e) => { e.stopPropagation(); const m = $('#mMenu'); m.hidden = !m.hidden; $('#mSel').setAttribute('aria-expanded', String(!m.hidden)); if (!m.hidden) { const host = m.offsetParent || m.parentElement, hr = host.getBoundingClientRect(); m.style.right = 'auto'; { const br = $('#mSel').getBoundingClientRect(); const x = window.innerWidth >= 700 ? Math.max(8, Math.min(Math.round(br.right - m.offsetWidth), window.innerWidth - m.offsetWidth - 8)) : Math.round((window.innerWidth - m.offsetWidth) / 2); m.style.left = Math.round(x - hr.left) + 'px'; } } });   // דסקטופ: הקצה הימני של התפריט בקו ישר עם הקצה הימני של הכותרת; במובייל ממורכז
   document.addEventListener('click', (e) => { if (!e.target.closest('.msel')) closeMSel(); });
 
-  const WA_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.5c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.6.9 1-3.5-.2-.4C3.2 15.6 2.7 13.8 2.7 12c0-5.1 4.2-9.3 9.3-9.3 2.5 0 4.8 1 6.6 2.7 1.8 1.8 2.7 4.1 2.7 6.6 0 5.2-4.2 9.5-9.3 9.5zM20 4C17.9 1.8 15 .7 12 .7 5.8.7.7 5.8.7 12c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.4 5.4 1.4 6.2 0 11.3-5.1 11.3-11.3 0-3-1.2-5.8-3.3-7.9z"/></svg>';
+  const WA_ICON = icon('wa');
 
   /* סטטוס תשלום של משתתף: במפגש מסוים לפי המפגש; בתצוגת הכל: שילם = כל המפגשים שלו שולמו, טרם שילם = יש לפחות מפגש אחד שלא שולם, null = בלי מפגשים */
-  const FREE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="width:16px;height:16px;vertical-align:-2px"><circle cx="12" cy="12" r="8.5"/><path d="M6 18L18 6"/></svg>';
-  const REQ_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px;vertical-align:-2px"><path d="M6 3h12M6 21h12"/><path d="M7 3v3.5c0 1.6 1.1 2.8 2.7 3.6L12 12l2.3-1.9C15.9 9.3 17 8.1 17 6.5V3"/><path d="M7 21v-3.5c0-1.6 1.1-2.8 2.7-3.6L12 12l2.3 1.9c1.6.8 2.7 2 2.7 3.6V21"/></svg>';   // בבדיקה: שעון חול
-  const NEW_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px;vertical-align:-2px"><path d="M12 2.5l2.2 6.3 6.3 2.2-6.3 2.2L12 19.5l-2.2-6.3L3.5 11l6.3-2.2z"/></svg>';   // חדש: ניצוץ
+  const FREE_ICON = icon('free', 'i16');
+  const REQ_ICON = icon('hourglass', 'i16');   // בבדיקה: שעון חול
+  const NEW_ICON = icon('spark', 'i16');   // חדש: ניצוץ
   const dispStatus = (l) => afterOf(l) || linkStatus(l);   // הסטטוס שמוצג ברשימה: אחרי המפגש אם יש, אחרת לפני המפגש
   const meetingStarted = (m) => { const [y, mo, da] = m.meeting_date.split('-').map(Number), [h, mi] = String(m.meeting_time).split(':').map(Number); return nowIL() >= Date.UTC(y, mo - 1, da, h, mi); };
   const linkStatus = (l) => (l.status_key && state.statuses.some((s) => s.key === l.status_key)) ? l.status_key : l.exempt ? 'exempt' : l.paid ? 'paid' : l.will_pay ? 'willpay' : l.maybe ? 'maybe' : (l.pay_requested_at ? 'requested' : 'unpaid');   // לא משלם (בחינם ביודעין) / שילם / נשלחה בקשת תשלום / טרם שילם
@@ -1145,7 +1197,7 @@
   /* סינון חכם לפי דפוס הגעה (תמונת מצב כללית): התמדה (ירוק/צהוב/אדום לפי הממוצע, כמו צבע הצ'יפ "הגיע X/Y"), הגיעו לכל המפגשים, אף פעם לא הגיעו, רשומים למפגש עתידי */
   /* [מפתח, תווית, צבע (g ירוק / y צהוב / r אדום / n ניטרלי), צורה]: רמות ההתמדה בצורת עמודות בצבע שלהן; "הגיעו לכל" ✓ ירוק; "נרשמו ולא הגיעו" ✕ אדום; מפגש עתידי ויומן; לא משויכים ∅ (ניטרלי) */
   const ATT_OPTS_F = [['g', 'התמדה טובה', 'g', 'bars'], ['y', 'התמדה בינונית', 'y', 'bars'], ['r', 'התמדה נמוכה', 'r', 'bars'], ['n', 'עוד אין מידע', 'n', 'bars'], ['all', 'הגיעו לכל המפגשים', 'g', 'ok'], ['never', 'נרשמו ולא הגיעו אף פעם', 'r', 'no'], ['fut', 'רשומים למפגש עתידי', 'n', 'cal'], ['nolink', 'לא משויכים לאף מפגש', 'n', 'none']];
-  const ATT_GLYPH = { bars: () => PERSIST_ICON, ok: () => '✓', no: () => '✕', cal: () => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16"/><path d="M9 3v4"/><path d="M15 3v4"/></svg>', none: () => '∅' };
+  const ATT_GLYPH = { bars: () => PERSIST_ICON, ok: () => '✓', no: () => '✕', cal: () => icon('cal'), none: () => '∅' };
   const attCls = (c) => c === 'g' ? 'yes' : c === 'r' ? 'no' : c === 'y' ? 'mid' : 'neu';
   let attCache = null;
   function attCtx() {
@@ -1200,7 +1252,7 @@
     const selOf = (k) => k === PNONE ? { key: 'empty', label: 'בלי תגיות' } : state.statuses.concat(state.pstatuses).find((x) => x.key === k);
     const sel = epk.length ? selOf(epk[0]) : eh ? { key: 'empty', label: eh === '1' ? 'הגיע' : 'לא הגיע' } : null, nAll = genOkCount();
     h += '<div class="fgroup" style="--n:2"><button type="button" class="fx stsel' + (sel ? ' on' : '') + '" data-fxs="1" aria-haspopup="menu" aria-label="סינון לפי ' + (state.filter ? 'סטטוס' : 'תגיות') + (sel ? ': ' + epk.map((k) => (selOf(k) || {}).label).filter(Boolean).map(esc).join(', ') : '') + '" title="סינון לפי ' + (state.filter ? 'סטטוס' : 'תגיות') + '">' +
-      (sel ? '<span class="stpill ' + sel.key + '">' + esc(sel.label) + (epk.length > 1 ? ' +' + (epk.length - 1) : '') + ' <b>' + (epk.length ? nP(ep) : base.filter((p) => genOk(p) && hereOk(p)).length) + '</b></span>' : '<span class="stlab">' + (state.filter ? 'סטטוס' : 'תגיות') + '</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>') + '</button></div>';
+      (sel ? '<span class="stpill ' + sel.key + '">' + esc(sel.label) + (epk.length > 1 ? ' +' + (epk.length - 1) : '') + ' <b>' + (epk.length ? nP(ep) : base.filter((p) => genOk(p) && hereOk(p)).length) + '</b></span>' : '<span class="stlab">' + (state.filter ? 'סטטוס' : 'תגיות') + '</span>' + icon('chev', 'i14')) + '</button></div>';
     $('#facets').classList.toggle('searching', !!q);
     $('#facets').innerHTML = '';   // המגדר והסטטוס עברו לפס הצ'יפים (#stStrip)
     /* כל הסטטוסים (בתוך מפגש) או התגיות (בתצוגת הכל) כצ'יפים מעל הסינונים, ממורכזים ועוברים שורה: לחיצה מסננת (בחירה מרובה) */
@@ -1215,7 +1267,7 @@
     const pchip = (v, label, cls) => { const n = paidN(v); return '<button type="button" class="stc ' + cls + (n ? '' : ' zero') + '" data-stp="' + v + '" aria-pressed="' + (state.paidF === v && !!state.filter) + '">' + label + ' <small>' + n + '</small></button>'; };
     const hereN = (v) => base.filter((p) => genOk(p) && paidOk(p) && matchPay(p, epk) && ((((linkOf(p.id, state.filter) || {}).attended) ? '1' : '0') === v)).length;
     const hchip = (v, label, cls) => { const n = hereN(v); return '<button type="button" class="stc ' + cls + (n ? '' : ' zero') + '" data-sth="' + v + '" aria-pressed="' + (eh === v) + '">' + label + ' <small>' + n + '</small></button>'; };
-    const editLink = '<button type="button" class="qeditlink" data-qedit="' + (state.filter ? 'meeting' : 'participant') + '" style="margin:0"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg> עריכה</button>';
+    const editLink = '<button type="button" class="qeditlink" data-qedit="' + (state.filter ? 'meeting' : 'participant') + '" style="margin:0">' + icon('edit', 'i14') + ' עריכה</button>';
     $('#stStrip').style.setProperty('--nd', String(Math.max(2, String(state.participants.length).length)));
     {   /* ספירה לכל אפשרות בתפריטי הסינון: כמה משתתפים יוצגו אם בוחרים אותה (שאר הסינונים והחיפוש נשמרים) */
       const mid = state.filter, lk = (p) => linkOf(p.id, mid);
@@ -1241,14 +1293,14 @@
     const sentN = (v) => base.filter((p) => { if (!genOk(p) || !paidOk(p) || !hereOkNoSent(p) || !matchPay(p, epk)) return false; return sentMatch(p.id, linkOf(p.id, state.filter), v); }).length;
     $('#listHere').innerHTML = attOn ? fbtn('here', eh, hereN('1'), hereN('0')) : '';
     $('#listPay').innerHTML = state.filter && state.showPay ? fbtn('pay', (state.paidF === '1' || state.paidF === '0' || state.paidF === 'n' || state.paidF === 'w' || /^[am][A-Za-z0-9_]+$/.test(state.paidF || '')) ? state.paidF : null, paidN('1'), paidN('0')) : '';
-    $('#listTags').innerHTML = '<button type="button" class="hfilt all viewpill" id="viewBtn" aria-haspopup="menu" aria-expanded="' + !$('#viewMenu').hidden + '" aria-label="תצוגה: תגיות ושליחת פרטי המפגש" title="תצוגה: הפעלה וכיבוי של תגיות ושל שליחת פרטי המפגש"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9"/><path d="M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 17h3"/><path d="M11 17h9"/><circle cx="9" cy="17" r="2"/></svg></button><button type="button" class="hfilt all" id="sortBtnH" aria-haspopup="menu" aria-expanded="' + !$('#sortMenu').hidden + '" aria-label="מיון הרשימה" title="מיון: ' + (SORTS.find((s) => s[0] === state.sort) || SORTS[0])[1] + '" style="' + (state.sort !== 'new' ? 'color:var(--terra)' : '') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v15M7 19l-3-3M7 19l3-3M17 20V5M17 5l-3 3M17 5l3 3"/></svg></button>';   // כפתור אחד עם מילה, שפותח את הטוגלים
+    $('#listTags').innerHTML = '<button type="button" class="hfilt all viewpill" id="viewBtn" aria-haspopup="menu" aria-expanded="' + !$('#viewMenu').hidden + '" aria-label="תצוגה: תגיות ושליחת פרטי המפגש" title="תצוגה: הפעלה וכיבוי של תגיות ושל שליחת פרטי המפגש">' + icon('sliders') + '</button><button type="button" class="hfilt all" id="sortBtnH" aria-haspopup="menu" aria-expanded="' + !$('#sortMenu').hidden + '" aria-label="מיון הרשימה" title="מיון: ' + (SORTS.find((s) => s[0] === state.sort) || SORTS[0])[1] + '" style="' + (state.sort !== 'new' ? 'color:var(--terra)' : '') + '">' + icon('sort') + '</button>';   // כפתור אחד עם מילה, שפותח את הטוגלים
     $('#listAtt').innerHTML = !state.filter && state.showAtt !== false ? '<button type="button" class="hfilt ' + (() => { const k = effAttF(), o = k && ATT_OPTS_F.find((x) => x[0] === k); return !o ? 'all' : attCls(o[2]); })() + '" data-fk="att" aria-haspopup="menu" aria-label="סינון לפי התמדה" title="סינון לפי התמדה והגעה (לחיצה לפתיחת תפריט)">' + (() => { const k = effAttF(), o = k && ATT_OPTS_F.find((x) => x[0] === k); return o ? ATT_GLYPH[o[3]]() : PERSIST_ICON; })() + '</button>' : '';
     $('#listBal').innerHTML = !state.filter && state.showPay ? fbtn('bal', effBal(), '', '') : '';
     $('#listSent').innerHTML = evOn ? fbtn('sent', effSent(), sentN('1'), sentN('0')) : '';
     requestAnimationFrame(alignFilters);   // שולם / לא שולם בשורת החיפוש מעל הרשימה
     const stItems = (state.filter ? ((state.showTags && state.pstatuses.length) ? [{ key: PNONE, label: 'ללא תגית' }].concat(pstatusList().slice().reverse()) : []).concat(statusList()).concat(((m0) => (m0 && meetingStarted(m0)) ? astatusList() : [])(state.meetings.find((x) => x.id === state.filter))) : ((state.showTags && state.pstatuses.length) ? [{ key: PNONE, label: 'ללא תגית' }].concat(pstatusList().slice().reverse()) : [])).filter((s) => epk.includes(s.key) || state.participants.some((p) => (!state.filter || linkOf(p.id, state.filter)) && stMatch(p, s.key)));
     const onlyNone = !state.filter && stItems.every((s) => s.key === PNONE) && !epk.includes(PNONE);   // אין תגיות בשימוש: בלי השורה בכלל
-    $('#stStrip').innerHTML = true ? (onlyNone ? [] : stItems).map((s) => { const n = nP(s.key); return '<button type="button" class="stc ' + (isPKey(s.key) ? 'tagc' : s.key) + (n || epk.includes(s.key) ? '' : ' zero') + '" data-stc="' + s.key + '" aria-pressed="' + epk.includes(s.key) + '">' + esc(s.label) + ' <small>' + n + '</small></button>'; }).join('') + '' : '';   // "חינם" (לא משלם) נמצא בתפריט סינון התשלום, לא כצ'יפ נפרד
+    $('#stStrip').innerHTML = true ? (onlyNone ? [] : stItems).map((s) => { const n = nP(s.key); return '<button type="button" class="stc ' + (isPKey(s.key) ? 'tagc' : s.key) + (n || epk.includes(s.key) ? '' : ' zero') + '" data-stc="' + s.key + '" aria-pressed="' + epk.includes(s.key) + '">' + esc(s.label) + ' <small>' + n + '</small></button>'; }).join('') : '';   // "חינם" (לא משלם) נמצא בתפריט סינון התשלום, לא כצ'יפ נפרד
     $('#listCount').innerHTML = '';   // "מוצגים N" הוחלף בצ'יפ "הכל" עם הכמות
   }
 
@@ -1417,7 +1469,7 @@
     return { asc, links, all, perMeeting };
   }
 
-  const kpi = (v, label, sub, tone) => '<div class="kpi ' + (tone || '') + '"><b>' + v + '</b><span>' + label + '</span>' + (sub ? '<i>' + sub + '</i>' : '') + '</div>';
+  const kpi = (v, label, sub, tone) => UI.metric(label, v, { sub, tone: tone === 'good' ? 'pos' : tone === 'bad' ? 'neg' : tone === 'warn' ? 'yel' : '' });
   const sec = (title, hint, body) => '<section class="stsec"><h3>' + title + '</h3>' + (hint ? '<p class="sthint">' + hint + '</p>' : '') + body + '</section>';
   const barRow = (label, n, total, color, extra) => { const w = total ? Math.round(n / total * 100) : 0; return '<div class="brow"><span class="bl">' + label + '</span><span class="bt"><i style="width:' + w + '%;background:' + color + '"></i></span><span class="bv"><b>' + n + '</b>' + (total ? ' · ' + w + '%' : '') + (extra ? ' · ' + extra : '') + '</span></div>'; };
   const colsChart = (items, color, dense) => { const max = Math.max(1, ...items.map((i) => i.v)); return '<div class="cols' + (dense ? ' dense' : '') + '">' + items.map((i) => '<div class="col">' + (dense ? '' : '<span class="cv">' + (i.v || '') + '</span>') + '<i style="height:' + Math.round(i.v / max * 72) + 'px;background:' + (i.color || color) + '"></i><span class="cl">' + i.l + '</span></div>').join('') + '</div>'; };
@@ -1441,7 +1493,7 @@
     const dlab = (m) => meetingLabel(m).split(' · ')[0];
     const price = (l) => (l.st === 'paid' && l.paid_amount != null) ? Number(l.paid_amount) : priceAtReg(l.m, l.created_at);
     const trend = (a, b) => { if (!(b > 0)) return ''; const ch = Math.round((a - b) / b * 100), up = ch >= 0; return '<span class="trend ' + (up ? 'up' : 'down') + '"><i>' + (up ? '▲' : '▼') + '</i><b>' + Math.abs(ch) + '%</b></span>'; };
-    const num = (v, label) => '<div><b>' + v + '</b><small>' + label + '</small></div>';
+    const num = (v, label) => UI.metric(label, v);
     const topic = (key, title, tr, nums, hint) => '<button type="button" class="topic" data-topic="' + key + '"><div class="th"><b>' + title + '</b>' + (tr || '') + '</div><div class="tnums">' + nums + '</div><span class="tmore">' + (hint || 'פרטים') + ' ›</span></button>';
     const tbl = (head, rows) => '<div class="tb' + (head.length === 2 ? ' mv' : '') + '"><div class="tr th2">' + head.map((h) => '<span>' + h + '</span>').join('') + '</div>' + rows.map((r) => '<div class="tr">' + r.map((c) => '<span>' + c + '</span>').join('') + '</div>').join('') + '</div>';
     const part = (title, body) => '<section class="stp"><h4>' + title + '</h4>' + body + '</section>';
@@ -1500,7 +1552,7 @@
       part('חדשים וחוזרים', tbl(['מפגש', 'חדשים', 'חוזרים', 'מגמה'], pm.map((r, k) => [dlab(r.m), r.news, r.ret, k ? trend(r.news + r.ret, pm[k - 1].news + pm[k - 1].ret) : '—'])));
 
     // ----- מסך ראשי: שורה תחתונה לכל נושא -----
-    const bottom = '<div class="stbottom"><div><b>' + ilsB(cash) + '</b><small>הכנסה נטו</small></div><div><b>' + payers.length + '/' + cohort.length + '</b><small>שילמו</small></div><div><b>' + (conv == null ? '—' : conv + '%') + '</b><small>המרה</small></div></div>';
+    const bottom = '<div class="stbottom">' + UI.metric('הכנסה נטו', ilsB(cash)) + UI.metric('שילמו', payers.length + '/' + cohort.length) + UI.metric('המרה', conv == null ? '—' : conv + '%') + '</div>';
     const main = bottom +
       topic('money', 'כספים', last && prev ? trend(last.rev, prev.rev) : '', num(ilsB(cash), 'הכנסות') + num(ilsB(expAll), 'הוצאות') + num(sgn(profit), 'רווח')) +
       topic('promo', 'דרכי הגעה', '', num(ilsB(proInc), 'הכנסה') + num(adP.length, 'לידים') + num(ilsB(proCost), 'עלות')) +
@@ -1551,7 +1603,13 @@
   function renderFinance() {
     $('#finPerTxt').textContent = finPeriodLabel();
     const sg = (v) => Math.round(v) > 0 ? 'cpos' : Math.round(v) < 0 ? 'cneg' : '', ab = (v) => '₪' + nfm(Math.abs(v)), sv = (v) => '<bdi dir="ltr">' + (Math.round(v) > 0 ? '+' : Math.round(v) < 0 ? '-' : '') + ab(v) + '</bdi>'; const rows = finRows(), inc = rows.filter((x) => x.kind === 'income').reduce((s, x) => s + x.amount, 0), exp = rows.filter((x) => x.kind === 'expense').reduce((s, x) => s + x.amount, 0), part = finPartIncome(), expCh = rows.filter((x) => x.channel).reduce((s, x) => s + x.amount, 0), credHolders = [...new Set(state.payments.map((x) => x.participant_id))].map((id) => ({ id, c: Math.round(creditOf(id) * 100) / 100 })).filter((x) => x.c > 0), cred = credHolders.reduce((s, x) => s + x.c, 0), owed = state.promoters.reduce((s, x) => s + Math.max(0, ledgerOf(x.id).balance), 0);
-    $('#finSum').innerHTML = '<div class="in"><small>הכנסות ממשתתפים</small><b>₪' + nfm(part) + '</b></div><div class="out" data-ff="expense" role="button" tabindex="0" aria-pressed="' + (state.finFilter === 'expense') + '"><small>הוצאות</small><b>₪' + nfm(exp) + '</b>' + (expCh ? '<small class="fsub">מתוכן דרכי הגעה ₪' + nfm(expCh) + '</small>' : '') + '</div><div class="in" data-ff="income" role="button" tabindex="0" aria-pressed="' + (state.finFilter === 'income') + '"><small>הכנסות אחרות</small><b>₪' + nfm(inc) + '</b></div>' + (cred > 0 ? '<div class="cred"><small>קרדיט שמור</small><b>₪' + nfm(cred) + '</b><small class="fsub">' + credHolders.length + ' משתתפים, טרם נוצל</small></div><div class="net wide ' + (Math.round(part + inc - exp) > 0 ? 'pos' : Math.round(part + inc - exp) < 0 ? 'neg' : '') + '"><small>נטו</small><b class="' + sg(part + inc - exp) + '">' + sv(part + inc - exp) + '</b><small class="fsub">נטו אחרי קרדיט שמור: <i class="' + sg(part + inc - exp - cred) + '">' + sv(part + inc - exp - cred) + '</i></small></div>' : '<div class="net ' + (Math.round(part + inc - exp) > 0 ? 'pos' : Math.round(part + inc - exp) < 0 ? 'neg' : '') + '"><small>נטו</small><b class="' + sg(part + inc - exp) + '">' + sv(part + inc - exp) + '</b></div>') + (owed > 0 ? '<p class="finowed">עלויות דרכי הגעה שנצברו ועוד לא שולמו: ₪' + nfm(owed) + ' (לא נכללות בהוצאות עד התשלום)</p>' : '');
+    { const net = part + inc - exp, netTone = Math.round(net) > 0 ? 'pos' : Math.round(net) < 0 ? 'neg' : '';
+      $('#finSum').innerHTML = UI.metric('הכנסות ממשתתפים', '₪' + nfm(part), { tone: 'pos' })
+        + UI.metric('הוצאות', '₪' + nfm(exp), { tone: 'neg', sub: expCh ? 'מתוכן דרכי הגעה ₪' + nfm(expCh) : '', a: { 'data-ff': 'expense', role: 'button', tabindex: 0, 'aria-pressed': state.finFilter === 'expense' } })
+        + UI.metric('הכנסות אחרות', '₪' + nfm(inc), { tone: 'pos', a: { 'data-ff': 'income', role: 'button', tabindex: 0, 'aria-pressed': state.finFilter === 'income' } })
+        + (cred > 0 ? UI.metric('קרדיט שמור', '₪' + nfm(cred), { tone: 'yel', sub: credHolders.length + ' משתתפים, טרם נוצל' }) : '')
+        + UI.metric('נטו', sv(net), { tone: netTone, cls: 'wide', sub: cred > 0 ? 'נטו אחרי קרדיט שמור: <i class="' + sg(net - cred) + '">' + sv(net - cred) + '</i>' : '' })
+        + (owed > 0 ? '<p class="finowed">עלויות דרכי הגעה שנצברו ועוד לא שולמו: ₪' + nfm(owed) + ' (לא נכללות בהוצאות עד התשלום)</p>' : ''); }
     $('#finRecLbl').hidden = !state.finRec.length;
     $('#finRec').innerHTML = state.finRec.map((r) => '<button type="button" class="finrow' + (r.active ? '' : ' off') + '" data-frec="' + r.id + '"><span class="ft"><b>' + esc(r.title) + '</b><span>' + PERIODS[r.period] + ' · מ-' + finDmy(r.start_date) + (r.end_date ? ' עד ' + finDmy(r.end_date) : '') + (r.active ? '' : ' · מושהה') + '</span></span><span class="fa ' + (r.kind === 'income' ? 'in' : 'out') + '">₪' + nfm(Number(r.amount)) + '</span></button>').join('');
     const shown = state.finFilter ? rows.filter((x) => x.kind === state.finFilter) : rows;
@@ -1812,7 +1870,7 @@
     prCur = id; const x = promoterOf(id); if (!x) return showPromoterList();
     const L = ledgerOf(id);
     $('#prTitle').textContent = x.name;
-    $('#prSum').innerHTML = '<div class="bigbal' + (L.balance > 0 ? '' : ' ok') + '"><small>' + (L.balance > 0 ? 'יתרה לתשלום לדרך הגעה' : 'מסולק') + '</small><b>' + ils(Math.max(L.balance, 0)) + '</b></div>';
+    $('#prSum').innerHTML = UI.metric(L.balance > 0 ? 'יתרה לתשלום לדרך הגעה' : 'מסולק', ils(Math.max(L.balance, 0)), { tone: L.balance > 0 ? 'neg' : 'pos', cls: 'wide' });
     $('#prMoves').innerHTML = L.rows.length ? L.rows.map((r) => '<div class="pmv"><span class="d">' + fmtD(r.date) + '</span><span class="w">' + esc(r.who) + (r.sub ? '<small>' + esc(r.sub) + '</small>' : '') + '</span><span class="a ' + r.kind + '"><bdi dir="ltr">' + (r.amount > 0 ? '+' : '−') + nfm(Math.abs(r.amount)) + '</bdi></span>' +
       (r.kind === 'p' ? '<button type="button" class="ndel" data-delpay="' + r.id + '" aria-label="מחיקת תשלום" title="מחיקת תשלום">×</button>' : '<span class="bl" title="יתרה אחרי התנועה">' + nfm(r.bal) + '</span>') + '</div>').join('') : '<p class="mnone">עוד אין תנועות. עמלה נרשמת אוטומטית כשמסמנים תשלום של משתתף שהביא דרך ההגעה</p>';
     /* משתתפים שהגיעו דרך דרך ההגעה, ומי שילם ומי לא */
@@ -2125,7 +2183,7 @@
 
 
   /* ---------- הערות (CRM): כמה הערות לכל משתתף, עם מי כתב ומתי; בכרטיס מוצגת האחרונה ---------- */
-  const IMG_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>';
+  const IMG_ICON = icon('img');
   const noteLatest = new Map(), noteText = new Map(), imgCache = new Map();
   /* צילומי מסך בהערות נשמרים במטמון קבוע בדפדפן (IndexedDB): הערה לא משתנה, ולכן הטעינה הבאה מיידית ובלי רשת */
   const imgDB = (() => {
@@ -2178,8 +2236,8 @@
   /* תאריך ושעה בתוך הערה (25.10 · 20:00) מוצגים כיחידה אחת משמאל לימין, כדי שהסדר לא יתהפך בתוך משפט בעברית */
   const noteTextHtml = (s) => esc(s).replace(/(\d{1,2}\.\d{1,2}(?:\.\d{2,4})?(?:\s*·\s*\d{1,2}:\d{2})?|\d{1,2}:\d{2})/g, '<bdi dir="ltr">$1</bdi>');
   /* הערות מערכת כצ'יפים: המפגש תמיד ראשון (כתום), ואחריו הפעולה; שינוי (סטטוס, סכום הקצאה) הוא "ישן ← חדש", הכול בצבעי המערכת */
-  const NCH = (txt, cls) => '<span class="nch ' + cls + '">' + txt + '</span>';
-  const NARW = '<span class="narw" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>';   // חץ כ-SVG: ממורכז אנכית באמת (התו ← יושב נמוך בגופן)
+  const NCH = (txt, cls) => UI.tag(txt, 'nch ' + cls);
+  const NARW = '<span class="narw" aria-hidden="true">' + icon('go', 'i16') + '</span>';   // חץ כ-SVG: ממורכז אנכית באמת (התו ← יושב נמוך בגופן)
   const nStKey = (name) => { const s = state.statuses.concat(state.astatuses).find((x) => x.label === name); return s ? s.key : null; };
   const NLEGACY = { 'שילם': 'paid', 'ישלם': 'willpay', 'ספונטני': 'maybe', 'אולי': 'maybe', 'בטיפול': 'requested', 'חינם': 'exempt', 'חדש': 'unpaid', 'טרם טופל': 'unpaid', 'משויך': 'unpaid' };   // שמות ישנים של סטטוסים מובנים בהערות: מוצגים בשם ובצבע הנוכחיים של אותו סטטוס
   const nStChip = (name) => { let k = nStKey(name), lb = name; if (!k && NLEGACY[name]) { const s = state.statuses.find((x) => x.key === NLEGACY[name]); if (s) { k = s.key; lb = s.label; } } return NCH(esc(lb), k ? 'pay ' + k : 'nn'); };
@@ -2319,11 +2377,11 @@
     return lines.join('\n');
   };
   /* הודעת "היום זה קורה": רק למשתתף ששילם על מפגש שמתקיים היום (שעון ישראל). התאריך והשעות לפי המפגש; המקום קבוע */
-  const TAG_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>';
+  const TAG_ICON = icon('tag');
   const FLAB = { here: ['הכל', 'הגיעו', 'לא הגיעו'], sent: ['הכל', 'נשלחו', 'לא נשלחו'], pay: ['הכל', 'שולם', 'לא שולם', 'חינם', 'דווח'], bal: ['הכל', 'זכאי', 'חייב', 'מאוזן', 'חינם', 'דווח'] }, FNAME = { here: 'סינון הגעה', sent: 'סינון שליחת פרטים', pay: 'סינון תשלום', bal: 'סינון יתרה' };
   const fglyph = (k, c) => k === 'here' ? (c === 'no' ? '✕' : '✓') : k === 'sent' ? PIN_ICON : '₪';
-  const PIN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>';   // סמל הודעה (בועת שיחה), כמו בהגדרת ההודעה לפני המפגש
-  const PERSIST_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-6"/><path d="M12 20V9"/><path d="M19 20V4"/></svg>';   // סמל ההתמדה (עמודות עולות)
+  const PIN_ICON = icon('chat');   // סמל הודעה (בועת שיחה), כמו בהגדרת ההודעה לפני המפגש
+  const PERSIST_ICON = icon('persist');   // סמל ההתמדה (עמודות עולות)
   const FORCE_EVENT_BTN = false;   // זמני לבדיקה: מציג את הכפתור והסימון גם בלי יום מפגש ותשלום (להחזיר ל-false)
   /* מפגש "היום": מתקיים היום (שעון ישראל); בבדיקה הקרוב ביותר */
   const eventMeeting = () => {
@@ -2374,7 +2432,7 @@
     if (!p) { box.innerHTML = ''; return; }
     const base = waLink(p.phone);
     copyTexts = [PAYBOX];
-    const COPY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+    const COPY_ICON = icon('copy');
     /* משתתף בסטטוס "משויך": הוואטסאפ נפתח עם הודעה מובנית (בלשון זכר/נקבה); אחרי החזרה לדשבורד שואלים אם להעביר ל"בטיפול" */
     const pend = pendingLinks(p);
     const first = String(p.first_name || p.name || '').trim().split(/\s+/)[0] || '';
@@ -2528,7 +2586,7 @@
     const pid = sheet && sheet.id; if (!pid) return;
     const bal = creditOf(pid), owed = owedOf(pid);
     { const pays = state.payments.filter((x) => x.participant_id === pid), inn = pays.filter((x) => (x.kind === 'payment' || x.kind === 'deposit') && !x.from_credit).reduce((s, x) => s + Number(x.amount), 0), out = pays.filter((x) => x.kind === 'refund').reduce((s, x) => s + Number(x.amount), 0);
-      $('#walSum').innerHTML = '<div class="wcell"><div class="wl2">יתרה זמינה</div><div class="big ' + (bal > 0 ? 'pos' : bal < 0 ? 'neg' : 'zero') + '"><bdi dir="ltr">₪' + nfm(bal) + '</bdi></div></div><div class="wcell"><div class="wl2">שילם בסך הכול</div><div class="big tot"><bdi dir="ltr">₪' + nfm(inn - out) + '</bdi></div>' + (out > 0 ? '<div class="sub">אחרי החזרים של ₪' + nfm(out) + '</div>' : '') + '</div>'; }
+      $('#walSum').innerHTML = UI.metric('יתרה זמינה', '<bdi dir="ltr">₪' + nfm(bal) + '</bdi>', { tone: bal > 0 ? 'yel' : bal < 0 ? 'neg' : 'mut' }) + UI.metric('שילם בסך הכול', '<bdi dir="ltr">₪' + nfm(inn - out) + '</bdi>', { sub: out > 0 ? 'אחרי החזרים של ₪' + nfm(out) : '' }); }
     $('#walRefund').hidden = !(bal > 0);
     { const pl = pkgLeft(pid); if (pl > 0) $('#walSum').insertAdjacentHTML('beforeend', '<div class="sub">בחבילה נשארו <b>' + pl + '</b> מפגשים · ₪' + nfm(pkgUnit(pid)) + ' למפגש</div>'); }
     $('#walZikuy').hidden = true;   // בארנק רק קבלת כסף או החזרת כסף; אין זיכוי (ביטול הקצאה למפגש נעשה במסך התשלום למפגש)
@@ -2601,7 +2659,7 @@
     if (chip) {   // צ'יפ מצב המפגש בכותרת: הסכום המוקצה, או "חינם", או "לתשלום"; לחיצה פותחת בחירה בין לתשלום לחינם
       const fr = !!(linkOf(pid, m.id) && noPayOf(null, linkOf(pid, m.id)));
       chip.hidden = false; chip.disabled = false; const rp = !fr && !(al > 0) && reportedOf(pid, m.id); chip.classList.toggle('free', fr && !(al > 0)); chip.classList.toggle('topay', !fr && !(al > 0) && !rp); chip.classList.toggle('rep', !!rp);
-      chip.innerHTML = (al > 0 ? '₪' + nfm(al) : fr ? '<span class="nps">₪</span>חינם' : rp ? 'דיווח' + reportedAmt(pid, m.id).replace(' ', '&nbsp;') : 'לתשלום') + '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><path d="M6 9l6 6 6-6"/></svg>'; chip.title = 'מצב המפגש: לתשלום או חינם';
+      chip.innerHTML = (al > 0 ? '₪' + nfm(al) : fr ? '<span class="nps">₪</span>חינם' : rp ? 'דיווח' + reportedAmt(pid, m.id).replace(' ', '&nbsp;') : 'לתשלום') + icon('chev', 'i14'); chip.title = 'מצב המפגש: לתשלום או חינם';
     }
     box.hidden = true; box.innerHTML = ''; return;   // בלי שורת הקצאה בתחתית: הסכום המוקצה מוצג רק בצ'יפ שבכותרת
     box.hidden = false;
@@ -3060,7 +3118,7 @@
     /* שלושת המפגשים האחרונים (כל המפגשים, לא רק שלו) וכפתור לטעינת עוד */
     const desc = state.meetings.slice().sort((a, b) => (b.meeting_date + b.meeting_time).localeCompare(a.meeting_date + a.meeting_time)), shown = sheet.id ? desc.filter((m) => linkOf(sheet.id, m.id)) : desc;   // רק מפגשים שהמשתתף משויך אליהם (משתתף חדש: כולם, כדי לשייך)
     $('#pMore').hidden = true;
-    { const n = $('#pMeetN'); if (n) { n.innerHTML = sheet.id ? '<span>' + shown.length + '</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>' : ''; n.hidden = !sheet.id; } }   // מונה המפגשים: אותו צ'יף כמו היתרה, עם סמל יומן במקום ₪
+    { const n = $('#pMeetN'); if (n) { n.innerHTML = sheet.id ? '<span>' + shown.length + '</span>' + icon('cal', 'i16') : ''; n.hidden = !sheet.id; } }   // מונה המפגשים: אותו צ'יף כמו היתרה, עם סמל יומן במקום ₪
     { const ab = $('#pAddMeet'); if (ab) ab.hidden = !(sheet.id && state.meetings.some((m) => !linkOf(sheet.id, m.id))); }   // שיוך למפגש מהכרטיס
     { /* מספר אחד: יתרה = חוב פחות קרדיט. חוב רק על מפגשים שביקשנו עליהם תשלום ("בטיפול") או שהמשתתף אמר שישלם ("ישלם"); רשום בלבד (חדש) הוא עוד לא חוב */
       const owed = sheet.id ? owedOf(sheet.id) : 0;
@@ -3400,7 +3458,7 @@
     const m = $('#fMenu'); if (!m.hidden && m.dataset.kind === kind) { closeF(); return; }
     if (kind === 'att') {   // תפריט דפוס הגעה: כל אפשרות עם הכמות שהייתה מוצגת (לפי שאר הסינונים והחיפוש)
       const keep = state.attF; state.attF = null; const q = state.q.trim().toLowerCase(), qd = digits(q), pool = state.participants.filter((p) => rowPass(p, q, qd)); state.attF = keep;
-      const row = (k, label, cls, n, gl) => '<button type="button" role="menuitem" class="fopt" data-fv="' + k + '" aria-pressed="' + (keep === k || (!keep && k === '')) + '"><span class="hfilt ' + (k === '' ? 'all' : attCls(cls)) + '">' + (k === '' ? PERSIST_ICON : ATT_GLYPH[gl]()) + '</span><span>' + label + '</span><b class="fcnt">' + n + '</b></button>';
+      const row = (k, label, cls, n, gl) => UI.fopt(k, keep === k || (!keep && k === ''), k === '' ? 'all' : attCls(cls), k === '' ? PERSIST_ICON : ATT_GLYPH[gl](), label, n);
       m.innerHTML = row('', 'הכל', 'x', pool.length, 'bars') + ATT_OPTS_F.map((o, i) => (i === 4 ? '<div class="fsep" role="separator"></div>' : '') + row(o[0], o[1], o[2], pool.filter((p) => attMatch(p, o[0])).length, o[3])).join('');
       m.dataset.kind = kind; m.hidden = false;
       const r0 = anchor.getBoundingClientRect(), mw0 = m.offsetWidth;
@@ -3409,12 +3467,12 @@
     }
     const cur = fstate(kind) || null, lab = FLAB[kind];
     const opts = [[null, 'all', lab[0]]].concat(kind === 'pay' ? [['w', 'wait', lab[4]]] : kind === 'bal' ? [['w', 'wait', lab[5]]] : [], [['1', 'yes', lab[1]], ['0', 'no', lab[2]]]).concat(kind === 'pay' ? [['n', 'fr', lab[3]]] : kind === 'bal' ? [['n', 'free', lab[3]], ['f', 'fr', lab[4]]] : []);
-    m.innerHTML = opts.map((o) => '<button type="button" role="menuitem" class="fopt" data-fv="' + (o[0] === null ? '' : o[0]) + '" aria-pressed="' + (cur === o[0]) + '"><span class="hfilt ' + o[1] + '">' + fglyph(kind, o[1]) + '</span><span>' + o[2] + '</span><b class="fcnt">' + ((FC[kind] || {})[o[0] === null ? '' : o[0]] ?? 0) + '</b></button>').join('');
+    m.innerHTML = opts.map((o) => UI.fopt(o[0] === null ? '' : o[0], cur === o[0], o[1], fglyph(kind, o[1]), o[2], (FC[kind] || {})[o[0] === null ? '' : o[0]] ?? 0)).join('');
     if (kind === 'pay') {   // בנוסף: סינון לפי דרך התשלום ולפי הסכום ששולם למפגש
       const pmc = FC.payMeth || {}, pks = state.payMethods.filter((pm) => pmc[pm.key]);
-      if (pks.length) m.innerHTML += '<div class="fsep" role="separator"></div>' + pks.map((pm) => '<button type="button" role="menuitem" class="fopt" data-fv="m' + esc(pm.key) + '" aria-pressed="' + (cur === 'm' + pm.key) + '"><span class="hfilt yes">₪</span><span>' + esc(pm.name) + '</span><b class="fcnt">' + pmc[pm.key] + '</b></button>').join('');
+      if (pks.length) m.innerHTML += '<div class="fsep" role="separator"></div>' + pks.map((pm) => UI.fopt('m' + esc(pm.key), cur === 'm' + pm.key, 'yes', '₪', esc(pm.name), pmc[pm.key])).join('');
       const am = FC.payAmts || {}, ks = Object.keys(am).map(Number).sort((a, b) => b - a);
-      if (ks.length) m.innerHTML += '<div class="fsep" role="separator"></div>' + ks.map((a) => '<button type="button" role="menuitem" class="fopt" data-fv="a' + a + '" aria-pressed="' + (cur === 'a' + a) + '"><span class="hfilt yes">₪</span><span>₪' + nfm(a) + '</span><b class="fcnt">' + am[a] + '</b></button>').join('');
+      if (ks.length) m.innerHTML += '<div class="fsep" role="separator"></div>' + ks.map((a) => UI.fopt('a' + a, cur === 'a' + a, 'yes', '₪', '₪' + nfm(a), am[a])).join('');
     }
     m.dataset.kind = kind; m.hidden = false;
     const r = anchor.getBoundingClientRect(), mw = m.offsetWidth;
@@ -3674,13 +3732,13 @@
     const noCol = stScope === 'participant';   // תוויות משתתף בלי צבעים
     const mkRows = (arr) => arr.map((s) => s.key === sys
       ? '<div class="strow locked" data-k="' + s.key + '">' +
-      '<span class="stlockic" title="המיקום קבוע: תמיד ראשון"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>' +
+      '<span class="stlockic" title="המיקום קבוע: תמיד ראשון">' + icon('lock', 'i18') + '</span>' +
       '<input class="stname" value="' + esc(s.label) + '" maxlength="14" aria-label="שם סטטוס המערכת" style="background:' + (PALETTE[s.color] || PALETTE.sky)[0] + ';color:' + (PALETTE[s.color] || PALETTE.sky)[1] + '" />' +
       '<button type="button" class="swcur" data-c="' + s.color + '" aria-haspopup="menu" aria-label="צבע: ' + (PALETTE[s.color] || PALETTE.sky)[2] + ' (לחיצה לשינוי)" title="שינוי צבע" style="background:' + (PALETTE[s.color] || PALETTE.sky)[0] + '"></button>' +
       '<span class="stspacer" style="flex-basis:30px" aria-hidden="true"></span>' +
       '<small class="stcap">' + 'סטטוס מערכת: ברירת המחדל בשיוך משתתף למפגש' + '</small></div>'
       : '<div class="strow" data-k="' + s.key + '">' +
-      '<button type="button" class="sthandle" aria-label="גרירה לשינוי הסדר (או חצים במקלדת)" title="גרירה לשינוי הסדר"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.8"/><circle cx="15" cy="6" r="1.8"/><circle cx="9" cy="12" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="9" cy="18" r="1.8"/><circle cx="15" cy="18" r="1.8"/></svg></button>' +
+      '<button type="button" class="sthandle" aria-label="גרירה לשינוי הסדר (או חצים במקלדת)" title="גרירה לשינוי הסדר">' + icon('grip', 'i18') + '</button>' +
       '<input class="stname" value="' + esc(s.label) + '" maxlength="14" aria-label="שם הסטטוס" style="' + (noCol ? 'background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)' : 'background:' + (PALETTE[s.color] || PALETTE.sky)[0] + ';color:' + (PALETTE[s.color] || PALETTE.sky)[1]) + '" />' +
       (noCol ? '' : '<button type="button" class="swcur" data-c="' + s.color + '" aria-haspopup="menu" aria-label="צבע: ' + (PALETTE[s.color] || PALETTE.sky)[2] + ' (לחיצה לשינוי)" title="שינוי צבע" style="background:' + (PALETTE[s.color] || PALETTE.sky)[0] + '"></button>') +
  (s.key !== SYSTEM_STATUS ? '<button type="button" class="stdel" data-del="' + s.key + '" aria-label="מחיקת הסטטוס" title="מחיקת הסטטוס">×</button>' : '') + '</div>').join('');
@@ -3711,7 +3769,7 @@
         (used ? '' : '<button type="button" class="stdel" data-sdel="pr:' + x.id + '" aria-label="מחיקה" title="מחיקה">×</button>') + colDot(x.color || 'red', 'pr:' + x.id) + '</div>' +
         '<div class="srcseg" role="radiogroup" aria-label="סוג העלות"><button type="button" role="radio" data-seg="lead" aria-pressed="' + !fp + '">עלות לליד</button><button type="button" role="radio" data-seg="pay" aria-pressed="' + fp + '">עלות מהתשלום</button></div>' +
         '<div class="srcgrid">' +
-          '<label class="srcfld"><small>קוד בקישור</small><span class="srcin" dir="ltr"><i>?s=</i><input class="codein" data-f="code" value="' + esc(x.code || '') + '" maxlength="6" placeholder="—" aria-label="קוד בקישור" autocapitalize="off" autocomplete="off" /><button type="button" class="cpbtn" data-copylink="' + esc(x.code || '') + '" aria-label="העתקת הקישור" title="העתקת הקישור"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></span></label>' +
+          '<label class="srcfld"><small>קוד בקישור</small><span class="srcin" dir="ltr"><i>?s=</i><input class="codein" data-f="code" value="' + esc(x.code || '') + '" maxlength="6" placeholder="—" aria-label="קוד בקישור" autocapitalize="off" autocomplete="off" /><button type="button" class="cpbtn" data-copylink="' + esc(x.code || '') + '" aria-label="העתקת הקישור" title="העתקת הקישור">' + icon('copy', 'i18') + '</button></span></label>' +
           '<label class="srcfld"><small>' + (fp ? 'סכום או אחוז מהתשלום' : 'כמה עולה ליד') + '</small><span class="srcin">' +
             (fp ? '<select class="ratetype" data-f="rate_type" aria-label="סוג"><option value="fixed"' + (x.rate_type !== 'percent' ? ' selected' : '') + '>₪</option><option value="percent"' + (x.rate_type === 'percent' ? ' selected' : '') + '>%</option></select>' : '<i>₪</i>') +
             '<input class="codein ratein" data-f="rate" type="number" inputmode="decimal" min="0" value="' + Number(x.rate || 0) + '" aria-label="עלות" /></span></label>' +
@@ -3722,7 +3780,7 @@
   $('#setSrcBtn').addEventListener('click', () => showSetView('src'));
   /* דרכי תשלום: רשימה שהמנהל מגדיר (שם לכל דרך); מוצגת כצ'יפים בקבלת תשלום */
   function renderPm() {
-    $('#pmList').innerHTML = state.payMethods.map((x) => '<div class="pmrow" data-k="' + esc(x.key) + '">' + '<button type="button" class="sthandle" aria-label="גרירה לשינוי הסדר (או חצים במקלדת)" title="גרירה לשינוי הסדר"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.8"/><circle cx="15" cy="6" r="1.8"/><circle cx="9" cy="12" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="9" cy="18" r="1.8"/><circle cx="15" cy="18" r="1.8"/></svg></button>' + '<input class="pmname" value="' + esc(x.name) + '" maxlength="20" aria-label="שם דרך התשלום" />' + '<select class="pmown" aria-label="הקופה של" title="הקופה של: מי מקבל את הכסף בדרך הזאת"><option value="">הקופה של…</option>' + finAdmins().map((e) => '<option value="' + esc(e) + '"' + (x.owner_email === e ? ' selected' : '') + '>' + esc(finName(e)) + '</option>').join('') + '</select>' + (state.payMethods.length > 1 ? '<button type="button" class="stdel" data-pdel="' + esc(x.key) + '" aria-label="מחיקה" title="מחיקה">×</button>' : '') + '</div>').join('');
+    $('#pmList').innerHTML = state.payMethods.map((x) => '<div class="pmrow" data-k="' + esc(x.key) + '">' + '<button type="button" class="sthandle" aria-label="גרירה לשינוי הסדר (או חצים במקלדת)" title="גרירה לשינוי הסדר">' + icon('grip', 'i18') + '</button>' + '<input class="pmname" value="' + esc(x.name) + '" maxlength="20" aria-label="שם דרך התשלום" />' + '<select class="pmown" aria-label="הקופה של" title="הקופה של: מי מקבל את הכסף בדרך הזאת"><option value="">הקופה של…</option>' + finAdmins().map((e) => '<option value="' + esc(e) + '"' + (x.owner_email === e ? ' selected' : '') + '>' + esc(finName(e)) + '</option>').join('') + '</select>' + (state.payMethods.length > 1 ? '<button type="button" class="stdel" data-pdel="' + esc(x.key) + '" aria-label="מחיקה" title="מחיקה">×</button>' : '') + '</div>').join('');
     $('#setPmHint').textContent = state.payMethods.map((x) => x.name).join(' · ');
   }
   $('#setPmBtn').addEventListener('click', () => showSetView('pm'));
