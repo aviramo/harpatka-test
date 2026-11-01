@@ -4146,6 +4146,13 @@
   $('#q').addEventListener('blur', () => setTimeout(syncSearchNav, 0));
   $('#q').addEventListener('input', syncSearchNav);
   $('#qClear').addEventListener('click', () => setTimeout(syncSearchNav, 0));
+  /* לחיצה על השטח הריק מתחת לרשימה (ומתחת ל"הוספת משתתף חדש") מבטלת את החיפוש: מנקה את הטקסט וסוגרת את התיבה (1.11.26) */
+  document.addEventListener('click', (e) => {
+    const t = e.target, wrap = document.querySelector('.wrap');
+    if (t !== wrap && t !== document.body && t !== document.documentElement) return;
+    if (!searchOpen() || document.documentElement.classList.contains('menu-open')) return;
+    const q = $('#q'); q.value = ''; state.q = ''; q.blur(); renderList(); syncUrl(); setTimeout(syncSearchNav, 0);
+  });
   /* פתיחת החיפוש (מקלדת) לא מזיזה את הדף */
   document.addEventListener('focusin', (e) => { if (!e.target.closest('.hsearch')) return; let n = 0; const f = () => { if (window.scrollY || document.documentElement.scrollTop) window.scrollTo(0, 0); if (++n < 20) setTimeout(f, 50); }; f(); });
   if (window.visualViewport) window.visualViewport.addEventListener('scroll', () => { if (document.activeElement && document.activeElement.closest && document.activeElement.closest('.hsearch')) window.scrollTo(0, 0); });
