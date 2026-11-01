@@ -29,10 +29,10 @@
       </div>
       <div id="cmFormView" data-su-root>
         <div data-su="formWrap">
-          <div class="su-fold"><div>
+          <div class="su-head">
             <h2 class="su-title" data-meeting-name hidden></h2>
             <div class="mt-badge" role="note"><b data-meeting-when>המפגש הקרוב</b></div>
-          </div></div>
+          </div>
           <form data-su="form" novalidate class="text-start">
             <input type="text" name="website" data-su="hp" class="su-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="su-fold"><div>
@@ -220,22 +220,30 @@
   };
   const normPhone = PersonForm.normPhone;   // הלוגיקה בטופס המשותף (shared/person-form.js)
   window.normPhone = normPhone;
-  const suRoots = [];
+  const suRoots = [], suResets = [];
   function initSignup(root) {
     const q = k => root.querySelector('[data-su="' + k + '"]');
     const form = q('form'); if (!form) return;
     const btn = q('btn'), t0 = Date.now();
     PersonForm.bind(root);
     /* אחרי הרשמה: התוכן נסגר מלמעלה, הכפתור מתחלף ל"נשמר זמנית" ואז נחשפים הטקסט וכפתור התשלום בפייבוקס (הכול באנימציה) */
-    let saved = false;
+    let saved = false, savedFor = null;
     const showDone = (payOk = true) => {
-      if (saved) return; saved = true;
+      if (saved) return; saved = true; savedFor = (selMeeting || nearest || {}).id || null;
       root.querySelectorAll('.su-fold:not(.su-after)').forEach(f => f.classList.add('shut'));
       btn.disabled = true; btn.classList.add('swap');
-      setTimeout(() => { btn.textContent = payOk ? 'נשמר זמנית' : 'הפרטים נשלחו'; btn.classList.remove('swap'); btn.classList.add('saved'); }, 260);
-      if (payOk) setTimeout(() => { const a = q('after'); if (a) a.classList.remove('shut'); }, 700);
+      setTimeout(() => { if (!saved) return; btn.textContent = payOk ? 'נשמר זמנית' : 'הפרטים נשלחו'; btn.classList.remove('swap'); btn.classList.add('saved'); }, 260);
+      if (payOk) setTimeout(() => { const a = q('after'); if (saved && a) a.classList.remove('shut'); }, 700);
     };
     suRoots.push(showDone);
+    /* פתיחה למפגש אחר אחרי הרשמה: "נשמר זמנית" שייך למפגש שנרשמו אליו, ולמפגש הזה הפופאפ חוזר למצב הרשמה */
+    suResets.push((id) => {
+      if (!saved || savedFor === id) return;
+      saved = false; savedFor = null;
+      btn.classList.remove('saved', 'swap'); btn.disabled = false; btn.textContent = submitLabel;
+      const a = q('after'), fl = q('fail'); if (a) a.classList.add('shut'); if (fl) fl.textContent = '';
+      root.querySelectorAll('.su-fold:not(.su-after)').forEach((f) => f.classList.remove('shut'));
+    });
     /* לחיצה על התשלום בפייבוקס = דיווח על תשלום, אוטומטית (בלי קישור "שילמתי"): פייבוקס נפתח בלשונית חדשה, ובמערכת המפגש מסומן "דווח" ומחכה לאימות שלנו */
     const payA = root.querySelector('[data-paybox]');
     let reporting = false;
@@ -868,7 +876,7 @@
     const f = document.getElementById('cmFirst'), l = document.getElementById('cmLast');
     if (f && !f.value && first) f.value = first; if (l && !l.value && last) l.value = last;
   }
-  function openReg(auto, meeting) { if (!nearestOk) ensureNearest(); selMeeting = meeting && meeting.id ? meeting : null; showMeeting(selMeeting || nearest); applyMemberMode(); prefillGoogleName(); applyRegState(selMeeting || nearest); if (contactModal) openModal(contactModal, auto === true); }
+  function openReg(auto, meeting) { if (!nearestOk) ensureNearest(); selMeeting = meeting && meeting.id ? meeting : null; suResets.forEach((r) => r((selMeeting || nearest || {}).id || null)); showMeeting(selMeeting || nearest); applyMemberMode(); prefillGoogleName(); applyRegState(selMeeting || nearest); if (contactModal) openModal(contactModal, auto === true); }
   /* הרשמה כשהכניסה עם גוגל פעילה: מי שלא מחובר עובר קודם לכניסה עם גוגל (בלי פופאפ); אחרי הכניסה נפתח פופאפ ההרשמה של המפגש שנבחר:
      משתתף מקושר: הרשמה בלחיצה; בלי משתתף מקושר: הזנת פרטים, והכפתור יוצר משתתף, מחבר את החשבון ונרשם באותו צעד (harpatka_me_join) */
   window.HarpatkaRegister = { open: (auto, meeting) => {
