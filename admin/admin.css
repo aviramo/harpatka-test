@@ -455,7 +455,9 @@ h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -.01em; line-
 /* תפריט שיוך למפגש ותפריט מצב ההקצאה */
 #qMenu.am, #qMenu.am2 { width: max-content; min-width: 0; max-width: calc(100vw - 16px); display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 8px; padding: 8px; }
 #qMenu.am .qi, #qMenu.am2 .qi { flex: 0 0 auto; height: var(--ctl); min-width: 160px; padding: 0 24px; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; border: 1px solid transparent; font-size: 16px; font-weight: 600; }
-#qMenu.am .qi { background: var(--surface-2); color: var(--text); }
+#qMenu.am .qi { background: transparent; color: var(--text); }   /* תפריט בחירת מפגש: בלי רקע אפור (1.11.26); אפור רק בריחוף ובלחיצה */
+#qMenu.am .qi:active { background: var(--surface-2); }
+@media (hover: hover) { #qMenu.am .qi:hover { background: var(--surface-2); } }
 #qMenu.am2 .qi { background: transparent; color: var(--text-2); }   /* בלי רקע (1.11.26) */
 #qMenu.am2 .qi.del, #qMenu.am2 .qi.rej { background: transparent; color: var(--red); }
 #qMenu.am2 .qi[aria-pressed="true"] { background: transparent; color: var(--text); }
