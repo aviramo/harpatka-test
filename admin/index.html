@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css?v=20261104asaraqapaoanalakajaiahag" />
+  <link rel="stylesheet" href="admin.css?v=20261104avauatasaraqapaoanalakajaiahag" />
   <style>
     :root { --envtop: 18px; }
     #testBadge { inset: auto; margin: 0; border: 0; position: fixed; top: 0; left: 0; right: 0; width: auto; height: 18px; padding: 0; overflow: hidden; background: #3F382F; color: #fff; font: 700 11px/18px Arial, sans-serif; text-align: center; pointer-events: none; }
@@ -3489,7 +3489,7 @@
     /* שלושת המפגשים האחרונים (כל המפגשים, לא רק שלו) וכפתור לטעינת עוד */
     const desc = state.meetings.slice().sort((a, b) => (b.meeting_date + b.meeting_time).localeCompare(a.meeting_date + a.meeting_time)), shown = sheet.id ? desc.filter((m) => linkOf(sheet.id, m.id)) : desc;   // רק מפגשים שהמשתתף משויך אליהם (משתתף חדש: כולם, כדי לשייך)
     $('#pMore').hidden = true;
-    { const n = $('#pMeetN'); if (n) { n.innerHTML = sheet.id ? '<span>' + shown.length + '</span>' + icon('cal', 'i16') : ''; n.hidden = !sheet.id; } const t = $('#pMeetTile'); if (t) t.hidden = !sheet.id; }   // מונה המפגשים עם סמל יומן באריח בצד ימין של הרצועה
+    { const n = $('#pMeetN'); if (n) { n.innerHTML = sheet.id ? icon('cal', 'i16') + '<span>' + shown.length + '</span>' : ''; n.hidden = !sheet.id; } const t = $('#pMeetTile'); if (t) t.hidden = !sheet.id; }   // מונה המפגשים עם סמל יומן באריח בצד ימין של הרצועה
     { const ab = $('#pAddMeet'); if (ab) ab.hidden = !(sheet.id && state.meetings.some((m) => !linkOf(sheet.id, m.id))); }   // שיוך למפגש מהכרטיס
     { /* מספר אחד: יתרה = חוב פחות קרדיט. חוב רק על מפגשים שביקשנו עליהם תשלום ("בטיפול") או שהמשתתף אמר שישלם ("ישלם"); רשום בלבד (חדש) הוא עוד לא חוב */
       const owed = sheet.id ? owedOf(sheet.id) : 0;
