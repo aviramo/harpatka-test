@@ -567,12 +567,12 @@ html.dlg-lock { overflow: hidden; overscroll-behavior: none; }
 #pDlg .pviewsub { margin-top: -8px; padding-inline-start: calc(var(--ib) + 8px); line-height: 1.3; }
 #pDlg .sheet-head #pInfoBtn { order: -2; }
 #pDlg .sheet-head.navrow { cursor: pointer; }   /* כל שורת הכותרת לחיצה: במסך הראשי פותחת את פרטי המשתתף, ובפרטים חוזרת לכרטיס */
-#pDlg .sheet-head #pPayChip, #pDlg .sheet-head #pAllocChip { order: 3; }   /* היתרה בקצה השמאלי, והוואטסאפ מימינה (1.11.26, הוחלפו) */
-#pDlg .sheet-head #pMsgs .ctop { order: 2; display: flex; margin: 0; }
-#pCall { order: 2; }   /* בפרטי המשתתף: החיוג מימין והצפייה כמשתתף בקצה השמאלי (1.11.26, הוחלפו) */
-#pViewAs { order: 3; }
-/* התגית והמונה מימין לוואטסאפ (במסך הראשי) ולטלפון (בפרטים), בגודל שלהם: אותו כפתור של 40px וסמל של 20px, והמונה בפינה (בלי אפס) */
-#pDlg .sheet-head #pTagSlot { order: 1; flex: 0 0 auto; margin-inline-start: auto; line-height: 0; }
+#pDlg .sheet-head #pPayChip, #pDlg .sheet-head #pAllocChip { order: 3; }   /* הוואטסאפ בקצה השמאלי, והיתרה מימינו (2.11.26) */
+#pDlg .sheet-head #pMsgs .ctop { order: 4; display: flex; margin: 0; }
+#pCall { order: 4; }   /* בפרטי המשתתף: החיוג בקצה השמאלי, מימינו התגית, ומימינה הצפייה כמשתתף (2.11.26) */
+#pViewAs { order: 1; }
+/* התגית והמונה רק בפרטי המשתתף, מימין לטלפון ובגודל שלו: אותו כפתור של 40px וסמל של 20px, והמונה בפינה (בלי אפס) */
+#pDlg .sheet-head #pTagSlot { order: 2; flex: 0 0 auto; line-height: 0; }
 #pTagSlot .glk.tgq { display: inline-grid; place-items: center; width: var(--ib); height: var(--ib); color: var(--text); }
 #pTagSlot .glk.tgq svg { width: 20px; height: 20px; }
 #pTagSlot .glk.tgq::before { inset: 0; }
@@ -588,11 +588,14 @@ html.dlg-lock { overflow: hidden; overscroll-behavior: none; }
 .paychip { background: var(--red-bg); color: var(--red); cursor: pointer; }
 .paychip.ok { background: var(--yellow-bg); color: var(--yellow); }
 .paychip.zero { background: var(--surface-2); color: var(--text-2); }
+#pPayChip { background: transparent; }   /* היתרה בכותרת: בלי רקע, רק הצבע לפי המצב (חוב אדום, יתרה צהוב, אפס אפור) */
+#pPayChip:active { background: var(--surface-2); }
+@media (hover: hover) { #pPayChip:hover { background: var(--surface-2); } }
 .paychip.allocchip { position: relative; background: var(--green-bg); color: var(--green); }   /* מוקצה (שולם), דווח ולתשלום עם רקע; חינם בלי רקע */
 .paychip.allocchip.rep { background: var(--yellow-bg); color: var(--yellow); }
 .paychip.allocchip.topay { background: var(--red-bg); color: var(--red); }
 .paychip.allocchip.free { background: transparent; color: var(--text-2); }
-#pAllocChip select { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; opacity: 0; cursor: pointer; font-size: 16px; }   /* תפריט של מערכת ההפעלה: select שקוף מעל כל הצ'יף */
+#pAllocChip select { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); margin: 0; padding: 0; border: 0; opacity: 0; cursor: pointer; font-size: 16px; }   /* תפריט של מערכת ההפעלה: select שקוף מעל כל הצ'יף */
 #pAllocChip:has(select:focus-visible) { outline: 1px solid var(--text); outline-offset: 1px; }
 #pPayChip[data-tab]:not([data-tab="main"]) { display: none; }
 /* תגיות המשתתף ושורת המפגשים */
@@ -647,6 +650,9 @@ html.dlg-lock { overflow: hidden; overscroll-behavior: none; }
 .mlist .mrow .mmoney.mplus { display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; }   /* עוד לא משויך: פלוס במקום התשלום, כמו באריח */
 .more { display: block; width: 100%; height: var(--ctl); margin: 4px 0 8px; border: 1px solid transparent; background: var(--surface-2); color: var(--text); font-weight: 600; font-size: 15px; }
 /* הערה חדשה: שדה וצירוף צילום מסך */
+#pDelete { background: transparent; }   /* מחיקת משתתף: בלי רקע, רק הטקסט האדום; רקע אדום בהיר בריחוף ובלחיצה */
+#pDelete:active { background: var(--red-bg); }
+@media (hover: hover) { #pDelete:hover { background: var(--red-bg); } }
 .nform { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 12px; border-bottom: 1px solid var(--line-2); }   /* הערה חדשה: בלי מסגרת, קו תחתון אחד לכל הרוחב, שכולל גם את כפתור התמונה (1.11.26) */
 .nform:focus-within { border-bottom-color: var(--text); }
 .nform textarea { border-width: 0; background: transparent; flex: 1 1 auto; min-width: 0; height: auto; min-height: var(--ib); max-height: 140px; padding: 8px 0; resize: none; line-height: 1.4; font-size: 16px; }
