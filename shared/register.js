@@ -486,7 +486,7 @@
     /* משתתף מחובר עם פרטים והדף לא מכיר מפגש (הטעינה נכשלה) אבל השרת כבר רשם אותו למפגש: מציגים את המפגש שנרשם אליו (מצב נרשמתם והתשלום), ולא "השארת פרטים" */
     if (meInfo && meInfo.complete && !(m && m.id)) {
       const reg = (meInfo.meetings || []).filter((y) => y.registered && y.future).sort((a, b) => String(a.date + a.time).localeCompare(String(b.date + b.time)))[0];
-      if (reg) { selMeeting = { id: reg.id, date: reg.date, time: reg.time, name: reg.name || '', city: reg.city || '', tiers: { base: Number(reg.price) || 80, steps: [] } }; showMeeting(selMeeting); m = selMeeting; }
+      if (reg) { selMeeting = { id: reg.id, date: reg.date, time: reg.time, name: reg.name || '', city: reg.city || '', place: reg.place || '', tiers: { base: Number(reg.price) || 80, steps: [] } }; showMeeting(selMeeting); m = selMeeting; }
     }
     const noMeet = !!(meInfo && meInfo.complete && !(m && m.id));   // פרטים שמורים ואין שום מפגש: אין מה להשאיר ואין שדות, אז גם אין כפתור
     const nmEl = q('nomeet'); if (nmEl) nmEl.hidden = !noMeet;
@@ -784,7 +784,7 @@
     if (m && m.date) { const [, mo, d] = String(m.date).split('-').map(Number), wd = HE_DAYS[new Date(m.date + 'T12:00:00Z').getUTCDay()]; info = 'יום ' + wd + ' ' + d + '.' + mo + (m.time ? ' בשעה ' + m.time : ''); }
     const text = 'היי, אני רוצה להעביר את התשלום בדרך אחרת למפגש ביום ' + info.replace(/^יום /, '');
     const wa = (num) => 'https://wa.me/' + num + '?text=' + encodeURIComponent(text);
-    dlg.querySelector('#otherInfo').textContent = info;
+    dlg.querySelector('#otherInfo').textContent = m && m.date ? [(m.name || defMeetingName || ''), CONFIG.meetingLine(m)].filter(Boolean).join(String.fromCharCode(10)) : info;
     dlg.querySelector('#otherHadar').href = wa(CONFIG.whatsappHadar); dlg.querySelector('#otherOfir').href = wa(CONFIG.whatsappOfir);
     openModal(dlg, true);
   }
@@ -917,9 +917,7 @@
     document.querySelectorAll('.mt-badge').forEach((e) => { e.hidden = !m; });   // אין מפגש: אין שורת תאריך בכותרת
     { const nm = (m && m.name) || defMeetingName || ''; document.querySelectorAll('[data-meeting-name]').forEach((e) => { e.textContent = nm; e.hidden = !nm; }); }   // כותרת: שם המפגש, ואם אין לו שם: שם ברירת המחדל
     if (!m) { document.querySelectorAll('[data-price]').forEach((e) => { e.textContent = priceFor(999, null) + ' ₪'; }); return; }
-    const [, mo, d] = m.date.split('-').map(Number), wd = HE_DAYS[new Date(m.date + 'T12:00:00Z').getUTCDay()];
-    const when = 'יום ' + wd + ' ' + Number(d) + '.' + Number(mo) + (m.time ? ' · ' + m.time : '') + (m.city ? ' · ' + m.city : '');
-    document.querySelectorAll('[data-meeting-when]').forEach((e) => { e.textContent = when; });
+    { const when = CONFIG.meetingLine(m); document.querySelectorAll('[data-meeting-when]').forEach((e) => { e.textContent = when; }); }
     document.querySelectorAll('[data-meeting-place]').forEach((e) => { e.textContent = CONFIG.meetingPlace || ''; });
     const left = dayN(m.date) - dayN(new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem' }).format(new Date()));
     const price = priceFor(left, m.tiers);
@@ -931,17 +929,17 @@
     const H = { apikey: CONFIG.supabaseKey, Authorization: 'Bearer ' + CONFIG.supabaseKey };
     try {
       const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem' }).format(new Date());
-      const r = await fetch(CONFIG.supabaseUrl + '/rest/v1/harpatka_meetings?select=id,meeting_date,meeting_time,price_tiers,name,city,type_id&meeting_date=gte.' + today + '&order=meeting_date.asc,meeting_time.asc&limit=1', { headers: H });
+      const r = await fetch(CONFIG.supabaseUrl + '/rest/v1/harpatka_meetings?select=id,meeting_date,meeting_time,price_tiers,name,city,place,type_id&meeting_date=gte.' + today + '&order=meeting_date.asc,meeting_time.asc&limit=1', { headers: H });
       const rows = r.ok ? await r.json() : [];
       if (r.ok) nearestOk = true;
       if (r.ok && !(rows && rows[0])) nearest = null;   // אין מפגש עתידי
       /* שדה ריק במפגש: הערך של סוג המפגש שלו (31.10.26); מפגש בלי סוג: שם ברירת המחדל הגלובלי, כמו קודם */
       let ty = null;
-      if (rows && rows[0] && rows[0].type_id) { try { const tr = await fetch(CONFIG.supabaseUrl + '/rest/v1/harpatka_meeting_types?select=name,city,price_tiers&id=eq.' + rows[0].type_id, { headers: H }); ty = tr.ok ? ((await tr.json())[0] || null) : null; } catch (e) {} }
+      if (rows && rows[0] && rows[0].type_id) { try { const tr = await fetch(CONFIG.supabaseUrl + '/rest/v1/harpatka_meeting_types?select=name,city,place,price_tiers&id=eq.' + rows[0].type_id, { headers: H }); ty = tr.ok ? ((await tr.json())[0] || null) : null; } catch (e) {} }
       if (!ty) try { const sr = await fetch(CONFIG.supabaseUrl + '/rest/v1/harpatka_public_settings?select=key,value&key=eq.default_meeting_name', { headers: H }); const sv = sr.ok ? await sr.json() : []; defMeetingName = String(((sv[0] || {}).value) || '').trim(); } catch (e) {}
       else defMeetingName = String(ty.name || '').trim();
       const tx = (v) => String(v == null ? '' : v).trim();
-      if (rows && rows[0]) nearest = { id: rows[0].id, date: rows[0].meeting_date, time: String(rows[0].meeting_time).slice(0, 5), tiers: normT(rows[0].price_tiers) || (ty && normT(ty.price_tiers)), name: tx(rows[0].name) || tx(ty && ty.name), city: tx(rows[0].city) || tx(ty && ty.city) };
+      if (rows && rows[0]) nearest = { id: rows[0].id, date: rows[0].meeting_date, time: String(rows[0].meeting_time).slice(0, 5), tiers: normT(rows[0].price_tiers) || (ty && normT(ty.price_tiers)), name: tx(rows[0].name) || tx(ty && ty.name), city: tx(rows[0].city) || tx(ty && ty.city), place: tx(rows[0].place) || tx(ty && ty.place) };
       showMeeting(selMeeting || nearest);
     } catch (e) {}
   };
