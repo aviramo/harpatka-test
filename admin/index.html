@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css?v=20261104cz" />
+  <link rel="stylesheet" href="admin.css?v=20261104da" />
   <style>
     :root { --envtop: 18px; }
     #testBadge { inset: auto; margin: 0; border: 0; position: fixed; top: 0; left: 0; right: 0; width: auto; height: 18px; padding: 0; overflow: hidden; background: #3F382F; color: #fff; font: 700 11px/18px Arial, sans-serif; text-align: center; pointer-events: none; }
@@ -4603,10 +4603,10 @@
     return '<div class="srccard" data-w="' + w + '">' +
       '<div class="srctop"><input class="stname" data-f="name" value="' + esc(x.name) + '" maxlength="24" placeholder="שם דרך ההגעה" aria-label="שם דרך ההגעה" style="' + nameStyle(x.color || 'red') + '" />' +
       (used || isNew ? '' : '<button type="button" class="stdel" data-sdel="' + w + '" aria-label="מחיקה" title="מחיקה">×</button>') + colDot(x.color || 'red', w) + '</div>' +
-      '<div class="srcseg" role="radiogroup" aria-label="סוג העלות"><button type="button" role="radio" data-seg="lead" aria-pressed="' + !fp + '">עלות לליד</button><button type="button" role="radio" data-seg="pay" aria-pressed="' + fp + '">עלות מהתשלום</button></div>' +
       '<div class="srcgrid">' +
-        '<label class="srcfld"><small>קוד בקישור</small><span class="srcin" dir="ltr"><i>?s=</i><input class="codein" data-f="code" value="' + esc(x.code || '') + '" maxlength="6" placeholder="—" aria-label="קוד בקישור" autocapitalize="off" autocomplete="off" />' + (isNew ? '' : '<button type="button" class="cpbtn" data-copylink="' + esc(x.code || '') + '" aria-label="העתקת הקישור" title="העתקת הקישור">' + icon('copy', 'i18') + '</button>') + '</span></label>' +
-        '<label class="srcfld"><small>' + (fp ? 'סכום או אחוז מהתשלום' : 'כמה עולה ליד') + '</small><span class="srcin">' +
+        '<label class="srcfld"><small>קוד בקישור <bdi dir="ltr">?s=</bdi></small><span class="srcin" dir="ltr"><input class="codein" data-f="code" value="' + esc(x.code || '') + '" maxlength="6" placeholder="—" aria-label="קוד בקישור" autocapitalize="off" autocomplete="off" />' + (isNew ? '' : '<button type="button" class="cpbtn" data-copylink="' + esc(x.code || '') + '" aria-label="העתקת הקישור" title="העתקת הקישור">' + icon('copy', 'i18') + '</button>') + '</span></label>' +
+        '<label class="srcfld"><small>סוג עלות</small><select class="srcsel" data-f="cost_type" aria-label="סוג העלות"><option value="lead"' + (fp ? '' : ' selected') + '>עלות לליד</option><option value="pay"' + (fp ? ' selected' : '') + '>עלות מהתשלום</option></select></label>' +
+        '<label class="srcfld"><small>' + (fp ? 'סכום או אחוז' : 'כמה עולה ליד') + '</small><span class="srcin">' +
           (fp ? '<select class="ratetype" data-f="rate_type" aria-label="סוג"><option value="fixed"' + (x.rate_type !== 'percent' ? ' selected' : '') + '>₪</option><option value="percent"' + (x.rate_type === 'percent' ? ' selected' : '') + '>%</option></select>' : '<i>₪</i>') +
           '<input class="codein ratein" data-f="rate" type="number" inputmode="decimal" min="0" value="' + (isNew && !Number(x.rate) ? '' : Number(x.rate || 0)) + '" placeholder="0" aria-label="עלות" /></span></label>' +
       '</div>' +
@@ -4703,14 +4703,13 @@
     const inp = e.target.closest('[data-f]'); if (!inp) return; const row = inp.closest('[data-w]'); if (!row) return; const w = row.dataset.w, f = inp.dataset.f, tg = srcTarget(w);
     if (f === 'name') { const v = inp.value.trim().slice(0, 24); if (!v) { if (w === 'new') prDraft.name = ''; else renderSources(); return; } saveSrc(w, { name: v }); }
     else if (f === 'code') { const v = inp.value.trim().toLowerCase(); if (v && (!/^[a-z0-9]{1,6}$/.test(v) || state.promoters.some((s) => s !== tg.row && s.code === v))) { toast('קוד לא תקין או כבר קיים'); if (w === 'new') renderPrDraft(); else renderSources(); return; } saveSrc(w, { code: v || null }); }
-    else if (f === 'cost_from_payment') saveSrc(w, inp.checked ? { cost_from_payment: true, cost_on_lead: false } : { cost_from_payment: false, cost_on_lead: true, rate_type: 'fixed' });
+    else if (f === 'cost_type') saveSrc(w, inp.value === 'pay' ? { cost_from_payment: true, cost_on_lead: false } : { cost_from_payment: false, cost_on_lead: true, rate_type: 'fixed' });
     else if (f === 'rate_type') saveSrc(w, { rate_type: inp.value });
     else if (f === 'rate') saveSrc(w, { rate: Math.max(0, Number(inp.value) || 0) });
   };
   const srcClick = async (e) => {
     const cur = e.target.closest('.swcur'); if (cur) { const w = cur.dataset.who, tg = srcTarget(w); if (tg.row) openColorMenu(w, cur, tg.row.color || (tg.kind === 'ad' ? 'sky' : 'red'), (c) => saveSrc(w, { color: c })); return; }
     const cp0 = e.target.closest('[data-copylink]'); if (cp0) { e.preventDefault(); const c0 = cp0.dataset.copylink; if (!c0) { toast('אין קוד לדרך ההגעה הזו'); return; } const url0 = 'https://harpatka.co.il/?s=' + c0; (navigator.clipboard ? navigator.clipboard.writeText(url0) : Promise.reject()).then(() => toast('הקישור הועתק'), () => { prompt('העתיקו את הקישור', url0); }); return; }
-    const sg0 = e.target.closest('[data-seg]'); if (sg0) { const w0 = sg0.closest('[data-w]').dataset.w, on = sg0.dataset.seg === 'pay'; const tg0 = srcTarget(w0); if (tg0.row && !!tg0.row.cost_from_payment !== on) saveSrc(w0, on ? { cost_from_payment: true, cost_on_lead: false } : { cost_from_payment: false, cost_on_lead: true, rate_type: 'fixed' }); return; }
     const st0 = e.target.closest('[data-settle]'); if (st0) { showPromoterDetail(st0.dataset.settle); $('#prDlg').showModal(); return; }   // ההתחשבנות דרך דרכי ההגעה
     const d = e.target.closest('[data-sdel]'); if (d) {
       const w = d.dataset.sdel, tg = srcTarget(w); if (!tg.row) return;
