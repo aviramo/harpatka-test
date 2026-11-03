@@ -67,6 +67,7 @@
     </header>
 
     <div id="status"></div>
+    <div class="sumcard" id="sumCard" hidden></div>
     <div class="vbar" id="listTags" role="group" aria-label="חיפוש, סינון ומיון">   <!-- שורה אחת: מונה הרשומות (מימין, בעמודת הגיל), תיבת החיפוש, הסינון, המיון, זכר / נקבה (צמודים לאייקוני הסינון של העמודות), ואייקוני העמודות עצמם (נקבעים ב-JS מעל העמודות שלהם) -->
       <div class="listcount" id="listCount" aria-live="polite" title="מספר הרשומות המוצגות"></div>
       <label class="search hsearch" title="חיפוש או הוספת משתתף">
@@ -1556,6 +1557,7 @@
     const hasNew = !!q;
 
     state.listCnt = String(rows.length + others.length); { const lc = $('#listCount'); if (lc) lc.textContent = state.listCnt; }   // מספר הרשומות המוצגות כרגע (בשורת הסינון, מימין, ובתפריט הסינון בשורת "תצוגה")
+    paintSum();
     if (!rows.length && !others.length) {
       $('#list').innerHTML = '';   // רשימה ריקה: בלי הודעות (נשאר רק "הוספת משתתף חדש" בחיפוש)
       requestAnimationFrame(alignFilters);
@@ -1596,9 +1598,27 @@
     const rowsHtml = rows.map(rowHtml).join('');
     const othersHtml = others.length ? '<li class="group">לא משויכים למפגש הזה</li>' + others.map(rowHtml).join('') : '';
     $('#list').innerHTML = rowsHtml + othersHtml + newBtn;
-    markSel(); requestAnimationFrame(alignFilters);   // שורת הסינון נבנית מחדש בכל ציור של הרשימה (גם בחיפוש): האייקונים מתיישרים מחדש
+    paintSum(); markSel(); requestAnimationFrame(alignFilters);   // שורת הסינון נבנית מחדש בכל ציור של הרשימה (גם בחיפוש): האייקונים מתיישרים מחדש
   }
 
+
+  /* כרטיס סיכום מעל הרשימה (admin1): במפגש רשומים, ממתינים ושילמו; בתצוגה הכללית ובסוג משתתפים, גברים ונשים */
+  function paintSum() {
+    const el = $('#sumCard'); if (!el) return;
+    let base = state.participants.filter((p) => p.active !== false);
+    const T = (ic, n, l, cls) => '<div class="sc ' + (cls || '') + '"><div class="scn">' + icon(ic, 'i22') + '<b>' + n + '</b></div><div class="scl">' + l + '</div></div>';
+    let tiles = '';
+    if (state.filter) {
+      base = base.filter((p) => linkOf(p.id, state.filter));
+      let paid = 0, wait = 0;
+      base.forEach((p) => { const lk = linkOf(p.id, state.filter); if (noPayOf(p, lk) || (allocatedOf(p.id, state.filter) > 0 && !(dueOf(p.id, state.filter) > 0))) paid++; else wait++; });
+      tiles = T('user', base.length, 'רשומים', 'c-blue') + T('clock', wait, 'ממתינים', 'c-org') + T('check', paid, 'שילמו', 'c-green');
+    } else {
+      const men = base.filter((p) => p.gender === 'male').length, wom = base.filter((p) => p.gender === 'female').length;
+      tiles = T('user', base.length, 'משתתפים', 'c-blue') + T('male', men, 'גברים', 'c-org') + T('female', wom, 'נשים', 'c-green');
+    }
+    el.innerHTML = tiles; el.hidden = false;
+  }
 
   /* ---------- סטטיסטיקות ---------- */
   const ilDay = (iso) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem' }).format(new Date(iso));
