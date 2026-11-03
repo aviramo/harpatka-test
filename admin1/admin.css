@@ -327,15 +327,13 @@ h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -.01em; line-
 .mtr.mhead { min-height: 30px; font-size: 12px; font-weight: 700; color: var(--text-2); border-bottom: 1px solid var(--line); margin-bottom: 4px; }
 .mtr.mhead span { text-align: center; }
 .mtr.mhead span:first-child { text-align: right; }
-.mtr.mrow2 { min-height: 46px; cursor: pointer; font-size: 15.5px; }
-.mtr.mrow2 { align-content: center; }   /* שורה ראשונה: מועד, סמלים ועיפרון על אותו קו. שורה שנייה: שם המפגש */
+.mtr.mrow2 { min-height: 46px; cursor: pointer; font-size: 15.5px; align-content: center; }   /* שורה ראשונה: מועד, סמלים ועיפרון על אותו קו. שורה שנייה: שם המפגש */
 .mtr.mrow2 .mrname { grid-column: 1 / 4; grid-row: 2; min-width: 0; font-size: 12.5px; font-weight: 400; line-height: 1.3; color: var(--text-2); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mtr.mrow2 .medit { margin-block: -11px; }   /* העיפרון נשאר בגודלו ללחיצה, בלי להגביה את השורה: אותו גובה עם בחירה ובלעדיה */
 .mtr.mrow2[aria-checked="true"] { background: var(--surface-2); color: var(--text); font-weight: 700; }
 .mtr.mrow2.past { color: var(--text-2); }
 .mtr.mrow2.next, .mtr.mrow2.next .mc { font-weight: 800; }
-.mtr .mc { text-align: center; font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; }
-.mtr .mc { display: inline-flex; align-items: center; justify-content: flex-start; gap: 4px; padding-inline-start: 8px; }   /* הסמל צמוד לימין התא: כל הסמלים בעמודה על אותו קו אנכי, והמספר משמאלו */
+.mtr .mc { text-align: center; font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; display: inline-flex; align-items: center; justify-content: flex-start; gap: 4px; padding-inline-start: 8px; }   /* הסמל צמוד לימין התא: כל הסמלים בעמודה על אותו קו אנכי, והמספר משמאלו */
 .mtr .mc .mci { display: inline-grid; place-items: center; width: 14px; height: 14px; font-style: normal; color: var(--text-3); flex: 0 0 auto; }   /* הסמל שאומר מה המספר סופר */
 .mtr.mrow2[aria-checked="true"] .mc .mci { color: inherit; opacity: .7; }
 .mtr .mc.dim { color: var(--text-2); }
@@ -390,8 +388,7 @@ h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -.01em; line-
 .row .ptag[data-qs] { cursor: pointer; }
 .row .ptag.empty { color: var(--text-2); }
 /* מחוונים בעמודות 6 ו-7: תשלום, שליחת פרטים, הגעה */
-.row .evc, .row .balic { grid-row: 1; justify-self: center; }
-.row .evc, .row .balic { grid-column: 6; }
+.row .evc, .row .balic { grid-row: 1; justify-self: center; grid-column: 6; }
 .row .main.bl .balic { grid-column: 5; }
 .row .evc:active { transform: scale(.94); }
 /* וואטסאפ: תגית אייקון בתחילת השורה, בגובה התגיות שבשורה */
@@ -502,8 +499,7 @@ html.dlg-lock { overflow: hidden; overscroll-behavior: none; }
 #pDlg { overflow: visible; }
 #pDlg:focus { outline: none; }
 #pDlg .sheet { display: flex; flex-direction: column; height: 100%; overflow: hidden; padding: 28px var(--gut) 20px; }
-#pDlg .sheet-head { position: relative; flex: 0 0 auto; gap: 8px; text-align: right; }
-#pDlg .sheet-head { align-items: flex-start; }   /* שם ארוך: הכול מיושר לשורה הראשונה של השם, וההמשך שלו יורד מתחת */
+#pDlg .sheet-head { position: relative; flex: 0 0 auto; gap: 8px; text-align: right; align-items: flex-start; }   /* שם ארוך: הכול מיושר לשורה הראשונה של השם, וההמשך שלו יורד מתחת */
 #pDlg .sheet-head h2 { display: flex; align-items: flex-start; flex: 1 1 auto; min-width: 0; font-size: 20px; line-height: 25px; padding-top: calc((var(--tag-lg) - 25px) / 2); min-height: var(--tag-lg);}
 #pDlg .sheet-head h2 .tchip { margin-top: calc((var(--tag-lg) - 25px) / -2); }   /* תגית הגיל בגובה הכפתורים, למרות הריפוד של הכותרת */
 #pDlg .sheet-head .tchip { min-width: 0; padding: 0; }
@@ -589,14 +585,13 @@ html.dlg-lock { overflow: hidden; overscroll-behavior: none; }
 #pgM { padding-top: 16px; }
 #pMeetPad { flex: none; }
 #pgW { padding-top: 16px; }
-#pgI { padding-top: 17px; }
 #pRegLine { text-align: center; }
 #pgM, #pgI { overflow-y: auto; overscroll-behavior-y: contain; }
 #pgI { padding-bottom: var(--safe-b); }
 #pgW { overflow: hidden; }
 #pgW > #walSum, #pgW > .payact { flex: 0 0 auto; }
 #pgW > #walHist { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior-y: contain; padding-bottom: var(--safe-b); }   /* מהכפתור ומעלה קבוע, ורק ההיסטוריה נגללת */
-#pgI { display: block; }
+#pgI { padding-top: 17px; display: block; }
 #pDlg.newp .ptabs, #pDlg.newp #pgM, #pDlg.newp #pgW, #pDlg.newp #pgN { display: none; }   /* משתתף חדש: רק הפרטים */
 .maddw { flex: 0 0 auto; position: sticky; bottom: 0; z-index: 1; display: flex; justify-content: center; padding-top: 8px; padding-bottom: var(--safe-b); background: var(--bg); }   /* אחרי הרשימה, ועם הרבה מפגשים צמוד לתחתית ותמיד גלוי */
 .maddw:has(> [hidden]) { display: none; }
@@ -1019,8 +1014,7 @@ html.is-loading .vbar { display: none; }
 @media (min-width: 1024px) {
   :root { --listw: clamp(440px, 45vw, 600px); }   /* ב-1024 בערך 460, מ-1334 ומעלה 600 */
   .wrap { max-width: var(--listw); margin-inline: 0 auto; border-inline-end: 1px solid var(--line); }
-  #pDlg.side { position: fixed; inset: var(--envtop, 0px) var(--listw) 0 0; z-index: 20; width: auto; max-width: none; height: auto; max-height: none; margin: 0; box-shadow: none; overflow: hidden; }
-  #pDlg.side { --gut: 32px; }   /* ריווח הצד של הכרטיס: רצועת המפגשים ממשיכה עד הקצה, והמפגש האחרון נעצר בקו של הכותרת וההערות */
+    #pDlg.side { position: fixed; inset: var(--envtop, 0px) var(--listw) 0 0; z-index: 20; width: auto; max-width: none; height: auto; max-height: none; margin: 0; box-shadow: none; overflow: hidden; --gut: 32px; }   /* ריווח הצד של הכרטיס: רצועת המפגשים ממשיכה עד הקצה, והמפגש האחרון נעצר בקו של הכותרת וההערות */
   #pDlg.side .sheet { height: 100%; max-height: none; padding: 24px 32px 20px; }
   #splitEmpty { position: fixed; inset: var(--envtop, 0px) var(--listw) 0 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin: 0; color: var(--text-2); font-size: 15px; pointer-events: none; }
   #splitEmpty svg { width: 40px; height: 40px; color: var(--line-2); }
@@ -1133,8 +1127,7 @@ dialog .dclose { display: none; }
 /* מתג (1.11.26, לפי הסקיל ui-ux-pro-max: role="switch" / aria-checked, המצב מוצג גם במיקום הידית ולא רק בצבע, שורה בגובה 44px, בלי הזזת פריסה). מרובע (בלי פינות מעוגלות); דולק = שחור, כבוי = אפור. בתפריט העריכה: "תגיות בשורה" */
 /* תווית "מפגשים" משמאל למפגש הכי ישן (1.11.26): טיפוגרפיה של כותרת הכרטיס (20px) באפור, ממורכזת אנכית ברצועה, עם רווח אופקי */
 /* תפריט "שיוך למפגש": ארוך מדי = גלילה פנימית (הגובה המרבי נקבע ב-placeMenuV); ליד המועד שם המפגש, שנחתך ב-"..." כשהוא ארוך (1.11.26) */
-#qMenu.am { overflow-y: auto; overscroll-behavior: contain; }
-#qMenu.am { display: grid; grid-template-columns: max-content max-content minmax(0, 1fr); row-gap: 8px; align-content: start; }   /* שלוש עמודות משותפות לכל השורות (subgrid): התאריכים, השעות והשמות כל אחד על אותו קו אנכי */
+#qMenu.am { overflow-y: auto; overscroll-behavior: contain; display: grid; grid-template-columns: max-content max-content minmax(0, 1fr); row-gap: 8px; align-content: start; }   /* שלוש עמודות משותפות לכל השורות (subgrid): התאריכים, השעות והשמות כל אחד על אותו קו אנכי */
 #qMenu.am .qi { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; align-items: center; justify-content: normal; column-gap: 4px; min-width: 0; padding: 0 8px; text-align: start; }   /* הכול מיושר לימין והרוחב לפי התוכן (השורה הרחבה ביותר קובעת) */
 #qMenu.am .qhd { grid-column: 1 / -1; padding: 4px 8px 0; text-align: start; }   /* תת הכותרת "שיוך למפגש": בקו של הטקסט בשורות */
 #qMenu.am .amd, #qMenu.am .amh { text-align: start; font-variant-numeric: tabular-nums; }
@@ -1199,14 +1192,12 @@ dialog { border-radius: var(--r) var(--r) 0 0; }
 /* המפגש הנבחר בכרטיס המשתתף (2.11.26): בלי רקע על הכרטיס והתאריך מודגש. הסטטוס הוא רכיב התגית עצמו, בלי שום דריסה; כאן רק המיקום במרכז. "שיוך למפגש" נשאר קישור */
 /* תפריט בחירת הסטטוס והתגיות: הנבחר לא משנה רקע, ויש לו נקודה (של סטטוס בצבע שלו, מ-applyStatuses; של תגית בשחור). הנקודה תמיד בסימון ומוצגת רק בנבחר, כי תגיות מתחלפות במקום */
 #qMenu.qlist .qi { position: relative; }
-#qMenu.qlist .qi[aria-pressed="true"] { border-color: transparent; }
-#qMenu.qlist .qi[aria-pressed="true"] { display: inline-flex; align-items: center; gap: 4px; }   /* התגית הנבחרת: ✕ שמסיר אותה */
+#qMenu.qlist .qi[aria-pressed="true"] { border-color: transparent; display: inline-flex; align-items: center; gap: 4px; }   /* התגית הנבחרת: ✕ שמסיר אותה */
 #qMenu.qlist .qi svg { flex: none; width: 14px; height: 14px; margin: 0; }
 /* מייל שלא נשלח כי למשתתף אין חשבון גוגל: צהוב. תקלה אמיתית נשארת אדומה */
 .nmail.bad.noacc, .mailbad.noacc { color: var(--yellow); }
 
 /* שדה עם התווית בתוך המסגרת (3.11.26): התווית תמיד גלויה, בלי שורה נפרדת מעל, וכל שורת שדות קצרה ב-20 פיקסל. רכיב אחד: כל <label class="field"><span>תווית</span><input|select|textarea></label> */
-:root { --fld: 46px; }
 .field { position: relative; margin-bottom: 8px; }
 .field:has(> input, > select, > textarea, > .dtbox, > .setval) > span:first-child { position: absolute; z-index: 1; top: 3px; inset-inline: 0 -33%; margin: 0; font-size: 16px; line-height: 22px; font-weight: 400; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; transform: scale(.75); transform-origin: 100% 0; transition: transform .16s ease-out, color .16s ease-out; }
 /* תווית צפה: שדה ריק בלי פוקוס, והשם יושב על הקו בדיוק במקום הטקסט; בפוקוס או כשיש ערך הוא עולה למעלה בקטן. בתזוזה בלבד (transform), בלי לשנות את הפריסה */
@@ -1231,14 +1222,13 @@ dialog { border-radius: var(--r) var(--r) 0 0; }
 /* בלי מסגרת ובלי רקע: קו תחתון בלבד, כהה בפוקוס (3.11.26), כמו שורת ההערה החדשה. הטקסט והתווית בקו של כותרת הפופאפ. בלי פינות, כי הקו רק בצד אחד */
 .field input, .field select, .field textarea, #finForm select, .setinp, .pmname, .pmown, .mt2row input, .mt2row select, .dline input, .srccard .srcin, .srccard .srcsel, .srccard .stname, .strow .stname { border: 0; border-bottom: 1px solid var(--line-2); border-radius: 0; background-color: transparent; padding-inline: 0; }
 .field select, #finForm select, .pmown, .mt2row select, .srccard .srcsel { padding-inline: 0 20px; background-position: left 2px center; }
-.field input[type="date"], .field input[type="time"] { padding: 0 0 0 20px;}
 .dtbox .dtv { right: 0; left: 20px; }
 /* בלי מסגרות צריך יותר אוויר בין השדות באותה שורה */
 .two, .three, .name-row, .mf .mfrow, .payrow, .srccard .srcgrid { column-gap: 12px; }
 .three { grid-template-columns: calc((100% - 24px) / 3) 56px minmax(0, 1fr); }
 /* החץ של רשימה נפתחת, תאריך ושעה בקו של הטקסט ולא באמצע השדה */
 .field > select, #finForm .field > select, .srccard .srcsel { background-position: left 2px bottom 10px; }
-.field input[type="date"], .field input[type="time"] { background-position: left 2px bottom 12px; }   /* מספרים יושבים גבוה יותר מאותיות עבריות */
+.field input[type="date"], .field input[type="time"] { padding: 0 0 0 20px; background-position: left 2px bottom 12px; }   /* מספרים יושבים גבוה יותר מאותיות עבריות */
 /* בקוביות הממולאות (צבע, התחשבנות) התווית לא צמודה לקצה */
 .srccard .srcfld:has(> .srccol) > small { inset-inline: 9px; }
 
@@ -1278,7 +1268,6 @@ dialog { border-radius: var(--r) var(--r) 0 0; }
 .strow .swcur, .srccard .srccol .swcur, .colmenu .sw { position: relative; flex: 0 0 var(--tag); width: var(--tag); height: var(--tag); padding: 0; border-radius: 50%; }
 .strow .swcur::after, .srccard .srccol .swcur::after { content: ""; position: absolute; inset: -8px; }   /* שטח לחיצה של 44px */
 .colmenu .sw::after { content: ""; position: absolute; inset: -4px; }
-.strow .swcur { justify-self: center; }
 .srccard .srccolf { align-self: end; }
 .srccard .srccol { justify-content: space-between; height: auto; padding-bottom: 6px; }
 .srccard .srccol .stdel { flex: 0 0 var(--tag); width: var(--tag); height: var(--tag); }
@@ -1300,7 +1289,7 @@ dialog { border-radius: var(--r) var(--r) 0 0; }
 .srccard[data-w="new"] .srcfld.wide2 { grid-column: 1 / -1; }
 /* שורת סטטוס: הצבע לפני השם */
 .strow { grid-template-columns: 28px var(--tag) minmax(0, 1fr) 28px; }   /* תגיות: ידית גרירה, צבע, שם, מחיקה */
-.strow .swcur { grid-column: 2; }
+.strow .swcur { justify-self: center; grid-column: 2; }
 .strow .stname { grid-column: 3; }
 
 /* חשבון גוגל בפרטי המשתתף: שורה אחת כמו שדה, בלי מלבן. המצב כתוב בתווית, והפעולות סמלים */
@@ -1410,7 +1399,7 @@ html.is-loading .hsearch { visibility: hidden; }
 .mtr.mrow2:has(.mrname) { padding-block: 12px; }   /* מפגש עם שם: אותו ריפוד אנכי כמו בשורת סוג המפגש (3.11.26) */
 
 /* ===== admin1: שפה גרפית חדשה (3.11.26), לפי הציור; כאן מותר לשבור את כללי הפלטה והפינות ===== */
-:root { --pp: #6D3FD0; --pp2: #8B5CF6; --plav: #F2EEFC; --pcard: #fff; --pline: #E6E0F7; --r: 14px; }
+:root { --fld: 46px; --pp: #6D3FD0; --pp2: #8B5CF6; --plav: #F2EEFC; --pcard: #fff; --pline: #E6E0F7; --r: 14px; }
 body { background: linear-gradient(180deg, #E9E1FB 0, var(--plav) 240px); }
 .wrap { background: transparent; }
 .wrap > header.top { background: linear-gradient(180deg, #D9CCF8, rgba(233, 225, 251, 0)); border-bottom: 0; }
