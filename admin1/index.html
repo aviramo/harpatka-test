@@ -712,7 +712,6 @@
     const el = lastUi.el.closest(UI_SEL);
     return el && !el.closest('#status') ? el : null;
   }
-  const loadStart = { n: 0 };
   async function api(path, { method = 'GET', body, prefer, ui } = {}) {
     const isRead = method === 'GET', t0 = Date.now(), pr = wovParse(path), table = pr.table;
     let ov = null, rel = null;
@@ -778,7 +777,6 @@
     return p.age + Math.max(0, years);
   }
 
-  const CALL_ICON = icon('call');
   /* קישור שיחה (tel:) בפורמט בינלאומי; מספר ישראלי מקומי הופך ל-+972 */
   function telLink(phone) {
     const raw = String(phone || '').trim();
@@ -858,11 +856,6 @@
     if (on) { toast('מספר הטלפון לא תקין'); pForm.phone.focus(); }
   }
 
-  function fmtPhone(phone) {
-    const n = digits(phone);
-    if (n.length === 10 && n.startsWith('0')) return n.slice(0, 3) + ' ' + n.slice(3, 6) + ' ' + n.slice(6);
-    return phone || '';
-  }
 
   const DAYS = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ש׳'];
   function meetingLabel(m, withDay) {
@@ -897,7 +890,6 @@
   const firstArrive = (pid) => { if (state.att.some((l) => l.participant_id === pid)) return {}; const p = state.participants.find((x) => x.id === pid), x = p && channelOf(p); return x ? { source_promoter_id: x.id } : {}; };   // ההרשמה הראשונה מקבלת את דרך ההגעה של המשתתף (כמו הטריגר, כדי שהצבע יופיע מיד)
   const originAttr = (p, mid) => { const o = originOf(p, mid); if (!o) return ''; const c = PALETTE[o.color] || PALETTE.sky; return ' style="color:' + c[1] + '"'; };   // צבע דרך ההגעה: בטקסט בלבד, בלי רקע
   const promoterOf = (id) => state.promoters.find((x) => x.id === id);
-  const rateLabel = (pr) => pr ? (pr.cost_total ? 'עלות כללית' : pr.cost_from_payment ? (pr.rate_type === 'percent' ? Number(pr.rate) + '% מהתשלום' : '₪' + Number(pr.rate) + ' מהתשלום') : '₪' + Number(pr.rate) + ' לליד') : '';
   const calcCommission = () => '';   // העלות לא נחרטת על התשלום: היא מחושבת לפי התעריף הנוכחי על מה שעוד לא הוסדר (payCostOf)
   /* עמלה מתשלום: אחוז = על כל תשלום; ₪ קבוע = פעם אחת למשתתף (בתשלום הראשון) */
   const commOnEvery = (pr) => !!(pr && pr.cost_from_payment && pr.rate_type === 'percent');
@@ -924,7 +916,6 @@
     const all = base(''), total = !x.cost_from_payment ? r * all.L : x.rate_type === 'percent' ? all.S * r / 100 : r * all.P;
     return total > 0 && per(all) > 0 ? { rate: val(total, per(all)), L: all.L, P: all.P } : null;
   }
-  const fillPromoterSelect = (sel, val, none) => { sel.innerHTML = '<option value="">' + (none || 'ללא') + '</option>' + state.promoters.map((x) => '<option value="' + x.id + '">' + esc(x.name) + ' (' + rateLabel(x) + ')</option>').join('') + '<option value="__new">+ דרך הגעה חדשה</option>'; sel.value = val || ''; };
   /* תצוגת ההגעה (מונה, הדגשת שורה, כפתור "הגיע") מופיעה החל מחצי שעה לפני תחילת המפגש (שעון ישראל) */
   const nowIL = () => {
     const s = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
@@ -1436,11 +1427,8 @@
     });
     const epk = payKeys(ep), payOk = (p) => paidOk(p) && matchPay(p, epk);
     const genOk = (p) => !eg || payKeys(eg).includes(p.gender || 'none');
-    const nG = (g) => base.filter((p) => payOk(p) && (g === 'none' ? !p.gender : p.gender === g)).length;
     $('#facets').classList.toggle('searching', !!q);
     $('#facets').innerHTML = '';
-    const gchip = (g, label, cls) => { const n = nG(g), sym = g === 'male' || g === 'female'; return '<button type="button" class="stc ' + cls + (n || eg === g ? '' : ' zero') + '" data-stg="' + g + '" aria-pressed="' + (eg === g) + '" title="' + label + '" aria-label="' + label + ' ' + n + '">' + (sym ? '<span class="gsym">' + icon(g, 'i16') + UI.fdot(eg === g && 'ink') + '</span>' : label) + ' <small>' + n + '</small>' + (sym ? '' : UI.fdot(eg === g && 'ink')) + '</button>'; };   // זכר / נקבה כסמל (♂ / ♀) ולא כמילה
-    const gHtml = state.showGender ? gchip('male', 'זכר', 'gm') + gchip('female', 'נקבה', 'gf') + (eg === 'none' ? gchip('none', 'ללא מגדר', 'gm') : '') : '';   // זכר / נקבה עם הכמויות בשורת הסינון והמיון (ליד תגית הסינון), תמיד כשהטוגל "מגדר" דולק (גם כשברשימה רק גברים או רק נשים)
     const evOn = !!(state.filter && sentView(state.meetings.find((x) => x.id === state.filter)));   // סינון השליחה מוצג כשהטוגל דולק (גם כשאף אחד עוד לא זכאי)
     const paidN = (v) => base.filter((p) => genOk(p) && sentOk(p) && matchPay(p, epk) && payF(p, v)).length;
     { const nd = String(Math.max(2, String(state.participants.length).length)); $('#listTags').style.setProperty('--nd', nd); }
@@ -1554,7 +1542,6 @@
     }
     const newBtn = '';
     $('#addBox').innerHTML = q ? '<button type="button" class="newbtn" id="addNew" aria-label="הוספת משתתף חדש: ' + esc(state.q.trim()) + '" title="הוספת משתתף חדש"><span class="tg ico plus" aria-hidden="true">+</span><b dir="auto">' + esc(state.q.trim()) + '</b></button>' : '';   // מנותק מהרשימה, מתחתיה
-    const hasNew = !!q;
 
     state.listCnt = String(rows.length + others.length); { const lc = $('#listCount'); if (lc) lc.textContent = state.listCnt; }   // מספר הרשומות המוצגות כרגע (בשורת הסינון, מימין, ובתפריט הסינון בשורת "תצוגה")
     paintSum();
@@ -1628,7 +1615,6 @@
   const P = (a, b) => b ? Math.round(a / b * 100) : null;
   const Ps = (a, b) => b ? Math.round(a / b * 100) + '%' : '—';
   const nfm = (n) => Math.round(n).toLocaleString('he-IL');
-  const priceAtReg = (m, created) => priceForDays(daysTo(m, created ? ilDay(created) : todayISO()), m);
 
   function computeStats() {
     const asc = state.meetings.slice().sort((a, b) => (a.meeting_date + a.meeting_time).localeCompare(b.meeting_date + b.meeting_time));
@@ -2064,11 +2050,6 @@
     // שינוי תגית / שיוך לא נוגע בכסף: אין הקצאה אוטומטית מהיתרה (תשלום רק במסך התשלום)
   }
   /* יציאה מתגית "שילם" (או הסרה ממפגש) = החזר תשלום: מתריעים בבירור, והמערכת רושמת רשומת החזר */
-  function refundNote(pid, mid) {
-    const l = linkOf(pid, mid), amt = Math.max(0, allocatedOf(pid, mid)), pr = l && promoterOf(l.promoter_id);
-    return 'המערכת תבצע <b>החזרה של תשלום בסך ₪' + nfm(amt) + '</b>. תירשם רשומת החזר ביומן התשלומים' + (pr && l.commission ? ', והעמלה לדרך הגעה ' + esc(pr.name) + ' (₪' + nfm(l.commission) + ') תבוטל' : '') + '.';
-  }
-  function confirmRefund(pid, mid, fn) { confirmAct('החזרת תשלום', pid, mid, fn, refundNote(pid, mid), 'כן, להחזיר תשלום'); }
   $('#cDlg').addEventListener('close', () => { $('#cYes').textContent = 'אישור'; $('#cYes').classList.remove('danger', 'ok', 'yel'); $('#cAlt').hidden = true; });
   /* משתתף שהגיע למפגש (סומנה הגעה) אי אפשר להסיר מהמפגש */
   /* הסרה ממפגש לא יוצרת זיכוי ליתרה: למי ששולם אפשר רק להחזיר את התשלום */
@@ -2109,10 +2090,6 @@
     const payRows = myPays.map((x) => ({ kind: 'p', date: x.paid_at, amount: -Number(x.amount), who: 'תשלום לדרך הגעה', sub: [methodName(x), x.by_email ? 'שולם דרך ' + finName(x.by_email) : '', x.note || ''].filter(Boolean).join(' · '), id: x.id, key: x.id }));
     const paid = myPays.reduce((s, x) => s + Number(x.amount), 0), balance = accNew.reduce((s, r) => s + r.amount, 0);
     return { rows: accNew.slice().reverse(), pays: payRows, accrued: paid + balance, paid, balance, lastTs };
-  }
-  function renderPromoters() {
-    $('#prList').innerHTML = (state.promoters.length ? state.promoters.map((x) => { const L = ledgerOf(x.id), brought = state.participants.filter((q) => q.promoter_id === x.id), rt = x.rate_type === 'percent' ? Number(x.rate) + '% מהתשלום' : '₪' + Number(x.rate) + ' למשתתף'; return '<div class="prrow" data-pr="' + x.id + '" role="button" tabindex="0"><div><b>' + esc(x.name) + '</b><small>עמלה ' + rt + '</small><small>' + brought.length + ' משתתפים · ' + brought.filter((q) => linksOf(q.id).some((l) => l.paid && !l.exempt)).length + ' שילמו</small></div>' + (L.balance > 0 ? '<span class="prearn" title="יתרה לתשלום לדרך הגעה">' + ils(L.balance) + '<small>לתשלום</small></span>' : '<span class="prok">מסולק ✓</span>') + '</div>'; }).join('')
-      : '<p class="mnone">עוד אין דרכי הגעה. אפשר להוסיף דרך הגעה עם עמלה קבועה בשקלים או באחוזים מהתשלום</p>') + '<button type="button" class="prnew" id="prNew">+ דרך הגעה חדשה</button>';
   }
   let prView = '#prList';
   const RANK = { '#prList': 0, '#prDetail': 1, '#prForm': 2 };
@@ -2390,7 +2367,6 @@
 
 
   /* ---------- הערות (CRM): כמה הערות לכל משתתף, עם מי כתב ומתי; בכרטיס מוצגת האחרונה ---------- */
-  const IMG_ICON = icon('img');
   const noteLatest = new Map(), noteText = new Map(), imgCache = new Map();
   /* צילומי מסך בהערות נשמרים במטמון קבוע בדפדפן (IndexedDB): הערה לא משתנה, ולכן הטעינה הבאה מיידית ובלי רשת */
   const imgDB = (() => {
@@ -2434,7 +2410,6 @@
   /* ---------- שולח ההודעות והקישורים ---------- */
   const SENDERS = { 'ofir.aviram@gmail.com': 'אופיר', 'hadarluri135@gmail.com': 'הדר' };
   const PAYBOX = 'https://links.payboxapp.com/zwi4JG24Y6b';
-  const HE_DAYS = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
   const dm = (m) => { const [, mo, d] = m.meeting_date.split('-').map(Number); return d + '.' + mo; };
   const defMeetingImage = () => String((state.pubSettings || {}).default_meeting_image || '').trim();
   const defMeetingName = () => String((state.pubSettings || {}).default_meeting_name || '').trim();
@@ -2564,14 +2539,12 @@
   /* השיוך של המשתתף למפגש היום, אם מגיע לו להודעה (שילם או לא לתשלום) */
   const evLink = (p) => { const m = eventMeeting(), l = m && linkOf(p.id, m.id); return l && evElig(p.id, l) ? l : null; };   // "ספונטני" לא מקבל עיגול שליחה
   /* כל מי שמגיע לו (שילם/לא לתשלום) כבר קיבל את הפרטים */
-  const evAllSent = (m) => { const ls = state.att.filter((l) => l.meeting_id === m.id && evElig(l.participant_id, l) && state.participants.some((p) => p.id === l.participant_id)); return !ls.some((l) => !l.details_sent_at); };
   /* עיגול ברשימה: כחול, שליחת פרטי המפגש (עד חצי שעה לפני המפגש; אז הוא הופך לעיגול הגעה הירוק); נעלם כשכולם קיבלו */
   const EV_OPEN_OPTS = [['day', 'מתחילת יום המפגש'], ['08', 'מ-08:00'], ['09', 'מ-09:00'], ['12', 'מ-12:00'], ['180', '3 שעות לפני'], ['120', 'שעתיים לפני'], ['60', 'שעה לפני'], ['always', 'תמיד']];
   const evOpenPref = (m) => { const t = m && m.id ? typeOf(m) : typeById(m); let v = t && t.event_open; if (!v && !state.mtypes.length) v = (state.prefs[emailOf()] || {}).event_open; return EV_OPEN_OPTS.some((o) => o[0] === v) ? v : '09'; };   // לפי סוג המפגש (מפגש או מזהה סוג)
   const evOpenAt = (m) => { const [y, mo, d] = m.meeting_date.split('-').map(Number), [h, mi] = String(m.meeting_time).split(':').map(Number), v = evOpenPref(m); if (v === 'always') return -Infinity; return v === 'day' ? Date.UTC(y, mo - 1, d, 0, 0) : v.length === 2 && Number(v) <= 23 && v[0] === '0' || v === '12' ? Date.UTC(y, mo - 1, d, Number(v), 0) : Date.UTC(y, mo - 1, d, h, mi) - Number(v) * 60000; };
   /* מרגע שהמפגש התחיל, עיגול שליחת פרטי המפגש רק מציג מצב (נשלח / לא נשלח) ולחיצה עליו לא עושה כלום */
   /* המפגש הסתיים (שעתיים אחרי תחילתו): סימון ההגעה ברשימה הופך לתצוגה בלבד; שינוי רק מתוך כרטיס המשתתף */
-  const evEnded = (m) => { if (!m) return false; const [y, mo, d] = m.meeting_date.split('-').map(Number), [h, mi] = String(m.meeting_time).split(':').map(Number); return nowIL() >= Date.UTC(y, mo - 1, d, h, mi) + 2 * 36e5; };
   const evStarted = (m) => { if (!m) return false; const [y, mo, d] = m.meeting_date.split('-').map(Number), [h, mi] = String(m.meeting_time).split(':').map(Number); return nowIL() >= Date.UTC(y, mo - 1, d, h, mi); };
   const evCircle = (p) => {
     if (!SENT_COL_ON || !state.filter || state.showSent === false) return '';   // שליחת פרטי המפגש כבויה בתפריט התצוגה, או בתצוגת "הכל" (אין מפגש)
@@ -2676,7 +2649,6 @@
     if (!p) { box.innerHTML = ''; return; }
     const base = waLink(p.phone);
     copyTexts = [PAYBOX];
-    const COPY_ICON = icon('copy');
     /* משתתף בתגית "משויך": הוואטסאפ נפתח עם הודעה מובנית (בלשון זכר/נקבה); אחרי החזרה לדשבורד שואלים אם להעביר ל"בטיפול" */
     const first = String(p.first_name || p.name || '').trim().split(/\s+/)[0] || '';
     const waHref = base;   // וואטסאפ נפתח לשיחה בלבד, בלי הודעת פתיחה
@@ -3009,7 +2981,6 @@
       $('#depFree').hidden = true;
       $('#depFields').hidden = free;
       const pkgF = $('#depPkgSel').closest('.field');
-      const freeChip = '';   // "לא לתשלום" עבר לתפריט הצ'יפ שבכותרת (לתשלום / לא לתשלום)
       if (free) { $('#depMethods').innerHTML = ''; return; }   // במצב לא לתשלום אין כלום מתחת; חוזרים ל"לתשלום" דרך הצ'יפ
       $('#depQuick').hidden = false;
       if (cr0) {   // יש יתרה: קודם כל משתמשים בה (אפשר להקצות רק חלק ממנה); שאר דרכי התשלום נפתחות כשהיתרה נגמרת
@@ -3216,23 +3187,9 @@
   $('#walRefund').addEventListener('click', openRefundPop);
   /* דרך הגעה הוא ברמת המשתתף: אייקון בכותרת (מואר כשיש דרך הגעה) פותח בחירת דרך הגעה */
   let promoFromPay = null;
-  function openPromoterPickFromPay(pid, mid) {
-    promoFromPay = { pid, mid, amount: pForm.pay_amount.value };
-    const keep = payCtx; openPromoterPick(true); payCtx = keep;
-  }
   function afterPromoPick() {
     if (promoFromPay) { const c = promoFromPay; promoFromPay = null; viewStack = ['main']; payCtx = { pid: c.pid, mid: c.mid }; openPayView(c.pid, c.mid, { keep: true, amount: c.amount }); }
     else toMain();
-  }
-  function openPromoterPick(fromPay) {
-    if (!sheet || !sheet.id) return;
-    if (fromPay !== true) promoFromPay = null;
-    const p = state.participants.find((x) => x.id === sheet.id); if (!p) return;
-    const opts = [{ id: '', label: 'ללא' }].concat(state.promoters.map((x) => ({ id: x.id, label: esc(x.name) + ' <small>(' + rateLabel(x) + ')</small>' })));
-    const curV = (channelOf(p) || {}).id || '';
-    $('#pPromoOpts').innerHTML = opts.map((o) => '<button type="button" class="sopt" data-pp="' + o.id + '" aria-pressed="' + (o.id === curV) + '">' + o.label + '</button>').join('');
-    if (fromPay === true) { viewStack.push(pTab); setPTab('promoter'); return; }
-    payCtx = null; viewStack = ['main']; setPTab('promoter');
   }
   /* "פייסבוק" הוא עוד דרך הגעה בלי עמלות: מסמן את המשתתף כממומן (source=site-ad) ומנקה דרך הגעה; בחירה אחרת מוציאה מהממומן */
   async function setParticipantPromoter(id) {
