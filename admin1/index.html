@@ -566,6 +566,8 @@
   const meetOf = (id) => state.meetings.find((x) => x.id === id);   // מפגש לפי מזהה
   const attQs = (pid, mid) => '?participant_id=eq.' + pid + '&meeting_id=eq.' + mid;   // שאילתת שיוך משתתף-מפגש
   const blurActive = () => { const a = document.activeElement; if (a && a.blur) a.blur(); };   // בלי מקלדת בפתיחת פופאפ
+  const newestFirst = (a, b) => String(b.created_at).localeCompare(String(a.created_at));   // מהחדש לישן לפי זמן יצירה
+  const blurIn = (sel) => { const a = document.activeElement; if (a && a.closest && a.closest(sel)) a.blur(); };   // בלי מקלדת כשנפתח הפופאפ sel
   /* קישור עמוק מהמייל: ?m=<מפגש>&p=<משתתף>; נשמר בזמן הכניסה עם גוגל (שמחזירה בלי הפרמטרים) */
   let deep = null;
   try {
@@ -2086,7 +2088,7 @@
     const x0 = promoterOf(id), rate = x0 ? Number(x0.rate) : 0, byLead = !!(x0 && !x0.cost_from_payment && !x0.cost_total && rate > 0);
     if (x0 && x0.cost_total) {   // עלות כללית: אין יתרה. כל תשלום מוצג עם התקופה שהוא מכסה והעלות לליד שנגזרת ממנו
       const P = costPeriods(id), mine = state.promoPays.filter((x) => x.promoter_id === id).slice().sort((a, b) => String(b.paid_at).localeCompare(String(a.paid_at)) || String(b.created_at).localeCompare(String(a.created_at)));
-      const opened = srcLeads(id).filter((q) => ilDay(q.created_at) > P.openFrom).sort((a, b) => String(b.created_at).localeCompare(String(a.created_at))).map((q) => ({ kind: 'l', date: ilDay(q.created_at), amount: null, who: q.name, sub: '', key: q.id }));
+      const opened = srcLeads(id).filter((q) => ilDay(q.created_at) > P.openFrom).sort(newestFirst).map((q) => ({ kind: 'l', date: ilDay(q.created_at), amount: null, who: q.name, sub: '', key: q.id }));
       const rowsT = mine.map((x) => { const r = P.periods.find((q) => q.to === x.paid_at), per = r ? (r.from ? 'מאז ' + dayMon(r.from) + ' · ' : '') + r.leads + ' לידים' + (r.per != null ? ' · ' + perLeadTxt(r.per) + ' לליד' : '') : ''; return { kind: 'p', date: x.paid_at, amount: -Number(x.amount), who: 'תשלום לדרך הגעה', sub: [methodName(x), x.by_email ? 'שולם דרך ' + finName(x.by_email) : '', x.note || '', per].filter(Boolean).join(' · '), id: x.id, key: x.id }; });
       const paidT = mine.reduce((t, x) => t + Number(x.amount), 0);
       return { rows: opened, pays: rowsT, accrued: paidT, paid: paidT, balance: 0, total: P, lastTs: '' };
@@ -2188,7 +2190,7 @@
     f.by.innerHTML = '<option value="">לא הוגדר</option>' + finAdmins().map((e2) => '<option value="' + esc(e2) + '">' + esc(finName(e2)) + '</option>').join(''); f.by.value = emailOf() || '';
     f.method.innerHTML = payMethodOpts(); ppByFromMethod();
     $('#ppDlg').showModal();
-    const ae = document.activeElement; if (ae && ae.closest && ae.closest('#ppDlg')) ae.blur();   // בלי מקלדת בפתיחה
+    blurIn('#ppDlg');   // בלי מקלדת בפתיחה
   });
   $('#ppForm').method.addEventListener('change', ppByFromMethod);
   $('#ppForm').addEventListener('submit', (e) => {
@@ -2268,7 +2270,7 @@
   const closeQ = () => { const q = $('#qMenu'); q.hidden = true; q.className = 'qmenu'; q.style.width = ''; q.style.maxWidth = ''; q.style.maxHeight = ''; };
   function openStatusSettings() {
     closeQ(); setRoot = 'st'; renderSettings(); $('#setDlg').showModal(); tyId = null; stType = curTid() || state.mtype || firstTypeId(); showSetView('st');
-    const ae = document.activeElement; if (ae && ae.closest && ae.closest('#setDlg')) ae.blur();
+    blurIn('#setDlg');
   }
   /* תפריט התגיות של משתתף במפגש (מהרשימה ומהכרטיס): התגיות של סוג המפגש, ולמי שעוד לא משויך גם "שיוך למפגש" מעליהן. בחירה בתגית מחליפה, ובנבחרת מסירה. הסרה מהמפגש: רק ב-✕ בשורת המפגש בכרטיס המשתתף */
   function openQuickMenu(pid, anchor, mid) {
@@ -2342,7 +2344,7 @@
   /* יומן תשלומים: כל סימון תשלום או החזר יוצר רשומה חדשה (תיקון תשלום = החזר של הישן + תשלום חדש) */
   /* חבילות: הפקדה עם pkg_n מפגשים (מחיר למפגש = סכום / pkg_n); כל הקצאה מחבילה (pkg) לוקחת מחיר חבילה ומורידה מפגש; זיכוי של הקצאה כזו מחזיר מפגש */
   const pkgLeft = (pid) => state.payments.filter((x) => x.participant_id === pid).reduce((s, x) => s + (x.kind === 'deposit' && x.pkg_n > 0 ? Number(x.pkg_n) : x.pkg && x.kind === 'payment' ? -1 : x.pkg && x.kind === 'credit' ? 1 : 0), 0);
-  const pkgUnit = (pid) => { const d = state.payments.filter((x) => x.participant_id === pid && x.kind === 'deposit' && x.pkg_n > 0).sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0]; return d ? Math.round(Number(d.amount) / Number(d.pkg_n)) : 0; };
+  const pkgUnit = (pid) => { const d = state.payments.filter((x) => x.participant_id === pid && x.kind === 'deposit' && x.pkg_n > 0).sort(newestFirst)[0]; return d ? Math.round(Number(d.amount) / Number(d.pkg_n)) : 0; };
   const pkgNetFor = (pid, mid) => state.payments.filter((x) => x.participant_id === pid && x.meeting_id === mid && x.pkg).reduce((s, x) => s + (x.kind === 'payment' ? 1 : x.kind === 'credit' ? -1 : 0), 0);
   const expectedPrice = (pid, m, iso) => (pkgLeft(pid) > 0 && pkgUnit(pid) ? pkgUnit(pid) : defaultPrice(m, iso));
   const payMethodOpts = () => state.payMethods.map((x) => '<option value="' + esc(x.key) + '">' + esc(x.name) + '</option>').join('');
@@ -2402,7 +2404,7 @@
   }
   function rebuildNotes() {
     noteLatest.clear(); noteText.clear();
-    state.notes.filter((n) => !n.system).sort((a, b) => String(b.created_at).localeCompare(String(a.created_at))).forEach((n) => {   // מהחדשה לישנה; הערות מערכת לא מוצגות ברשימה ובחיפוש
+    state.notes.filter((n) => !n.system).sort(newestFirst).forEach((n) => {   // מהחדשה לישנה; הערות מערכת לא מוצגות ברשימה ובחיפוש
       if (!noteLatest.has(n.participant_id)) noteLatest.set(n.participant_id, n);
       noteText.set(n.participant_id, ((noteText.get(n.participant_id) || '') + ' ' + (n.body || '')).toLowerCase());
     });
@@ -2834,7 +2836,7 @@
     { const pl = pkgLeft(pid); if (pl > 0) $('#walSum').insertAdjacentHTML('beforeend', '<div class="sub">בחבילה נשארו <b>' + pl + '</b> מפגשים · ₪' + nfm(pkgUnit(pid)) + ' למפגש</div>'); }
     $('#walZikuy').hidden = true;   // בארנק רק קבלת כסף או החזרת כסף; אין זיכוי (ביטול הקצאה למפגש נעשה במסך התשלום למפגש)
     const mlabel = (x) => { const m = meetOf(x.meeting_id); return m ? ' ' + dm(m) : ''; };
-    const rows = state.payments.filter((x) => x.participant_id === pid && x.kind !== 'credit').slice().sort((a, b) => String(b.created_at).localeCompare(String(a.created_at))).flatMap((x) => {
+    const rows = state.payments.filter((x) => x.participant_id === pid && x.kind !== 'credit').slice().sort(newestFirst).flatMap((x) => {
       const a = Number(x.amount), mt = methodName(x); let lab, cls, sign;
       if (x.kind === 'deposit') { lab = 'קבלת תשלום' + (mt ? ' · ' + mt : ''); cls = 'up'; sign = ''; }
       else if (x.kind === 'credit') { lab = 'ביטול מפגש' + mlabel(x) + ', נשאר ביתרה'; cls = 'up'; sign = ''; }
@@ -2917,7 +2919,7 @@
   /* הקטנת ההקצאה למפגש בסכום מסוים: מהקצאה האחרונה אחורה; כסף שהתקבל ישירות (פייבוקס, ביט...) נשאר למשתתף כיתרה (הפקדה), והקצאה מהיתרה חוזרת ליתרה */
   async function reduceAlloc(pid, mid, amount) {
     let rem = amount;
-    const rows = state.payments.filter((x) => x.participant_id === pid && x.meeting_id === mid && x.kind === 'payment').sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+    const rows = state.payments.filter((x) => x.participant_id === pid && x.meeting_id === mid && x.kind === 'payment').sort(newestFirst);
     for (const r of rows) {
       if (rem <= 0.001) break;
       const a = Number(r.amount);
@@ -4345,7 +4347,7 @@
     const del = tplW('TplDel'); del.dataset.sure = ''; del.textContent = 'מחיקת התבנית'; del.hidden = isNew;
     $('#tplDlg').showModal();
     if (isNew) tplW('TplName').focus();   // תבנית חדשה: מוכנה לכתיבה
-    else { const ae = document.activeElement; if (ae && ae.closest && ae.closest('#tplDlg')) ae.blur(); }   // בלי מקלדת בפתיחה
+    else { blurIn('#tplDlg'); }   // בלי מקלדת בפתיחה
     syncUrl();
   }
   const tplRefresh = () => { render(); mf.tpl.render(); mf.paintTplInh(); tyF.tpl.render(); };   // הרשימה ברקע וגם רשימות התבניות בטופס המפגש והסוג
@@ -4544,7 +4546,7 @@
     if (!typeById(id)) return;
     tyId = stType = id; tyNew = null; tyFormFor = null; setRoot = 'tydet';
     renderSettings(); $('#setDlg').showModal(); showSetView('tydet');   // נפתח ישר על הטופס, כמו עריכת מפגש
-    const ae = document.activeElement; if (ae && ae.closest && ae.closest('#setDlg')) ae.blur();   // בלי מקלדת בפתיחה
+    blurIn('#setDlg');   // בלי מקלדת בפתיחה
   }
   /* סוג חדש: פרטי ברירת המחדל, מתי נפתח סימון ההגעה וההודעה מועתקים מהסוג שנבחר בתפריט (או הראשון); השם ריק; מתחיל רק עם תגית המערכת המשותף */
   function createType() {
@@ -4553,7 +4555,7 @@
     ['meeting_time', 'place', 'city', 'max_participants', 'directions', 'price_tiers', 'image_url', 'event_open', 'event_msg'].forEach((k) => { if (src[k] != null) tyNew[k] = src[k]; });
     tyId = stType = null; tyFormFor = null; setRoot = 'tydet';
     renderSettings(); $('#setDlg').showModal(); showSetView('tydet');   // סוג חדש נפתח ישר על הפרטים
-    const ae = document.activeElement; if (ae && ae.closest && ae.closest('#setDlg')) ae.blur();
+    blurIn('#setDlg');
   }
   $('#tySave').addEventListener('click', async () => {
     const t = tyCur(); if (!t || tyId) return;
@@ -4603,7 +4605,7 @@
   function openSetRoot(v) {
     setRoot = v;
     renderSettings(); $('#setDlg').showModal(); showSetView(v);
-    const ae = document.activeElement; if (ae && ae.closest && ae.closest('#setDlg')) ae.blur();   // בלי מקלדת בפתיחה
+    blurIn('#setDlg');   // בלי מקלדת בפתיחה
   }
   const curSt = () => statusList(stType || firstTypeId());
   function showSetView(v) {
