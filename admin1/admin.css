@@ -1506,3 +1506,5 @@ body { background: linear-gradient(180deg, #E9E1FB 0, var(--plav) 240px); }
 .row .rowwa.sent { background: #16A34A; }
 .addbox .newbtn, .row.newrow { border-radius: 14px; }
 
+.list > .row, .list > .group { flex: 0 0 auto; }
+.row .rowwa { width: var(--tag); height: var(--tag); }
