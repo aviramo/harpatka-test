@@ -1057,3 +1057,6 @@ html.gl-on #meAreaCard{ display:block; }
 /* תמונה רחבה כהמשך של כרטיס "כי במקום שבו יש תנועה": צמודה לתחתית הכרטיס ולכל רוחבו */
 :where(.pg-home) .sx-close { overflow: hidden; }
 :where(.pg-home) .sx-close .sx-close-img { display: block; width: calc(100% + 1rem); max-width: none; height: auto; margin: 1.2rem -.5rem -1.35rem; }
+/* תמונת שלב 2 (רגל יחפה): התמונה המלאה ביחס 3:1, בלי חיתוך */
+:where(.pg-home) .step-wide.pano .shape { height: auto; aspect-ratio: 3 / 1; }
+:where(.pg-home) .step-wide.pano .shape img { object-position: 50% 50%; }
