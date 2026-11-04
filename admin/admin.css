@@ -1477,11 +1477,14 @@ html.is-loading .hsearch { visibility: hidden; }
 .mlist .mrow { align-content: start; }
 .mlist .mrow .mdt { font-weight: 500; }
 .mlist .mrow.hl .mdt, .mlist .mrow.hl .mnm { font-weight: 800; color: var(--text); }   /* המפגש הנבחר: התאריך והשם מודגשים */
-@media (min-width: 640px) and (max-width: 1023px) {   /* מסך רחב בלי כרטיס צד: רשימת המשתתפים בגריד של שתי עמודות */
-  .wrap > .list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+@media (max-width: 1023px) {   /* טלפון וטאבלט: רשימת המשתתפים בגריד של כרטיסים בשתי עמודות, כמו המפגשים בכרטיס המשתתף */
+  .wrap > .list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 8px var(--gut) var(--safe-b); align-items: stretch; --agecol: 44px; }
   .wrap > .list .group, .wrap > .list .empty { grid-column: 1 / -1; }
-  .wrap > .list > .row:nth-child(odd) { border-inline-start: 0; }
-  .wrap > .list > .row:nth-child(even) { border-inline-start: 1px solid var(--line); }
+  .wrap > .list > .row { border: 1px solid var(--line); border-radius: var(--r); background: transparent; }
+  .wrap > .list .row .main { display: flex; flex-wrap: wrap; align-items: center; align-content: flex-start; gap: 4px 4px; min-height: 0; padding: 8px; padding-inline-end: calc(8px + var(--tag) + 4px); }
+  .wrap > .list .row .main .age { order: -1; flex: 0 0 auto; min-width: 0; padding: 0; }
+  .wrap > .list .row .main .nm .name { flex: 1 1 calc(100% - 60px); min-width: 0; font-size: 14.5px; }
+  .wrap > .list .row .main > :not(.nm):not(.meta), .wrap > .list .row .main .meta > :not(.age) { flex: 0 0 auto; }
+  .wrap > .list .row .rowwa { top: 8px; margin-top: 0; inset-inline-end: 8px; }
+  .wrap > .list .row .nm .name .mcnt { display: flex; width: fit-content; margin: 2px 0 0; }   /* שורה ראשונה: מגדר וגיל ושם; שורה שנייה: כל השאר, כולל כמות המפגשים */
 }
-#pPager #pgN > .nform { background: var(--bg); margin-inline: calc(-1 * var(--gut)); padding-inline: var(--gut); padding-top: 12px; }   /* הערה חדשה: רקע לבן והקו התחתון לכל רוחב המסך */
-#pPager .nform .nattach { margin-inline-end: -12px; }
