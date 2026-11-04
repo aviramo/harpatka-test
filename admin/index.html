@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css?v=20261104ol" />
+  <link rel="stylesheet" href="admin.css?v=20261104om" />
   <style>
     :root { --envtop: 18px; }
     #testBadge { inset: auto; margin: 0; border: 0; position: fixed; top: 0; left: 0; right: 0; width: auto; height: 18px; padding: 0; overflow: hidden; background: #3F382F; color: #fff; font: 700 11px/18px Arial, sans-serif; text-align: center; pointer-events: none; }
@@ -3322,8 +3322,11 @@
       this.animate([{ transform: 'translateY(' + y + 'px)' }, { transform: 'none' }], { duration: 340, easing: 'cubic-bezier(.22,.8,.2,1)' });
       backdrop(this, 0, 1, 340);
     };
+    /* סגירת פופאפ סוגרת גם את המקלדת (virtualKeyboard.hide, כי blur לבדו לא תמיד סוגר מקלדת שנפתחה בפקודה) */
+    const hideKb = () => { try { const a = document.activeElement; if (!a || a === document.body || !a.matches || !a.matches('input, textarea, select, [contenteditable]')) return; const vk = navigator.virtualKeyboard, can = vk && vk.hide && 'virtualKeyboardPolicy' in a; if (can) { a.virtualKeyboardPolicy = 'manual'; vk.hide(); } a.blur(); if (can) a.virtualKeyboardPolicy = ''; } catch (e) {} };
     proto.close = function (rv, from) {
       if (!this.open || this._closing) return;
+      hideKb();
       navClose(this);
       if (this._side) {   // כרטיס בצד הרשימה: נסגר מיד, והאזור חוזר להודעה "בחרו משתתף"
         this._side = false; this.classList.remove('side'); this.getAnimations().forEach((a) => a.cancel());
