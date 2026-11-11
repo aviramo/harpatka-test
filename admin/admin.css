@@ -1211,7 +1211,7 @@ dialog { border-radius: 0; }   /* במובייל הפופאפים עולים מ�
 .field > input:not([type="date"], [type="time"]) { padding-block: 19px 3px; line-height: 22px; }
 .field > select, #finForm .field > select { padding-block: 19px 3px; line-height: 22px; }
 .field > textarea { min-height: var(--fld); padding-block: 19px 3px; line-height: 22px; }
-.field .dtbox .dtv { top: 1px; }
+.field .dtbox .dtv { top: 19px; bottom: 3px; line-height: 22px; }   /* הערך יושב על הקו כמו בשאר השדות (בין התווית לקו), לא באמצע השדה */
 .field > .setval { min-height: var(--fld); padding: 20px 0 3px; background: transparent; line-height: 22px; text-align: right; }
 /* כרטיס דרך הגעה: אותו מראה */
 .srccard .srcfld { position: relative; display: block; }
