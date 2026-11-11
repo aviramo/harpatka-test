@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css?v=20261111t" />
+  <link rel="stylesheet" href="admin.css?v=20261111u" />
   <style>
     :root { --envtop: 18px; }
     #testBadge { inset: auto; margin: 0; border: 0; border-radius: 0; position: fixed; top: 0; left: 0; right: 0; width: auto; height: 18px; padding: 0; overflow: hidden; background: #3F382F; color: #fff; font: 700 11px/18px Arial, sans-serif; text-align: center; pointer-events: none; }
@@ -3852,7 +3852,7 @@
     { /* מספר אחד: קרדיט = חוב פחות קרדיט. חוב רק על מפגשים שביקשנו עליהם תשלום ("בטיפול") או שהמשתתף אמר שישלם ("ישלם"); רשום בלבד (חדש) הוא עוד לא חוב */
       const owed = sheet.id ? owedOf(sheet.id) : 0;
       const net = owed - (sheet.id ? creditOf(sheet.id) : 0), bn = $('#pBalN');
-      bn.innerHTML = '<bdi dir="ltr">₪' + nfm(Math.abs(net)) + '</bdi>' + (sheet.id && pkgLeft(sheet.id) > 0 ? '<span class="pses" title="מפגשים בקרדיט">' + icon('cal', 'i14') + pkgLeft(sheet.id) + '</span>' : ''); }
+      bn.innerHTML = (net || !(sheet.id && pkgLeft(sheet.id) > 0) ? '<bdi dir="ltr">₪' + nfm(Math.abs(net)) + '</bdi>' : '') + (sheet.id && pkgLeft(sheet.id) > 0 ? '<span class="pses" title="מפגשים בקרדיט">' + icon('cal', 'i14') + pkgLeft(sheet.id) + '</span>' : ''); }
     box.innerHTML = desc.filter((m) => shown.includes(m) || m.id === sheet.hl).map(meetRow).join('');   // המפגש שממנו הגענו מסומן ברשימה, וכשעוד לא משויך אליו: "שיוך למפגש" במקומו לפי התאריך (לא נספר במונה)
     meetTop(false);
   }
