@@ -7,7 +7,7 @@
    אחרי המעבר הסופי מחליפים את הקריאות באתר לקריאות ישירות ומוחקים את הקובץ. */
 (function () {
   'use strict';
-  var C = window.CONFIG, R = C && C.rosterApi;
+  var C = (typeof CONFIG !== 'undefined') ? CONFIG : null, R = C && C.rosterApi;   // CONFIG הוא const גלובלי (לא מאפיין של window)
   if (!R || !R.authUrl || !R.authKey || !window.fetch || window.__rosterBridge) return;
   window.__rosterBridge = true;
   var SB = C.supabaseUrl, real = window.fetch.bind(window), TOK = 'harpatka_roster_token';
