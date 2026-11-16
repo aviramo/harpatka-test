@@ -588,14 +588,14 @@
   const LOGIN_KEY = 'harpatka_login_pending';   // '1': פתיחת הרשמה רק אם אין משתתף; 'reg': תמיד לפתוח את פופאפ ההרשמה אחרי ההתחברות
   function loginGoogle(after) {
     try { sessionStorage.setItem(LOGIN_KEY, after || '1'); } catch (e) {}
-    location.href = CONFIG.supabaseUrl + '/auth/v1/authorize?provider=google&prompt=select_account&redirect_to=' + encodeURIComponent(location.origin + location.pathname);
+    location.href = ((CONFIG.rosterApi && CONFIG.rosterApi.authUrl) || CONFIG.supabaseUrl) + '/auth/v1/authorize?provider=google&prompt=select_account&redirect_to=' + encodeURIComponent(location.origin + location.pathname);
   }
   /* כניסה עם גוגל בחלון קופץ: הדף לא מתרענן ולא עובר לשום מקום. החלון הקופץ חוזר ל-me/, שומר את החיבור ב-localStorage, מסמן harpatka_login_done וסוגר את עצמו;
      כאן מאזינים לסימון (אירוע storage), טוענים את המשתתף ומרעננים את הפופאפ הפתוח. אם החלון נחסם: ניווט רגיל כמו קודם */
   function loginWindow(after, thenOpen) {
     if (!GL) return;
     try { localStorage.setItem('harpatka_login_popup', '1'); } catch (e) {}
-    const url = CONFIG.supabaseUrl + '/auth/v1/authorize?provider=google&prompt=select_account&redirect_to=' + encodeURIComponent(BASE + 'me/');
+    const url = ((CONFIG.rosterApi && CONFIG.rosterApi.authUrl) || CONFIG.supabaseUrl) + '/auth/v1/authorize?provider=google&prompt=select_account&redirect_to=' + encodeURIComponent(BASE + 'me/');
     const w = window.open(url, 'harpatka_login', 'width=480,height=680');
     if (!w) { try { localStorage.removeItem('harpatka_login_popup'); if (thenOpen) sessionStorage.setItem('harpatka_open_me', '1'); } catch (e) {} return loginGoogle(after); }
     const onDone = (ev) => {
