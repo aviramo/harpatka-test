@@ -1,9 +1,9 @@
-# מודעות פייסבוק לצ'אט (chat/): תמונת טקסט 9:16 (1080x1920). כל התוכן באזור הבטוח 4:5 (1080x1350, y 285 עד 1635), שני צבעים, בלי צילומים.
+# מודעות פייסבוק של כאב: תמונת טקסט 9:16 (1080x1920). כל התוכן באזור הבטוח 4:5 (1080x1350, y 285 עד 1635), שני צבעים, בלי צילומים.
 # מלבן 4:5 דמיוני באמצע עם ריפוד של 90px, והטקסט ממלא את פנים הריפוד (900x1170): כל שורה מוגדלת או מוקטנת לאותו רוחב בדיוק,
 # והמרווח האנכי מתפזר כך שגם הגובה מתמלא. מילים קצרות וחזקות נעשות ענקיות, שורות ארוכות קטנות. השורה האחרונה מפנה לכפתור של פייסבוק שמתחת למודעה.
-# הרצה: python ads/tools/build_pain_ads.py  -> ads/chat/img/chat-<מפתח>-916.png  (דורש Chrome)
+# הרצה: python ads/tools/build_pain_ads.py  -> ads/img/pain-<מפתח>-916.png  (דורש Chrome)
 import json, pathlib, subprocess, tempfile, sys, os, html
-# עצמאי (בלי build_ads.py): מחלקה B עם קבועי הגודל והאזור הבטוח. ROOT = שורש הריפו. הגרסה של חמשת הכאבים של מנוע הצ'אט (calm, crowd2, nothing, self, close); build_chat_ads.py נשאר של הטקסטים הישנים.
+# עצמאי (בלי build_ads.py): מחלקה B עם קבועי הגודל והאזור הבטוח. ROOT = שורש הריפו. הגרסה של חמשת הכאבים של מנוע הצ'אט (calm, crowd2, nothing, self, close);
 class B:
     ROOT = pathlib.Path(__file__).resolve().parents[2]
     CHROME = next(p for p in [r"C:\Program Files\Google\Chrome\Application\chrome.exe", r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"] if os.path.exists(p))
@@ -67,11 +67,11 @@ document.fonts.load('100px {FONT}','אבגדהוזחטיכלמנסעפצקרשת
 </script></body></html>'''
 
 def main():
-    out = ROOT/"ads"/"chat"/"img"; out.mkdir(parents=True, exist_ok=True)
+    out = ROOT/"ads"/"img"; out.mkdir(parents=True, exist_ok=True)
     tmp = pathlib.Path(tempfile.mkdtemp())
     for key, (lines, acc) in ADS.items():
         f = tmp/(key+".html"); f.write_text(page(lines, acc), encoding="utf-8")
-        name = f"chat-{key}-916.png"
+        name = f"pain-{key}-916.png"
         subprocess.run([B.CHROME, "--headless", "--disable-gpu", "--hide-scrollbars", f"--window-size={B.W},{B.H}", "--virtual-time-budget=6000",
                         f"--user-data-dir={tmp/('p'+key)}", f"--screenshot={out/name}", f.as_uri()], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
         print("ok", name)
